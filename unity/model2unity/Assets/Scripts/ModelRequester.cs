@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine.Events;
 using Dummiesman;
+using GLTFast;
 
 public class ModelRequester : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class ModelRequester : MonoBehaviour
     
     [Header("Model Import Options")]
     public bool autoImportOBJ = true;
+    public bool autoImportGLTF = true;
     public Transform modelParent; // Optional parent transform for imported models
     
     // Events for UI updates
@@ -272,6 +274,12 @@ public class ModelRequester : MonoBehaviour
                         OnDownloadProgress?.Invoke(1f, "Importing model...");
                         ImportOBJModel(savePath, filename);
                     }
+                    // Auto-import glTF files if enabled
+                    else if (autoImportGLTF && IsGLTFFile(filename))
+                    {
+                        OnDownloadProgress?.Invoke(1f, "Importing glTF model...");
+                        StartCoroutine(ImportGLTFModel(savePath, filename));
+                    }
                     
                     OnModelLoaded?.Invoke(savePath);
                 }
@@ -388,6 +396,110 @@ public class ModelRequester : MonoBehaviour
         catch (System.Exception e)
         {
             LogError($"Failed to center model: {e.Message}");
+        }
+    }
+    
+    /// <summary>
+    /// Check if the file is a glTF file (.gltf or .glb)
+    /// </summary>
+    private bool IsGLTFFile(string filename)
+    {
+        string extension = Path.GetExtension(filename).ToLower();
+        return extension == ".gltf" || extension == ".glb";
+    }
+    
+    /// <summary>
+    /// Import a glTF file into the Unity scene using glTFast
+    /// </summary>
+    private IEnumerator ImportGLTFModel(string filePath, string filename)
+    {
+        Log($"Importing glTF model: {filename}");
+        
+        // Create glTF importer using the correct API
+        var gltf = new GLTFast.GltfImport();
+        
+        // Load the glTF file asynchronously
+        var loadTask = gltf.Load(filePath);
+        
+        // Wait for the loading to complete
+        while (!loadTask.IsCompleted)
+        {
+            yield return null;
+        }
+        
+        // Check results after completion
+        if (loadTask.Exception != null)
+        {
+            LogError($"Failed to load glTF file: {loadTask.Exception.Message}");
+            OnError?.Invoke($"glTF import failed: {loadTask.Exception.Message}");
+            yield break;
+        }
+        
+        var success = loadTask.Result;
+        
+        if (!success)
+        {
+            LogError("Failed to load glTF file - unknown error");
+            OnError?.Invoke("glTF import failed");
+            yield break;
+        }
+        
+        // Create a parent GameObject for the model
+        string modelName = Path.GetFileNameWithoutExtension(filename);
+        GameObject importedModel = new GameObject($"ImportedGLTF_{modelName}");
+        
+        // Instantiate the loaded model using the correct API
+        var instantiateTask = gltf.InstantiateMainSceneAsync(importedModel.transform);
+        
+        // Wait for instantiation to complete
+        while (!instantiateTask.IsCompleted)
+        {
+            yield return null;
+        }
+        
+        if (instantiateTask.Exception != null)
+        {
+            LogError($"Failed to instantiate glTF model: {instantiateTask.Exception.Message}");
+            OnError?.Invoke($"glTF instantiation failed: {instantiateTask.Exception.Message}");
+            
+            // Clean up the created GameObject if instantiation failed
+            if (importedModel != null)
+            {
+                UnityEngine.Object.DestroyImmediate(importedModel);
+            }
+            yield break;
+        }
+        
+        var instantiationSuccess = instantiateTask.Result;
+        
+        if (instantiationSuccess && importedModel != null)
+        {
+            // Position the model at the origin initially
+            importedModel.transform.position = Vector3.zero;
+            
+            // If a parent transform is specified, parent the model to it
+            if (modelParent != null)
+            {
+                importedModel.transform.SetParent(modelParent);
+                importedModel.transform.localPosition = Vector3.zero;
+            }
+            
+            // Center the model by adjusting its position based on bounds
+            CenterModel(importedModel);
+            
+            Log($"✅ Successfully imported glTF model '{modelName}' into scene!");
+            Log($"Model position: {importedModel.transform.position}");
+        }
+        else
+        {
+            LogError("Failed to import glTF model - instantiation was not successful");
+            OnError?.Invoke("Failed to import glTF model");
+            
+            // Clean up the created GameObject if instantiation failed
+            if (importedModel != null)
+            {
+                UnityEngine.Object.DestroyImmediate(importedModel);
+            }
         }
     }
     

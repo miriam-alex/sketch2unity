@@ -16,6 +16,9 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)  # Enable CORS for Unity communication
 
+SUPPORTED_EXTENSIONS = ['.obj', '.glb']
+SUPPORTED_REGEX_EXTENSIONS = ['*.obj', '*.glb']
+
 @app.route('/health', methods=['GET'])
 def health_check():
     """
@@ -37,13 +40,11 @@ def list_models():
     try:
         models_dir = Path.home() / "models"
         
-        # Supported model file extensions
-        supported_extensions = ['*.fbx', '*.obj', '*.dae', '*.3ds', '*.blend', '*.ply', '*.stl']
-        
+        # Supported model file extensions        
         found_models = []
         
         if models_dir.exists():
-            for extension in supported_extensions:
+            for extension in SUPPORTED_REGEX_EXTENSIONS:
                 # Find files with this extension
                 pattern = str(models_dir / extension)
                 files = glob.glob(pattern)
@@ -96,13 +97,11 @@ def search_models():
                 "message": "Query cannot be empty"
             }), 400
         
-        models_dir = Path.home() / "models"
-        supported_extensions = ['*.fbx', '*.obj', '*.dae', '*.3ds', '*.blend', '*.ply', '*.stl']
-        
+        models_dir = Path.home() / "models"        
         found_models = []
         
         if models_dir.exists():
-            for extension in supported_extensions:
+            for extension in SUPPORTED_REGEX_EXTENSIONS:
                 pattern = str(models_dir / extension)
                 files = glob.glob(pattern)
                 
@@ -154,10 +153,9 @@ def download_model(filename):
             }), 404
         
         # Check if it's a supported model file
-        supported_extensions = ['.fbx', '.obj', '.dae', '.3ds', '.blend', '.ply', '.stl']
         file_extension = file_path.suffix.lower()
         
-        if file_extension not in supported_extensions:
+        if file_extension not in SUPPORTED_EXTENSIONS:
             return jsonify({
                 "status": "error",
                 "message": f"Unsupported file type: {file_extension}"
