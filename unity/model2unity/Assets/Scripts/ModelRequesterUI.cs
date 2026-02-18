@@ -58,6 +58,8 @@ public class ModelRequesterUI : MonoBehaviour
                 modelRequester.OnError.AddListener(OnErrorReceived);
             if (modelRequester.OnDownloadProgress != null)
                 modelRequester.OnDownloadProgress.AddListener(OnDownloadProgress);
+            if (modelRequester.OnHealthCheckComplete != null)
+                modelRequester.OnHealthCheckComplete.AddListener(OnHealthCheckComplete);
             
             Debug.Log("[ModelRequesterUI] Successfully subscribed to ModelRequester events");
         }
@@ -81,6 +83,18 @@ public class ModelRequesterUI : MonoBehaviour
         else
         {
             UpdateStatusText("ERROR: ModelRequester not found!");
+        }
+    }
+    
+    private void OnHealthCheckComplete(bool success, string message)
+    {
+        if (success)
+        {
+            UpdateStatusText(message);
+        }
+        else
+        {
+            UpdateStatusText($"Health Check Failed: {message}");
         }
     }
     

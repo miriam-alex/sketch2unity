@@ -30,6 +30,8 @@ public class ModelRequester : MonoBehaviour
     public UnityEvent<string> OnError;
     [System.NonSerialized]
     public UnityEvent<float, string> OnDownloadProgress; // Progress (0-1), status message
+    [System.NonSerialized]
+    public UnityEvent<bool, string> OnHealthCheckComplete; // Success (true/false), status message
     
     private void Awake()
     {
@@ -38,6 +40,7 @@ public class ModelRequester : MonoBehaviour
         if (OnModelLoaded == null) OnModelLoaded = new UnityEvent<string>();
         if (OnError == null) OnError = new UnityEvent<string>();
         if (OnDownloadProgress == null) OnDownloadProgress = new UnityEvent<float, string>();
+        if (OnHealthCheckComplete == null) OnHealthCheckComplete = new UnityEvent<bool, string>();
     }
     
     private void Start()
@@ -76,37 +79,48 @@ public class ModelRequester : MonoBehaviour
             {
                 // Parse the response
                 string responseText = request.downloadHandler.text;
-                Log($"✅ Server Health Check SUCCESS!");
+                Log($"Server Health Check SUCCESS!");
                 Log($"Response: {responseText}");
                 
                 // Try to parse as JSON for better display
+                string statusMessage = "Server connection successful!";
                 try
                 {
                     var healthData = JsonUtility.FromJson<HealthResponse>(responseText);
                     Log($"Server Status: {healthData.status}");
                     Log($"Server Message: {healthData.message}");
                     Log($"Server Version: {healthData.version}");
+                    statusMessage = $"Server OK - {healthData.message} (v{healthData.version})";
                 }
                 catch (System.Exception e)
                 {
                     Log($"Could not parse JSON response: {e.Message}");
                 }
+                
+                // Notify UI of successful health check
+                OnHealthCheckComplete?.Invoke(true, statusMessage);
             }
             else
             {
                 // Handle errors
-                LogError($"❌ Server Health Check FAILED!");
+                LogError($"Server Health Check FAILED!");
                 LogError($"Error: {request.error}");
                 LogError($"Response Code: {request.responseCode}");
                 
+                string errorMessage = "Server connection failed";
                 if (request.result == UnityWebRequest.Result.ConnectionError)
                 {
                     LogError("Connection Error - Is the server running?");
+                    errorMessage = "Connection failed - Is the server running?";
                 }
                 else if (request.result == UnityWebRequest.Result.ProtocolError)
                 {
                     LogError($"Protocol Error - Server returned: {request.responseCode}");
+                    errorMessage = $"Server error: {request.responseCode}";
                 }
+                
+                // Notify UI of failed health check
+                OnHealthCheckComplete?.Invoke(false, errorMessage);
             }
         }
     }
@@ -185,7 +199,7 @@ public class ModelRequester : MonoBehaviour
             if (request.result == UnityWebRequest.Result.Success)
             {
                 string responseText = request.downloadHandler.text;
-                Log($"✅ Model Search SUCCESS!");
+                Log($"Model Search SUCCESS!");
                 
                 // Parse search results
                 try
@@ -217,7 +231,7 @@ public class ModelRequester : MonoBehaviour
             }
             else
             {
-                LogError($"❌ Model Search FAILED!");
+                LogError($"Model Search FAILED!");
                 LogError($"Error: {request.error}");
                 OnError?.Invoke($"Search failed: {request.error}");
             }
@@ -264,7 +278,7 @@ public class ModelRequester : MonoBehaviour
                 try
                 {
                     File.WriteAllBytes(savePath, request.downloadHandler.data);
-                    Log($"✅ Model '{filename}' loaded successfully!");
+                    Log($"Model '{filename}' loaded successfully!");
                     Log($"File saved to: {savePath}");
                     Log($"File size: {request.downloadHandler.data.Length} bytes");
                     
@@ -291,7 +305,7 @@ public class ModelRequester : MonoBehaviour
             }
             else
             {
-                LogError($"❌ Model Download FAILED!");
+                LogError($"Model Download FAILED!");
                 LogError($"Error: {request.error}");
                 LogError($"Response Code: {request.responseCode}");
                 OnError?.Invoke($"Download failed: {request.error}");
@@ -344,7 +358,7 @@ public class ModelRequester : MonoBehaviour
                 // Center the model by adjusting its position based on bounds
                 CenterModel(importedModel);
                 
-                Log($"✅ Successfully imported OBJ model '{modelName}' into scene!");
+                Log($"Successfully imported OBJ model '{modelName}' into scene!");
                 Log($"Model position: {importedModel.transform.position}");
                 
                 // You can add additional setup here, such as:
@@ -487,7 +501,7 @@ public class ModelRequester : MonoBehaviour
             // Center the model by adjusting its position based on bounds
             CenterModel(importedModel);
             
-            Log($"✅ Successfully imported glTF model '{modelName}' into scene!");
+            Log($"Successfully imported glTF model '{modelName}' into scene!");
             Log($"Model position: {importedModel.transform.position}");
         }
         else
