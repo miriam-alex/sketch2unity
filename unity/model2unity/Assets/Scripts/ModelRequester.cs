@@ -149,7 +149,6 @@ public class ModelRequester : MonoBehaviour
             if (request.result == UnityWebRequest.Result.Success)
             {
                 string responseText = request.downloadHandler.text;
-                Log($"Model List SUCCESS!");
                 Log($"Available Models Response: {responseText}");
             }
             else
@@ -212,7 +211,8 @@ public class ModelRequester : MonoBehaviour
                     
                     if (searchResult.count == 0)
                     {
-                        Log($"No models found for '{query}'. Try: cat, dog, house, tree");
+                        Log($"No models found for '{query}'. Try the models below.");
+                        GetModelList();
                         OnError?.Invoke($"No models found for '{query}'");
                     }
                     else
@@ -428,6 +428,8 @@ public class ModelRequester : MonoBehaviour
     private IEnumerator ImportGLTFModel(string filePath, string filename)
     {
         Log($"Importing glTF model: {filename}");
+
+        // Reference: https://prasetion.medium.com/introducing-gltfast-in-unity-revolutionizing-3d-model-loading-1ad795a4b8dc
         
         // Create glTF importer using the correct API
         var gltf = new GLTFast.GltfImport();

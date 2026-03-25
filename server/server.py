@@ -19,6 +19,11 @@ CORS(app)  # Enable CORS for Unity communication
 SUPPORTED_EXTENSIONS = ['.obj', '.glb']
 SUPPORTED_REGEX_EXTENSIONS = ['*.obj', '*.glb']
 
+
+def get_models_dir() -> Path:
+    """Return the project's models directory path."""
+    return Path(__file__).resolve().parent.parent / "models"
+
 @app.route('/health', methods=['GET'])
 def health_check():
     """
@@ -38,7 +43,7 @@ def list_models():
     Scans ~/models/ for supported 3D model file formats.
     """
     try:
-        models_dir = Path.home() / "models"
+        models_dir = get_models_dir()
         
         # Supported model file extensions        
         found_models = []
@@ -97,7 +102,7 @@ def search_models():
                 "message": "Query cannot be empty"
             }), 400
         
-        models_dir = Path.home() / "models"        
+        models_dir = get_models_dir()
         found_models = []
         
         if models_dir.exists():
@@ -142,7 +147,7 @@ def download_model(filename):
     Streams the file directly to the client.
     """
     try:
-        models_dir = Path.home() / "models"
+        models_dir = get_models_dir()
         file_path = models_dir / filename
         
         # Security check - ensure file is within models directory

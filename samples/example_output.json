@@ -1,0 +1,69 @@
+{
+  "site_scale": {
+    "site_width_ft": 100,
+    "site_height_ft": 80,
+    "normalized_canvas": [0, 0, 1000, 1000],
+    "scale_note": "Bounding boxes define placement. Real-world dimensions define scale."
+  },
+  "terrain_zones": [
+    {
+      "area_name": "Park Green Space",
+      "semantic_tag": "park_zone",
+      "terrain_type": "grass",
+      "bounding_box": [160, 240, 480, 560],
+      "approx_sq_ft": 2400,
+      "unity_strategy": "paint_terrain"
+    },
+    {
+      "area_name": "Public Sidewalk",
+      "semantic_tag": "sidewalk_path",
+      "terrain_type": "pavement",
+      "bounding_box": [640, 80, 700, 850],
+      "approx_sq_ft": 1200,
+      "unity_strategy": "paint_terrain"
+    }
+  ],
+  "generated_objects": [
+    {
+      "area_name": "Grocery Store",
+      "semantic_tag": "grocery_building",
+      "object_type": "building",
+      "bounding_box": [200, 590, 560, 830],
+      "center_point": [380, 710],
+      "approx_sq_ft": 1800,
+      "target_dimensions_ft": {
+        "width_ft": 30,
+        "depth_ft": 40,
+        "height_ft": 20
+      },
+      "image_gen_prompt": {
+        "prompt": "Isometric 3/4 view of a photorealistic small modern grocery store building, large glass storefront windows, flat roof, minimalist concrete and wood exterior, plain white background, no shadows, high resolution, physically based rendering",
+        "negative_prompt": "humans, cars, street lights, ground plane, sky, shadows, text, signage, blurry, low resolution, distorted",
+        "meshy_notes": "Target 15k poly budget; ensure clean UV unwrap for storefront glass transparency."
+      },
+      "unity_strategy": "generate_mesh"
+    }
+  ],
+  "prefab_instances": [
+    {
+      "area_name": "Park Tree",
+      "semantic_tag": "tree_large",
+      "prefab_type": "tree",
+      "center_point": [310, 450],
+      "footprint_box": [180, 400, 440, 500],
+      "rotation_deg": 0,
+      "scale_multiplier": 1.2,
+      "unity_strategy": "place_prefab"
+    },
+    {
+      "area_name": "Park Bench",
+      "semantic_tag": "seating_bench",
+      "prefab_type": "bench",
+      "center_point": [380, 310],
+      "footprint_box": [340, 280, 420, 340],
+      "rotation_deg": 0,
+      "scale_multiplier": 1.0,
+      "unity_strategy": "place_prefab"
+    }
+  ]
+}
