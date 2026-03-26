@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e9f6634505249e794d2a22c9971e97, type: 3}
+  m_Name: PrefabRegistry
+  m_EditorClassIdentifier: Assembly-CSharp::PrefabRegistry
+  entries:
+  - key: bench
+    prefab: {fileID: 106578, guid: ccf13c7381ca25349b107bbb9423e1bd, type: 3}
+  - key: tree
+    prefab: {fileID: 182448, guid: 357a66039fecd22469b4e4ea64729751, type: 3}
