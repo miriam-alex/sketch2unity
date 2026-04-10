@@ -27,8 +27,8 @@ ARCH_REFERENCES = {
 
 with open("ri_site_parsing.md") as f:
     base_prompt = f.read()
-    PROMPT_TEMPLATE = Template(base_prompt + """ 
-
+    PROMPT_TEMPLATE = Template(base_prompt + """
+                               
     ## 👤 Participant Design Input
 
     ### Spatial Description
@@ -40,8 +40,7 @@ with open("ri_site_parsing.md") as f:
     ### Architectural Reference (Image {{ arch_letter }})
     The participant referenced image {{ arch_letter }}: {{ arch_context }}
     Use this as a material and massing reference when generating image prompts.
-    {% endif %}
-    """)
+    {% endif %}""")
 
     with open("participants.csv") as f:
         reader = csv.DictReader(f)
@@ -56,5 +55,5 @@ with open("ri_site_parsing.md") as f:
                 arch_context=arch_context
             )
             
-            with open(f"output_{row['participant']}.txt", "w") as out:
+            with open(f"custom_prompts/output_{row['participant']}.txt", "w") as out:
                 out.write(prompt)
