@@ -185,7 +185,7 @@ Every `generated_object` must include an `image_gen_prompt` object. This prompt 
 
 - **`prompt`** — A descriptive, model-agnostic image generation prompt. Must produce an image optimized for Meshy's image-to-3D pipeline.
 - **`negative_prompt`** — Elements to avoid that would confuse mesh generation (e.g., humans, text, cut-off edges, excessive background clutter).
-- **`meshy_notes`** — One sentence of guidance for the Meshy operator (e.g., remeshing tips, texture bake advice, poly budget).
+- **`meshy_notes`** — One sentence of guidance for the Meshy operator (e.g., remeshing tips, texture bake advice, poly budget). Do not include references to abstract terms, such as a referenced image that will be unavailable for Meshy to read.
 
 ### Prompt Writing Rules
 
@@ -355,8 +355,12 @@ No commentary. No extra text.
     ## 👤 Participant Design Input
 
     ### Spatial Description
-    Birds Eye view of open space with lots of food stalls and museum of history entrance from team and escalators / elevators down from bridge. We drew a escalator and elevator and we have a shopping center with a small museum of history for the island and shops and restaurants for food and an entrance form the tram directly to the market. 
+    I drew an outdoor shopping center with restaurants and small stores for knick knacks and a small little walk in museum to get island history and learn about the shops on mainstreet. And there’s a lot of trees there so it’s nice and breezy in the summer
 
     ### Architectural Style Intent
-    We both chose opens spaces, maybe the exterior will look like K on the options? Some bricks and some windows? That’s what I thought for mine. Maybe maintain some of the original power plant bricks.  Brick and windows
+    Little Tram cars
+    
+    ### Architectural Reference (Image K)
+    The participant referenced image K: Contemporary mixed-use infill — glass and metal curtain wall over retail.
+    Use this as a material and massing reference when generating image prompts.
     

@@ -55,5 +55,5 @@ with open("ri_site_parsing.md") as f:
                 arch_context=arch_context
             )
             
-            with open(f"custom_prompts/output_{row['participant']}.txt", "w") as out:
+            with open(f"custom_prompts/{row['participant']}-prompt.txt", "w") as out:
                 out.write(prompt)

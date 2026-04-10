@@ -185,7 +185,7 @@ Every `generated_object` must include an `image_gen_prompt` object. This prompt 
 
 - **`prompt`** — A descriptive, model-agnostic image generation prompt. Must produce an image optimized for Meshy's image-to-3D pipeline.
 - **`negative_prompt`** — Elements to avoid that would confuse mesh generation (e.g., humans, text, cut-off edges, excessive background clutter).
-- **`meshy_notes`** — One sentence of guidance for the Meshy operator (e.g., remeshing tips, texture bake advice, poly budget).
+- **`meshy_notes`** — One sentence of guidance for the Meshy operator (e.g., remeshing tips, texture bake advice, poly budget). Do not include references to abstract terms, such as a referenced image that will be unavailable for Meshy to read.
 
 ### Prompt Writing Rules
 

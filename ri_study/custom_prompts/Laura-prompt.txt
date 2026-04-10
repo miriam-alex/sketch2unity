@@ -185,7 +185,7 @@ Every `generated_object` must include an `image_gen_prompt` object. This prompt 
 
 - **`prompt`** — A descriptive, model-agnostic image generation prompt. Must produce an image optimized for Meshy's image-to-3D pipeline.
 - **`negative_prompt`** — Elements to avoid that would confuse mesh generation (e.g., humans, text, cut-off edges, excessive background clutter).
-- **`meshy_notes`** — One sentence of guidance for the Meshy operator (e.g., remeshing tips, texture bake advice, poly budget).
+- **`meshy_notes`** — One sentence of guidance for the Meshy operator (e.g., remeshing tips, texture bake advice, poly budget). Do not include references to abstract terms, such as a referenced image that will be unavailable for Meshy to read.
 
 ### Prompt Writing Rules
 
@@ -355,8 +355,8 @@ No commentary. No extra text.
     ## 👤 Participant Design Input
 
     ### Spatial Description
-    An aquarium next to the Roosevelt island museum of history. A bridge connects the ferry station to the roof of the aquarium directly. The walking bridge is over the road.
+    I drew a climbing wall and an escalator down from the bridge so it could be a foot bridge. I also added an ice cream shop and a 24 hr open chicken shop. The escalator has multiple levels because it is a big distance from the bridge. The climbing wall is colorful under the bridge, and the ice cream shop and chicken shop are labeled next to it
 
     ### Architectural Style Intent
-    The original bricks from the power plant, but I want big glass windows to show the fish. Stuck with re-used bricks for the museum. Glass for aquarium 
+    I chose modern (for the escalator and climbing wall) as well as cute and traditional for the shops. I was trying to imply one big open space to emphasize community. 
     
