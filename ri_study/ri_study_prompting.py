@@ -1,64 +1,82 @@
 import os
+import time
+import random
 from pathlib import Path
-import google.generativeai as genai
 from dotenv import load_dotenv
+from google import genai
+from google.genai import types
 
-# Load variables from .env
 load_dotenv()
 
 # Configuration
-API_KEY = os.getenv("GOOGLE_API_KEY")
-if not API_KEY:
-    raise ValueError("GOOGLE_API_KEY not found. Please check your .env file.")
-
-genai.configure(api_key=API_KEY)
-model = genai.GenerativeModel('gemini-1.5-flash')
-
-# Directory Setup
+MODEL_ID = "gemini-2.5-flash"
 SKETCH_DIR = Path("drawings")
-PROMPT_DIR = Path("custom-images")
+PROMPT_DIR = Path("prompts")
 OUTPUT_DIR = Path("outputs")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
-def run_batch_processing():
-    # Find all sketches
-    sketches = list(SKETCH_DIR.glob("*.png"))
-    
-    if not sketches:
-        print("No sketches found in the /sketches folder.")
-        return
+# Client Setup
+client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
 
-    for sketch_path in sketches:
-        # Determine the base name
-        name = sketch_path.name.replace("-sketch.png", "")
+def process_with_respect():
+    sketches = list(SKETCH_DIR.glob("*.png"))
+    print(f"📋 Found {len(sketches)} images to process.")
+
+    for i, sketch_path in enumerate(sketches):
+        name = sketch_path.name.replace(".png", "")
         prompt_path = PROMPT_DIR / f"{name}-prompt.txt"
+        output_file = OUTPUT_DIR / f"{name}-output.md"
 
         if not prompt_path.exists():
-            print(f"⚠️  Missing prompt for: {name}. Skipping...")
             continue
 
-        print(f"🚀 Processing: {name}")
+        if output_file.exists():
+            # temporary measure for texting
+            print(f"{output_file} already exists. Moving to next drawing-prompt pair...")
 
-        try:
-            # Read files
-            prompt_text = prompt_path.read_text(encoding="utf-8")
-            image_parts = [
-                {
-                    "mime_type": "image/png",
-                    "data": sketch_path.read_bytes()
-                }
-            ]
+        max_retries = 5
+        retry_delay = 10 # Base wait time in seconds
+        
+        for attempt in range(max_retries):
+            try:
+                print(f"🔄 [{i+1}/{len(sketches)}] Processing {name} (Attempt {attempt+1})...")
+                
+                # Load assets
+                prompt_text = prompt_path.read_text(encoding="utf-8")
+                image_bytes = sketch_path.read_bytes()
 
-            # Generate and save
-            response = model.generate_content([prompt_text, image_parts[0]])
-            
-            output_file = OUTPUT_DIR / f"{name}-output.md"
-            output_file.write_text(response.text, encoding="utf-8")
-            
-            print(f"✅ Success: {output_file}")
+                # Generate
+                response = client.models.generate_content(
+                    model=MODEL_ID,
+                    contents=[
+                        prompt_text,
+                        types.Part.from_bytes(data=image_bytes, mime_type="image/png")
+                    ]
+                )
 
-        except Exception as e:
-            print(f"❌ Error with {name}: {e}")
+                # Save
+                output_file.write_text(response.text, encoding="utf-8")
+                
+                print(f"✅ Success!")
+                
+                # MANDATORY BREATHING ROOM: 
+                # Prevents the 429 'Too Many Requests' seen in your dashboard
+                time.sleep(4) 
+                break 
+
+            except Exception as e:
+                err_msg = str(e)
+                if "429" in err_msg or "503" in err_msg:
+                    # Exponential backoff: 10s, 20s, 30s... plus a bit of randomness
+                    wait = (retry_delay * (attempt + 1)) + random.uniform(1, 5)
+                    print(e)
+                    print(f"⚠️ Rate limited or Server Busy. Sleeping {wait:.1f}s...")
+                    time.sleep(wait)
+                else:
+                    print(f"❌ Permanent Error for {name}: {e}")
+                    break
+        else:
+            print(f"🚫 Failed {name} after {max_retries} attempts.")
 
 if __name__ == "__main__":
-    run_batch_processing()
+    process_with_respect()
