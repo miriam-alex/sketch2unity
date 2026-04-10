@@ -27,6 +27,8 @@ Identify all meaningful spatial elements in the sketch and classify each into **
 
 You are given real-world site dimensions. Use these as the **authoritative scale**.
 
+The site is the Roosevelt Island Steam Plant, located at the southern tip of Roosevelt Island, New York City. The parcel is oriented with its long axis running roughly north-south, bounded by the East River on both the east and west sides. The existing steam plant building occupies the central-to-western portion of the parcel. To the north is Cornell Tech campus. The tramway station and Ed Koch Queensboro Bridge approach are immediately to the northwest. The NYC Ferry landing is to the northeast on the waterfront. The parcel is largely isolated at the island's southern tip with water on three sides. Use the pink highlighted rectangle in the provided map image as the authoritative lot boundary. All bounding box coordinates should be normalized relative to that pink parcel footprint only — ignore all surrounding map context outside the pink boundary. The site is roughly measured to be 30,000 square feet. 
+
 You **MUST** include this top-level object:
 
 ```json
