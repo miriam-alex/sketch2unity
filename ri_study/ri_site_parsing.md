@@ -216,6 +216,16 @@ Every `generated_object` must include an `image_gen_prompt` object. This prompt 
 - Do **NOT** include page edges or sketch borders
 - Do **NOT** hallucinate elements not suggested by the drawing
 
+### 🚫 Site Boundary Enforcement
+
+The input image may contain surrounding context (streets, water, neighboring buildings, labels, map UI).
+You MUST ignore everything outside the designated site boundary.
+
+- Parse ONLY elements that fall within the site parcel boundary
+- Do NOT generate terrain zones for surrounding water, streets, or adjacent properties
+- Do NOT generate prefab or object entries for anything outside the parcel
+- The site boundary is the authoritative canvas — treat [0, 0, 1000, 1000] as the parcel edges, not the full image edges
+- If an element is ambiguous (partially inside/outside), include it only if its center point falls within the parcel
 ---
 
 ## ⚖️ Classification Rules
@@ -350,4 +360,6 @@ Output **only**:
 }
 ```
 
-No commentary. No extra text.
+Render ONLY elements within the site parcel boundary. Treat the parcel edge as the edge of the world.
+
+No commentary. No extra text. 

@@ -19,33 +19,32 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
 
 def process_with_respect():
-    sketches = list(SKETCH_DIR.glob("*.png"))
-    print(f"📋 Found {len(sketches)} images to process.")
+    # Only grab images that don't have a markdown output yet
+    sketches = [s for s in SKETCH_DIR.glob("*.png") 
+                if not (OUTPUT_DIR / f"{s.stem}-output.md").exists()]
+    
+    print(f"📋 Found {len(sketches)} new images to process.")
 
     for i, sketch_path in enumerate(sketches):
-        name = sketch_path.name.replace(".png", "")
+        name = sketch_path.stem  # Get filename without extension
         prompt_path = PROMPT_DIR / f"{name}-prompt.txt"
         output_file = OUTPUT_DIR / f"{name}-output.md"
 
         if not prompt_path.exists():
+            print(f"⚠️ Prompt missing for {name}, skipping...")
             continue
 
-        if output_file.exists():
-            # temporary measure for texting
-            print(f"{output_file} already exists. Moving to next drawing-prompt pair...")
-
-        max_retries = 5
-        retry_delay = 10 # Base wait time in seconds
+        max_retries = 3
+        # In 2026, 30s is the 'Safe Zone' for free tier multimodal requests
+        base_cooldown = 30 
         
         for attempt in range(max_retries):
             try:
                 print(f"🔄 [{i+1}/{len(sketches)}] Processing {name} (Attempt {attempt+1})...")
                 
-                # Load assets
                 prompt_text = prompt_path.read_text(encoding="utf-8")
                 image_bytes = sketch_path.read_bytes()
 
-                # Generate
                 response = client.models.generate_content(
                     model=MODEL_ID,
                     contents=[
@@ -54,29 +53,28 @@ def process_with_respect():
                     ]
                 )
 
-                # Save
                 output_file.write_text(response.text, encoding="utf-8")
+                print(f"✅ Success: {output_file.name}")
                 
-                print(f"✅ Success!")
-                
-                # MANDATORY BREATHING ROOM: 
-                # Prevents the 429 'Too Many Requests' seen in your dashboard
-                time.sleep(4) 
+                # CRITICAL: Wait 30s to allow the "Tokens Per Minute" bucket to refill.
+                # Image processing is token-heavy!
+                if i < len(sketches) - 1:
+                    print(f"⏳ Cooling down for {base_cooldown}s...")
+                    time.sleep(base_cooldown)
                 break 
 
             except Exception as e:
                 err_msg = str(e)
                 if "429" in err_msg or "503" in err_msg:
-                    # Exponential backoff: 10s, 20s, 30s... plus a bit of randomness
-                    wait = (retry_delay * (attempt + 1)) + random.uniform(1, 5)
-                    print(e)
-                    print(f"⚠️ Rate limited or Server Busy. Sleeping {wait:.1f}s...")
+                    # If we hit a wall, wait a full minute + jitter
+                    wait = 60 + random.uniform(5, 15)
+                    print(f"🚨 API Overloaded. Sleeping {wait:.1f}s before retry...")
                     time.sleep(wait)
                 else:
                     print(f"❌ Permanent Error for {name}: {e}")
                     break
         else:
-            print(f"🚫 Failed {name} after {max_retries} attempts.")
+            print(f"🚫 Giving up on {name} after {max_retries} attempts.")
 
 if __name__ == "__main__":
     process_with_respect()
