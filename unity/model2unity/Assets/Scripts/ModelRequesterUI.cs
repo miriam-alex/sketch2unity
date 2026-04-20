@@ -10,6 +10,7 @@ public class ModelRequesterUI : MonoBehaviour
     [Header("UI References")]
     public Button healthCheckButton;
     public Button searchButton;
+    public Button generateLayoutButton;
     public TMP_InputField searchInput;
     public TMP_Text statusText;
     public TMP_Text resultsText; // Shows current loaded model info
@@ -46,6 +47,11 @@ public class ModelRequesterUI : MonoBehaviour
         {
             searchButton.onClick.AddListener(OnSearchClicked);
         }
+
+        if (generateLayoutButton != null)
+        {
+            generateLayoutButton.onClick.AddListener(OnGenerateLayoutClicked);
+        }
         
         // Subscribe to events with null checks (after UI is set up)
         if (modelRequester != null)
@@ -60,6 +66,8 @@ public class ModelRequesterUI : MonoBehaviour
                 modelRequester.OnDownloadProgress.AddListener(OnDownloadProgress);
             if (modelRequester.OnHealthCheckComplete != null)
                 modelRequester.OnHealthCheckComplete.AddListener(OnHealthCheckComplete);
+            if (modelRequester.OnLayoutGenerated != null)
+                modelRequester.OnLayoutGenerated.AddListener(OnLayoutGenerated);
             
             Debug.Log("[ModelRequesterUI] Successfully subscribed to ModelRequester events");
         }
@@ -67,7 +75,7 @@ public class ModelRequesterUI : MonoBehaviour
         // Initialize progress UI
         SetProgressVisible(false);
         
-        UpdateStatusText("Ready - Enter search term and click 'Search' to load a model");
+        UpdateStatusText("Ready - Search a model or click 'Generate Layout' to run sketch prompting");
         UpdateResultsText($"Currently loaded model: {currentLoadedModel}");
         
         Debug.Log("[ModelRequesterUI] Initialization complete");
@@ -123,6 +131,23 @@ public class ModelRequesterUI : MonoBehaviour
             UpdateStatusText("ERROR: ModelRequester not found!");
         }
     }
+
+    public void OnGenerateLayoutClicked()
+    {
+        UpdateStatusText("Generating layout - select a sketch in the Python file picker...");
+        UpdateResultsText("Waiting for sketch selection and layout generation...");
+
+        if (modelRequester != null)
+        {
+            SetProgressVisible(true);
+            UpdateProgress(0f, "Waiting for sketch selection...");
+            modelRequester.GenerateLayoutFromSketchButton();
+        }
+        else
+        {
+            UpdateStatusText("ERROR: ModelRequester not found!");
+        }
+    }
     
     private void OnSearchResultsReceived(ModelRequester.SearchResult results)
     {
@@ -156,6 +181,32 @@ public class ModelRequesterUI : MonoBehaviour
         SetProgressVisible(false);
         UpdateResultsText($"Model Loaded: {fileName}\\nSaved to: {filePath}");
         UpdateStatusText($"Success! Model '{fileName}' is loaded and ready to use.");
+    }
+
+    private void OnLayoutGenerated(string responseJson)
+    {
+        SetProgressVisible(false);
+
+        try
+        {
+            LayoutResponseEnvelope response = JsonUtility.FromJson<LayoutResponseEnvelope>(responseJson);
+            int terrainZoneCount = response.layout != null && response.layout.terrain_zones != null
+                ? response.layout.terrain_zones.Length
+                : 0;
+            int prefabCount = response.layout != null && response.layout.prefabs != null
+                ? response.layout.prefabs.Length
+                : 0;
+
+            UpdateStatusText("Layout generation complete.");
+            UpdateResultsText(
+                $"Layout Generated\nTerrain Zones: {terrainZoneCount}\nPrefabs: {prefabCount}\nSketch: {response.selected_sketch}"
+            );
+        }
+        catch (System.Exception e)
+        {
+            UpdateStatusText("Layout generated, but UI parsing failed.");
+            UpdateResultsText($"Raw response:\n{responseJson}\n\nParse error: {e.Message}");
+        }
     }
     
     private void OnErrorReceived(string errorMessage)
@@ -207,5 +258,33 @@ public class ModelRequesterUI : MonoBehaviour
         {
             resultsText.text = message;
         }
+    }
+
+    [System.Serializable]
+    private class LayoutResponseEnvelope
+    {
+        public string status;
+        public string message;
+        public string selected_sketch;
+        public LayoutPayload layout;
+    }
+
+    [System.Serializable]
+    private class LayoutPayload
+    {
+        public TerrainZoneDto[] terrain_zones;
+        public PrefabDto[] prefabs;
+    }
+
+    [System.Serializable]
+    private class TerrainZoneDto
+    {
+        public string area_name;
+    }
+
+    [System.Serializable]
+    private class PrefabDto
+    {
+        public string prefab_type;
     }
 }

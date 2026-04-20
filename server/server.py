@@ -9,15 +9,30 @@ for model selection and generation.
 
 import os
 import glob
+import json
+import threading
+import sys
 from pathlib import Path
 from flask import Flask, jsonify, request, send_file, abort
 from flask_cors import CORS
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from layout_prompt import process_sketch, visualize_output, choose_sketch_path
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for Unity communication
 
 SUPPORTED_EXTENSIONS = ['.obj', '.glb']
 SUPPORTED_REGEX_EXTENSIONS = ['*.obj', '*.glb']
+LAYOUT_OUTPUT_PATH = PROJECT_ROOT / "sample_output.json"
+DEFAULT_LOT_BOUNDARY = [[0, 0], [0, 1000], [1000, 0], [1000, 1000]]
+DEFAULT_SITE_WIDTH_FT = 1000
+DEFAULT_SITE_HEIGHT_FT = 1000
+
+layout_generation_lock = threading.Lock()
 
 
 def get_models_dir() -> Path:
@@ -179,10 +194,85 @@ def download_model(filename):
             "message": f"Error downloading file: {str(e)}"
         }), 500
 
+@app.route('/api/layout/generate', methods=['POST'])
+def generate_layout_from_sketch():
+    """
+    Trigger sketch selection on the local machine, run prompting, and return layout JSON.
+    This endpoint intentionally accepts no request payload for local-only workflows.
+    """
+    if not layout_generation_lock.acquire(blocking=False):
+        return jsonify({
+            "status": "error",
+            "message": "Layout generation is already in progress."
+        }), 409
+
+    try:
+        selected_sketch_path = choose_sketch_path()
+        if selected_sketch_path is None:
+            return jsonify({
+                "status": "error",
+                "message": "Sketch selection canceled."
+            }), 400
+
+        output = process_sketch(
+            output_path=LAYOUT_OUTPUT_PATH,
+            sketch_path=selected_sketch_path,
+            lot_boundary=DEFAULT_LOT_BOUNDARY,
+            site_width_ft=DEFAULT_SITE_WIDTH_FT,
+            site_height_ft=DEFAULT_SITE_HEIGHT_FT,
+        )
+
+        if output is None:
+            return jsonify({
+                "status": "error",
+                "message": "Layout generation failed. Check server logs for details."
+            }), 502
+
+        if not LAYOUT_OUTPUT_PATH.exists():
+            return jsonify({
+                "status": "error",
+                "message": f"Expected output file was not created: {LAYOUT_OUTPUT_PATH}"
+            }), 500
+
+        try:
+            site_data = json.loads(LAYOUT_OUTPUT_PATH.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            return jsonify({
+                "status": "error",
+                "message": f"Generated output is not valid JSON: {exc.msg}"
+            }), 500
+
+        visualization_warning = None
+        try:
+            visualize_output(site_data)
+        except Exception as exc:
+            visualization_warning = str(exc)
+
+        response = {
+            "status": "success",
+            "message": "Layout generated successfully.",
+            "layout": site_data,
+            "output_path": str(LAYOUT_OUTPUT_PATH),
+            "selected_sketch": str(selected_sketch_path),
+        }
+        if visualization_warning:
+            response["visualization_warning"] = visualization_warning
+
+        return jsonify(response)
+
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": f"Unexpected error during layout generation: {str(e)}"
+        }), 500
+    finally:
+        layout_generation_lock.release()
+
 if __name__ == '__main__':
     print("Starting Local Model to Unity Bridge Server...")
     print("Health check available at: http://localhost:5002/health")
     print("Model listing available at: http://localhost:5002/api/list")
     print("Model search available at: http://localhost:5002/api/search")
     print("Model download available at: http://localhost:5002/api/download/<filename>")
+    print("Layout generation available at: http://localhost:5002/api/layout/generate")
     app.run(host='0.0.0.0', port=5002, debug=True)

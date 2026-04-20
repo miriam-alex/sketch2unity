@@ -2,186 +2,288 @@
   "site_scale": {
     "site_width_ft": 1000,
     "site_height_ft": 1000,
-    "normalized_canvas": [0, 0, 1000, 1000],
+    "normalized_canvas": [
+      0,
+      0,
+      1000,
+      1000
+    ],
     "lot_boundary": [
-      [0, 0],
-      [0, 1000],
-      [1000, 0],
-      [1000, 1000]
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1000
+      ],
+      [
+        1000,
+        0
+      ],
+      [
+        1000,
+        1000
+      ]
     ],
     "scale_note": "All placements must fall within lot_boundary. Bounding boxes define placement. Real-world dimensions define scale."
   },
   "terrain_zones": [
     {
-      "area_name": "Central Plaza",
-      "semantic_tag": "public_space",
-      "terrain_type": "plaza",
-      "bounding_box": [450, 250, 800, 750],
-      "approx_sq_ft": 175000,
-      "unity_strategy": "paint_terrain"
-    },
-    {
-      "area_name": "Cafe Patio Garden",
-      "semantic_tag": "outdoor_dining",
-      "terrain_type": "planting_bed",
-      "bounding_box": [500, 300, 650, 450],
-      "approx_sq_ft": 22500,
-      "unity_strategy": "paint_terrain"
-    },
-    {
-      "area_name": "Daycare Playground",
-      "semantic_tag": "recreation_area",
+      "area_name": "Site Lawn",
+      "semantic_tag": "site_ground",
       "terrain_type": "grass",
-      "bounding_box": [480, 550, 700, 700],
-      "approx_sq_ft": 33000,
+      "bounding_box": [
+        0,
+        0,
+        1000,
+        1000
+      ],
+      "approx_sq_ft": 1000000,
       "unity_strategy": "paint_terrain"
     },
     {
-      "area_name": "West Walkway",
-      "semantic_tag": "path",
+      "area_name": "Central Plaza",
+      "semantic_tag": "courtyard",
+      "terrain_type": "plaza",
+      "bounding_box": [
+        450,
+        200,
+        700,
+        800
+      ],
+      "approx_sq_ft": 150000,
+      "unity_strategy": "paint_terrain"
+    },
+    {
+      "area_name": "Cafe Entry Path",
+      "semantic_tag": "main_path",
       "terrain_type": "pavement",
-      "bounding_box": [680, 0, 750, 250],
+      "bounding_box": [
+        680,
+        0,
+        750,
+        250
+      ],
       "approx_sq_ft": 17500,
       "unity_strategy": "paint_terrain"
     },
     {
-      "area_name": "East Walkway",
-      "semantic_tag": "path",
+      "area_name": "Daycare Entry Path",
+      "semantic_tag": "main_path",
       "terrain_type": "pavement",
-      "bounding_box": [800, 750, 850, 1000],
+      "bounding_box": [
+        680,
+        750,
+        750,
+        1000
+      ],
+      "approx_sq_ft": 17500,
+      "unity_strategy": "paint_terrain"
+    },
+    {
+      "area_name": "Cafe Central Connector",
+      "semantic_tag": "walkway",
+      "terrain_type": "pavement",
+      "bounding_box": [
+        450,
+        200,
+        700,
+        250
+      ],
       "approx_sq_ft": 12500,
       "unity_strategy": "paint_terrain"
     },
     {
-      "area_name": "Central Divider Path",
-      "semantic_tag": "path",
+      "area_name": "Daycare Central Connector",
+      "semantic_tag": "walkway",
       "terrain_type": "pavement",
-      "bounding_box": [470, 480, 800, 520],
-      "approx_sq_ft": 13200,
+      "bounding_box": [
+        450,
+        750,
+        700,
+        800
+      ],
+      "approx_sq_ft": 12500,
+      "unity_strategy": "paint_terrain"
+    },
+    {
+      "area_name": "Main Central Walkway",
+      "semantic_tag": "walkway",
+      "terrain_type": "pavement",
+      "bounding_box": [
+        550,
+        250,
+        600,
+        750
+      ],
+      "approx_sq_ft": 25000,
+      "unity_strategy": "paint_terrain"
+    },
+    {
+      "area_name": "Cafe Side Planting",
+      "semantic_tag": "landscaping",
+      "terrain_type": "planting_bed",
+      "bounding_box": [
+        450,
+        250,
+        550,
+        500
+      ],
+      "approx_sq_ft": 25000,
+      "unity_strategy": "paint_terrain"
+    },
+    {
+      "area_name": "Daycare Side Planting",
+      "semantic_tag": "landscaping",
+      "terrain_type": "planting_bed",
+      "bounding_box": [
+        450,
+        500,
+        550,
+        750
+      ],
+      "approx_sq_ft": 25000,
       "unity_strategy": "paint_terrain"
     }
   ],
   "generated_objects": [
     {
       "area_name": "Dr.'s Office",
-      "semantic_tag": "medical_building",
+      "semantic_tag": "medical_office",
       "object_type": "building",
-      "bounding_box": [100, 0, 450, 600],
-      "center_point": [275, 300],
-      "approx_sq_ft": 11250,
+      "bounding_box": [
+        50,
+        200,
+        450,
+        800
+      ],
+      "center_point": [
+        250,
+        500
+      ],
+      "approx_sq_ft": 240000,
       "target_dimensions_ft": {
-        "width_ft": 150,
-        "depth_ft": 75,
-        "height_ft": 28
+        "width_ft": 600,
+        "depth_ft": 400,
+        "height_ft": 40
       },
       "unity_strategy": "box_primitive"
     },
     {
-      "area_name": "cafe",
-      "semantic_tag": "retail_building",
+      "area_name": "Cafe",
+      "semantic_tag": "restaurant",
       "object_type": "building",
-      "bounding_box": [450, 0, 700, 250],
-      "center_point": [575, 125],
-      "approx_sq_ft": 3000,
+      "bounding_box": [
+        450,
+        0,
+        700,
+        200
+      ],
+      "center_point": [
+        575,
+        100
+      ],
+      "approx_sq_ft": 50000,
       "target_dimensions_ft": {
-        "width_ft": 60,
-        "depth_ft": 50,
-        "height_ft": 14
+        "width_ft": 200,
+        "depth_ft": 250,
+        "height_ft": 15
       },
       "unity_strategy": "box_primitive"
     },
     {
       "area_name": "Daycare",
-      "semantic_tag": "educational_building",
+      "semantic_tag": "childcare",
       "object_type": "building",
-      "bounding_box": [100, 750, 800, 1000],
-      "center_point": [450, 875],
-      "approx_sq_ft": 7000,
+      "bounding_box": [
+        450,
+        800,
+        700,
+        1000
+      ],
+      "center_point": [
+        575,
+        900
+      ],
+      "approx_sq_ft": 50000,
       "target_dimensions_ft": {
-        "width_ft": 100,
-        "depth_ft": 70,
-        "height_ft": 24
+        "width_ft": 200,
+        "depth_ft": 250,
+        "height_ft": 15
       },
       "unity_strategy": "box_primitive"
     }
   ],
   "prefab_instances": [
     {
-      "area_name": "Cafe Bench 1",
+      "area_name": "Courtyard Bench 1",
       "semantic_tag": "seating",
       "prefab_type": "bench",
-      "center_point": [600, 320],
-      "footprint_box": [590, 305, 610, 335],
+      "center_point": [
+        520,
+        270
+      ],
+      "footprint_box": [
+        510,
+        260,
+        530,
+        280
+      ],
       "rotation_deg": 0,
       "scale_multiplier": 1.0,
       "unity_strategy": "place_prefab"
     },
     {
-      "area_name": "Cafe Bench 2",
+      "area_name": "Courtyard Bench 2",
       "semantic_tag": "seating",
       "prefab_type": "bench",
-      "center_point": [570, 350],
-      "footprint_box": [560, 335, 580, 365],
+      "center_point": [
+        480,
+        290
+      ],
+      "footprint_box": [
+        470,
+        280,
+        490,
+        300
+      ],
       "rotation_deg": 0,
       "scale_multiplier": 1.0,
       "unity_strategy": "place_prefab"
     },
     {
-      "area_name": "Cafe Bench 3",
+      "area_name": "Courtyard Bench 3",
       "semantic_tag": "seating",
       "prefab_type": "bench",
-      "center_point": [540, 380],
-      "footprint_box": [530, 365, 550, 395],
+      "center_point": [
+        520,
+        310
+      ],
+      "footprint_box": [
+        510,
+        300,
+        530,
+        320
+      ],
       "rotation_deg": 0,
       "scale_multiplier": 1.0,
       "unity_strategy": "place_prefab"
     },
     {
-      "area_name": "Cafe Garden Tree 1",
-      "semantic_tag": "vegetation",
-      "prefab_type": "tree",
-      "center_point": [530, 340],
-      "footprint_box": [510, 320, 550, 360],
-      "rotation_deg": 0,
-      "scale_multiplier": 1.0,
-      "unity_strategy": "place_prefab"
-    },
-    {
-      "area_name": "Cafe Garden Tree 2",
-      "semantic_tag": "vegetation",
-      "prefab_type": "tree",
-      "center_point": [590, 410],
-      "footprint_box": [570, 390, 610, 430],
-      "rotation_deg": 0,
-      "scale_multiplier": 1.0,
-      "unity_strategy": "place_prefab"
-    },
-    {
-      "area_name": "Daycare Playground Structure",
-      "semantic_tag": "play_equipment",
-      "prefab_type": "playground_structure",
-      "center_point": [590, 620],
-      "footprint_box": [560, 590, 620, 650],
-      "rotation_deg": 0,
-      "scale_multiplier": 1.0,
-      "unity_strategy": "place_prefab"
-    },
-    {
-      "area_name": "Daycare Playground Tree 1",
-      "semantic_tag": "vegetation",
-      "prefab_type": "tree",
-      "center_point": [500, 600],
-      "footprint_box": [480, 580, 520, 620],
-      "rotation_deg": 0,
-      "scale_multiplier": 1.0,
-      "unity_strategy": "place_prefab"
-    },
-    {
-      "area_name": "Daycare Playground Tree 2",
-      "semantic_tag": "vegetation",
-      "prefab_type": "tree",
-      "center_point": [650, 650],
-      "footprint_box": [630, 630, 670, 670],
+      "area_name": "Courtyard Bench 4",
+      "semantic_tag": "seating",
+      "prefab_type": "bench",
+      "center_point": [
+        480,
+        330
+      ],
+      "footprint_box": [
+        470,
+        320,
+        490,
+        340
+      ],
       "rotation_deg": 0,
       "scale_multiplier": 1.0,
       "unity_strategy": "place_prefab"

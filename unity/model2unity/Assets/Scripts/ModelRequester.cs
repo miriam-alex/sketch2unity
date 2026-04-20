@@ -32,6 +32,8 @@ public class ModelRequester : MonoBehaviour
     public UnityEvent<float, string> OnDownloadProgress; // Progress (0-1), status message
     [System.NonSerialized]
     public UnityEvent<bool, string> OnHealthCheckComplete; // Success (true/false), status message
+    [System.NonSerialized]
+    public UnityEvent<string> OnLayoutGenerated; // Raw JSON response for layout output
     
     private void Awake()
     {
@@ -41,6 +43,7 @@ public class ModelRequester : MonoBehaviour
         if (OnError == null) OnError = new UnityEvent<string>();
         if (OnDownloadProgress == null) OnDownloadProgress = new UnityEvent<float, string>();
         if (OnHealthCheckComplete == null) OnHealthCheckComplete = new UnityEvent<bool, string>();
+        if (OnLayoutGenerated == null) OnLayoutGenerated = new UnityEvent<string>();
     }
     
     private void Start()
@@ -234,6 +237,96 @@ public class ModelRequester : MonoBehaviour
                 LogError($"Model Search FAILED!");
                 LogError($"Error: {request.error}");
                 OnError?.Invoke($"Search failed: {request.error}");
+            }
+        }
+    }
+
+    /// <summary>
+    /// Trigger server-side sketch selection and layout generation, then return layout JSON.
+    /// </summary>
+    [ContextMenu("Generate Layout From Sketch")]
+    public void GenerateLayoutFromSketchButton()
+    {
+        StartCoroutine(RequestLayoutGeneration());
+    }
+
+    private IEnumerator RequestLayoutGeneration()
+    {
+        string layoutUrl = $"{serverBaseUrl}/api/layout/generate";
+        Log($"Triggering layout generation: {layoutUrl}");
+
+        OnDownloadProgress?.Invoke(0f, "Select sketch in Python window...");
+
+        using (UnityWebRequest request = new UnityWebRequest(layoutUrl, "POST"))
+        {
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes("{}");
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+            request.timeout = 600;
+
+            var asyncOp = request.SendWebRequest();
+            while (!asyncOp.isDone)
+            {
+                float progress = Mathf.Clamp01(request.downloadProgress);
+                OnDownloadProgress?.Invoke(progress, "Generating layout...");
+                yield return null;
+            }
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                string responseText = request.downloadHandler.text;
+                Log("Layout generation SUCCESS!");
+                Log($"Response: {responseText}");
+
+                LayoutGenerationResponseMeta responseMeta = null;
+                try
+                {
+                    responseMeta = JsonUtility.FromJson<LayoutGenerationResponseMeta>(responseText);
+                }
+                catch (System.Exception e)
+                {
+                    Log($"Could not parse layout response metadata: {e.Message}");
+                }
+
+                if (responseMeta != null && !string.IsNullOrEmpty(responseMeta.status) && responseMeta.status != "success")
+                {
+                    string message = string.IsNullOrEmpty(responseMeta.message)
+                        ? "Layout generation failed."
+                        : responseMeta.message;
+                    LogError($"Layout generation failed: {message}");
+                    OnError?.Invoke($"Layout generation failed: {message}");
+                    yield break;
+                }
+
+                OnDownloadProgress?.Invoke(1f, "Layout generation complete");
+                OnLayoutGenerated?.Invoke(responseText);
+            }
+            else
+            {
+                string errorMessage = request.error;
+                string responseText = request.downloadHandler != null ? request.downloadHandler.text : string.Empty;
+
+                if (!string.IsNullOrEmpty(responseText))
+                {
+                    try
+                    {
+                        var errorData = JsonUtility.FromJson<ErrorResponse>(responseText);
+                        if (errorData != null && !string.IsNullOrEmpty(errorData.message))
+                        {
+                            errorMessage = errorData.message;
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        // Keep UnityWebRequest error when JSON parsing fails.
+                    }
+                }
+
+                LogError("Layout generation FAILED!");
+                LogError($"Error: {request.error}");
+                LogError($"Response Code: {request.responseCode}");
+                OnError?.Invoke($"Layout generation failed: {errorMessage}");
             }
         }
     }
@@ -552,5 +645,22 @@ public class ModelRequester : MonoBehaviour
         public long size;
         public string extension;
         public float modified;
+    }
+
+    [System.Serializable]
+    public class LayoutGenerationResponseMeta
+    {
+        public string status;
+        public string message;
+        public string output_path;
+        public string selected_sketch;
+        public string visualization_warning;
+    }
+
+    [System.Serializable]
+    public class ErrorResponse
+    {
+        public string status;
+        public string message;
     }
 }
