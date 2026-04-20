@@ -2,6 +2,8 @@ import os
 import time
 import random
 import json
+import subprocess
+import sys
 from pathlib import Path
 from typing import Iterable
 from dotenv import load_dotenv
@@ -15,7 +17,6 @@ load_dotenv()
 # Configuration
 MODEL_ID = "gemini-2.5-flash"
 PROMPT_PATH = Path("prompts/site_parsing.md")
-SKETCH_PATH = Path("samples/sample_bronx_drawing.png")
 OUTPUT_PATH = Path("sample_output.json")
 
 # Client Setup
@@ -236,10 +237,14 @@ def process_sketch(
     lot_boundary=None,
     site_width_ft=None,
     site_height_ft=None,
-    sketch_path=SKETCH_PATH,
+    sketch_path=None,
     prompt_path=PROMPT_PATH,
     output_path=OUTPUT_PATH,
 ):
+
+    if sketch_path is None:
+        print("No sketch path was provided")
+        return
 
     sketch_path = Path(sketch_path)
     prompt_path = Path(prompt_path)
@@ -303,8 +308,60 @@ def process_sketch(
 
     return output
 
+
+def choose_sketch_path():
+    try:
+        import tkinter as tk
+        from tkinter import filedialog
+
+        root = tk.Tk()
+        root.withdraw()
+        root.attributes("-topmost", True)
+
+        selected_path = filedialog.askopenfilename(
+            title="Select a sketch image",
+            filetypes=[
+                ("Image files", "*.png *.jpg *.jpeg *.webp *.bmp"),
+                ("All files", "*.*"),
+            ],
+        )
+
+        root.destroy()
+        if selected_path:
+            return Path(selected_path)
+    except Exception:
+        pass
+
+    if sys.platform == "darwin":
+        script = (
+            'POSIX path of (choose file with prompt "Select a sketch image" '
+            'of type {"public.image"})'
+        )
+        result = subprocess.run(
+            ["osascript", "-e", script],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode == 0:
+            selected_path = result.stdout.strip()
+            if selected_path:
+                return Path(selected_path)
+
+    user_input = input("Enter the full path to your sketch image (or press Enter to cancel): ").strip()
+    if not user_input:
+        return None
+
+    return Path(user_input)
+
 if __name__ == "__main__":
+    selected_sketch_path = choose_sketch_path()
+    if selected_sketch_path is None:
+        print("No sketch selected. Exiting.")
+        raise SystemExit(0)
+
     layout_output = process_sketch(
+        sketch_path=selected_sketch_path,
         lot_boundary=[[0, 0], [0, 1000], [1000, 0], [1000, 1000]],
         site_width_ft=1000,
         site_height_ft=1000,
