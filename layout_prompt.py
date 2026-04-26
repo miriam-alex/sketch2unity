@@ -366,4 +366,8 @@ if __name__ == "__main__":
         site_width_ft=1000,
         site_height_ft=1000,
     )
+
+    print(layout_output)
+
+    visualize_output(layout_output)
         

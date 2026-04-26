@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fa51e9043934a1b99b44d612e980e22, type: 3}
-  m_Name: TerrainRegistry
+  m_Script: {fileID: 11500000, guid: 40709c1665b93493492bd11d3e11cde2, type: 3}
+  m_Name: TerrainRegistry 1
   m_EditorClassIdentifier: Assembly-CSharp::TerrainRegistry
   entries:
   - key: grass
@@ -18,4 +18,4 @@ MonoBehaviour:
   - key: pavement
     terrainLayer: {fileID: 8574412962073106934, guid: 00b8d645b2b347942a3abcd3082f1f64, type: 2}
   - key: dirt
-    terrainLayer: {fileID: 8574412962073106934, guid: 4c4035b4429296047a447dd96db29248, type: 2}
+    terrainLayer: {fileID: 8574412962073106934, guid: 6de2cb754be81fe4da45a5d5149551c6, type: 2}

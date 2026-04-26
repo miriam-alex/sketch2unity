@@ -6,7 +6,8 @@ You will analyze a rough, hand-drawn, top-down architectural site sketch and con
 
 This JSON will be used to:
 - Generate terrain using Unity's terrain/material system
-- Place box primitives (resized cubes) for buildings and structures
+- Place modular apartment/office buildings using a prefab floor-and-bay system
+- Place box primitives (resized cubes) for unique or irregular structures
 - Place prefab objects (e.g., trees, benches) into the scene
 
 Your priority is to **faithfully interpret the sketch**, while producing a **clean, structured, and implementation-ready JSON output**.
@@ -31,8 +32,9 @@ Your priority is to **faithfully interpret the sketch**, while producing a **cle
 Identify all meaningful spatial elements in the sketch and classify each into **exactly one** of the following categories:
 
 1. `"terrain_zones"` → ground surfaces (grass, pavement, plaza, etc.)
-2. `"generated_objects"` → unique structures represented as resizable box primitives
-3. `"prefab_instances"` → repeatable objects (trees, benches, lamps, etc.)
+2. `"generated_buildings"` → rectangular buildings with regular floors and repeating window/unit bays
+3. `"generated_objects"` → unique or irregular structures represented as resizable box primitives (fallback only)
+4. `"prefab_instances"` → repeatable objects (trees, benches, lamps, etc.)
 
 ---
 
@@ -61,12 +63,13 @@ The top-level `site_scale` object must follow this shape exactly:
 
 ## 📦 Required Output Shape
 
-Your output must be a JSON object with **exactly** these four top-level keys:
+Your output must be a JSON object with **exactly** these five top-level keys:
 
 ```
 {
   "site_scale": { ... },
   "terrain_zones": [ ... ],
+  "generated_buildings": [ ... ],
   "generated_objects": [ ... ],
   "prefab_instances": [ ... ]
 }
@@ -106,9 +109,68 @@ Each entry must follow this schema in this exact field order:
 
 ---
 
+## 🏠 Generated Buildings
+
+Use for buildings that have **regular rectangular floors** and **repeating window or unit bays** — residential apartments, office blocks, rowhouses, and similar structures.
+
+**Use this category first** whenever a building in the sketch appears to be a regular, multi-story structure with uniform fenestration or repeated units. Only fall back to `generated_objects` if the structure is irregular, uniquely shaped, or cannot be described by a simple floor × bay grid.
+
+Each entry must follow this schema in this exact field order:
+
+```
+{
+  "area_name": string,
+  "semantic_tag": string,
+  "bounding_box": [ymin, xmin, ymax, xmax],
+  "center_point": [y, x],
+  "rotation_y_deg": number,
+  "approx_sq_ft": number,
+  "unity_strategy": "modular_prefab"
+}
+```
+
+### Estimating approx_sq_ft
+
+Derive from the bounding box scaled to real-world site dimensions:
+
+```
+bbox_width_normalized  = (xmax - xmin) / 1000
+bbox_height_normalized = (ymax - ymin) / 1000
+approx_sq_ft = (bbox_width_normalized × site_width_ft) × (bbox_height_normalized × site_height_ft)
+```
+
+### Rules
+
+- `center_point` must be the exact center of the bounding box
+
+#### rotation_y_deg
+- This is the **Y-axis (yaw) rotation** of the building in degrees, as seen from directly above
+- `0` = building's long wall runs east–west (left–right on canvas)
+- `90` = building's long wall runs north–south (up–down on canvas)
+- **You MUST infer this from the sketch.** Do **NOT** default to `0` unless the building is unambiguously axis-aligned
+- Valid range: `[0, 360)`. Common values: `0`, `30`, `45`, `60`, `90`, `120`, `135`, `150`
+
+#### Example
+
+```json
+{
+  "area_name": "Apartment Block A",
+  "semantic_tag": "residential_apartment",
+  "bounding_box": [200, 100, 400, 500],
+  "center_point": [300, 300],
+  "rotation_y_deg": 0,
+  "approx_sq_ft": 2400,
+  "unity_strategy": "modular_prefab"
+}
+```
+
+---
+
 ## 🏢 Generated Objects
 
-Use for unique structures to be represented as **resized Unity Cube primitives** scaled via `target_dimensions_ft`. Includes buildings, kiosks, pavilions, and unique structures.
+**Fallback only.** Use for unique structures that **cannot** be described by a regular floor × bay grid — pavilions, kiosks, irregularly massed buildings, structures with complex rooflines, or anything that does not fit the modular pattern.
+
+Do **NOT** use this category for a building that simply has many floors or many bays — those still belong in `generated_buildings`.
 
 Each entry must follow this schema in this exact field order:
 
@@ -133,21 +195,16 @@ Each entry must follow this schema in this exact field order:
 ### Rules
 
 - `center_point` must be the exact center of the bounding box
+- `width_ft × depth_ft` must approximately equal `approx_sq_ft`
+- **`height_ft` must NEVER be less than `10`. Buildings must stand upright.**
 
 #### rotation_y_deg
-- This is the **Y-axis (yaw) rotation** of the building in degrees, as seen from directly above
-- `0` = building's long wall runs east–west (left–right on canvas)
-- `90` = building's long wall runs north–south (up–down on canvas)
-- **You MUST infer this from the sketch.** Look at the angle of the building's longest wall relative to horizontal and set `rotation_y_deg` accordingly
-- Do **NOT** default to `0` unless the building is unambiguously axis-aligned — most buildings on angled lots will have a non-zero rotation
-- Valid range: `[0, 360)`. Common values: `0`, `30`, `45`, `60`, `90`, `120`, `135`, `150`
+- Same inference rules as `generated_buildings` — infer from sketch wall angles, do **NOT** default to `0`
 
 #### target_dimensions_ft
-- `width_ft` = the building's footprint size along its **local X axis** (before rotation is applied) — typically the shorter horizontal dimension
-- `depth_ft` = the building's footprint size along its **local Z axis** (before rotation is applied) — typically the longer horizontal dimension
-- `height_ft` = the building's **vertical** height off the ground — this is the Y dimension in Unity
-- **`height_ft` must NEVER be less than `10`. Buildings must stand upright.** A value like `2` or `5` is wrong.
-- `width_ft × depth_ft` must approximately equal `approx_sq_ft`
+- `width_ft` = footprint along local X axis (typically the shorter dimension)
+- `depth_ft` = footprint along local Z axis (typically the longer dimension)
+- `height_ft` = vertical height (Y in Unity)
 - In Unity: instantiate a Cube primitive, set `transform.localScale = (width_ft, height_ft, depth_ft)`, then set `transform.eulerAngles.y = rotation_y_deg`
 
 - Do **NOT** include `image_gen_prompt` on any generated object
@@ -164,7 +221,21 @@ Each entry must follow this schema in this exact field order:
 
 ## 🌳 Prefab Instances
 
-Use for small, repeatable objects such as trees and benches.
+Use for small, repeatable objects in the table below.
+
+| prefab_type | unity_prefab_name |
+|---|---|
+| "bench" | Bench |
+| "tree" | Tree_1 |
+| "pine_tree" | Tree_4 |
+| "bush" | Bush |
+| "square_fountain" | Fountain1 |
+| "circle_fountain" | Fountain_1 |
+| "streetlight" | Lamp |
+| "picnic_table" | DoubleBench |
+| "outdoor_beer_booth" | Booth_Food01_Art |
+| "outdoor_sausage_booth" | Booth_Food02_Art |
+| "outdoor_pretzel_booth" | Booth_Food02_Art |
 
 Each entry must follow this schema in this exact field order:
 
@@ -202,11 +273,21 @@ Each entry must follow this schema in this exact field order:
 
 ## ⚖️ Classification Rules
 
-Each element must appear in **exactly one** category:
+Each element must appear in **exactly one** category. Apply in this priority order:
 
-- Use `terrain_zones` if it is a continuous surface or defines ground material
-- Use `generated_objects` if it is a large, unique structure that should become a box primitive in Unity
-- Use `prefab_instances` if it is small, repeatable, and belongs in a prefab library
+1. If it is a large continuous ground surface → `terrain_zones`
+2. If it is a small, repeatable object (tree, bench, lamp) → `prefab_instances`
+3. If it is a building with regular rectangular floors and repeating bays → **`generated_buildings`** ← prefer this
+4. If it is a unique, irregular, or non-repeating structure → `generated_objects` (fallback)
+
+The decision between `generated_buildings` and `generated_objects` for a building:
+
+| Characteristic | Use `generated_buildings` | Use `generated_objects` |
+|---|---|---|
+| Floor plan | Simple rectangle | Complex, L-shaped, or irregular |
+| Facade | Repeating bays/units | Unique massing |
+| Floors | Any number ≥ 1 | Any number ≥ 1 |
+| Examples | Apartments, offices, rowhouses | Pavilions, kiosks, oddly-massed buildings |
 
 ---
 
@@ -217,9 +298,10 @@ Before producing output, verify:
 - All objects are in exactly one category
 - All bounding boxes and center points fall within `lot_boundary`
 - All center points are the correct center of their bounding box
-- `width_ft × depth_ft ≈ approx_sq_ft` for all generated objects
-- `height_ft ≥ 10` for every generated object — flat slabs are invalid
-- `rotation_y_deg` is present on every generated object and is **inferred from the sketch's wall angles**, not defaulted to `0`
+- For `generated_buildings`: `approx_sq_ft` derived from bounding box scaled to site dimensions
+- For `generated_objects`: `width_ft × depth_ft ≈ approx_sq_ft` and `height_ft ≥ 10`
+- Regular rectangular buildings are in `generated_buildings`, not `generated_objects`
+- `rotation_y_deg` is present on every building entry and is **inferred from the sketch's wall angles**
 - No `image_gen_prompt` fields exist anywhere in the output
 - All coordinate values are integers in the range `[0, 1000]`
 - JSON is valid and directly parseable — no fences, no commentary

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5e9f6634505249e794d2a22c9971e97, type: 3}
+  m_Script: {fileID: 11500000, guid: 78deb2a6f3b2248e9977a59c5b5c2624, type: 3}
   m_Name: PrefabRegistry
   m_EditorClassIdentifier: Assembly-CSharp::PrefabRegistry
   entries:
@@ -23,15 +23,15 @@ MonoBehaviour:
     prefab: {fileID: 192312, guid: 7712ec26597e75f4f9325357eefd61d4, type: 3}
   - key: square_fountain
     prefab: {fileID: 124066, guid: 3aea2b1d4d0db3542af1e9d3474cf6fe, type: 3}
-  - key: circular_fountain
+  - key: circle_fountain
     prefab: {fileID: 155698, guid: dd407b8b12f4ae245b5d40058a3d72d8, type: 3}
   - key: streetlight
     prefab: {fileID: 198732, guid: 4eef6f5ff5915b4458bd1d4a4f7b261a, type: 3}
+  - key: picnic_table
+    prefab: {fileID: 117050, guid: a36eb7c68da723844b826fa2e34e1e06, type: 3}
   - key: outdoor_beer_booth
     prefab: {fileID: 2909653555984108568, guid: ad7e42ca515a01b4ebe6867fd132fdba, type: 3}
   - key: outdoor_sausage_booth
     prefab: {fileID: 4142045385109628133, guid: a2aafd44677541345a2afdc32af1f14d, type: 3}
   - key: outdoor_pretzel_booth
-    prefab: {fileID: 919132149155446097, guid: 292e499e123826d4e82955b8e11f2cce, type: 3}
-  - key: picnic_table
-    prefab: {fileID: 117050, guid: a36eb7c68da723844b826fa2e34e1e06, type: 3}
+    prefab: {fileID: 4142045385109628133, guid: a2aafd44677541345a2afdc32af1f14d, type: 3}
