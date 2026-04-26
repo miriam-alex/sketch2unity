@@ -153,7 +153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -112.93, y: 766.5}
+  m_AnchoredPosition: {x: -112.93, y: 160.8}
   m_SizeDelta: {x: 368.9, y: 48.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &38594103
@@ -283,16 +283,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180392611}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.07766}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2018643026}
-  m_Father: {fileID: 1362816745}
+  m_Father: {fileID: 1617552028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 162.20096, y: 1208.2543}
+  m_AnchoredPosition: {x: -126.4, y: 230}
   m_SizeDelta: {x: 141.3, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180392613
@@ -395,7 +395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &216478854
 RectTransform:
   m_ObjectHideFlags: 0
@@ -404,16 +404,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 216478853}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.07766}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 406232959}
-  m_Father: {fileID: 1362816745}
+  m_Father: {fileID: 1617552028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -289.69897, y: 1208.2543}
+  m_AnchoredPosition: {x: -114.29999, y: 231.54999}
   m_SizeDelta: {x: 374.9, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &216478855
@@ -909,8 +909,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  far clip plane: 10000
+  field of view: 61.6
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -936,13 +936,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.08308651, y: 0, z: 0, w: 0.99654233}
+  m_LocalPosition: {x: 643.43, y: 64, z: -75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 9.532, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1184,7 +1184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &501964548
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1193,16 +1193,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 501964547}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.07766}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 253264660}
-  m_Father: {fileID: 1362816745}
+  m_Father: {fileID: 1617552028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -58.898987, y: 1208.2543}
+  m_AnchoredPosition: {x: 116.5, y: 232.54999}
   m_SizeDelta: {x: 62.1, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &501964549
@@ -1287,6 +1287,189 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 501964547}
   m_CullTransparentMesh: 1
+--- !u!1 &506498431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 506498433}
+  - component: {fileID: 506498434}
+  - component: {fileID: 506498432}
+  m_Layer: 0
+  m_Name: WorldGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &506498432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506498431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31310b3a0440547b891a80d1b3c7f3ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::JSONTerrainPainter
+  targetTerrain: {fileID: 1822902668}
+  prefabRegistry: {fileID: 11400000, guid: f514c96d1eebf4eb6bd2a9a6df0fe51b, type: 2}
+  terrainRegistry: {fileID: 11400000, guid: dccfca628d2f148139294fbdf193b5a6, type: 2}
+  buildingGenerator: {fileID: 506498434}
+  prefabScaleFactor: 2
+  testGeneration: 1
+  jsonInput: "{\n   \"site_scale\":{\n      \"site_width_ft\":1000,\n      \"site_height_ft\":1000,\n     
+    \"normalized_canvas\":[\n         0,\n         0,\n         1000,\n         1000\n     
+    ],\n      \"lot_boundary\":[\n         [\n            0,\n            0\n        
+    ],\n         [\n            0,\n            1000\n         ],\n         [\n           
+    1000,\n            0\n         ],\n         [\n            1000,\n           
+    1000\n         ]\n      ],\n      \"scale_note\":\"All placements must fall within
+    lot_boundary. Bounding boxes define placement. Real-world dimensions define scale.\"\n  
+    },\n   \"terrain_zones\":[\n      {\n         \"area_name\":\"Central Plaza\",\n        
+    \"semantic_tag\":\"outdoor_gathering_space\",\n         \"terrain_type\":\"plaza\",\n        
+    \"bounding_box\":[\n            400,\n            350,\n            900,\n           
+    700\n         ],\n         \"approx_sq_ft\":175000,\n         \"unity_strategy\":\"paint_terrain\"\n     
+    },\n      {\n         \"area_name\":\"Pavement Frontage\",\n         \"semantic_tag\":\"pedestrian_walkway\",\n        
+    \"terrain_type\":\"pavement\",\n         \"bounding_box\":[\n            900,\n           
+    0,\n            1000,\n            1000\n         ],\n         \"approx_sq_ft\":100000,\n        
+    \"unity_strategy\":\"paint_terrain\"\n      },\n      {\n         \"area_name\":\"Cafe
+    Planting Bed\",\n         \"semantic_tag\":\"decorative_planting\",\n        
+    \"terrain_type\":\"planting_bed\",\n         \"bounding_box\":[\n           
+    450,\n            400,\n            580,\n            480\n         ],\n        
+    \"approx_sq_ft\":10400,\n         \"unity_strategy\":\"paint_terrain\"\n     
+    },\n      {\n         \"area_name\":\"Daycare Planting Bed\",\n         \"semantic_tag\":\"decorative_planting\",\n        
+    \"terrain_type\":\"planting_bed\",\n         \"bounding_box\":[\n           
+    550,\n            570,\n            700,\n            650\n         ],\n        
+    \"approx_sq_ft\":12000,\n         \"unity_strategy\":\"paint_terrain\"\n     
+    },\n      {\n         \"area_name\":\"Central Walkway 1\",\n         \"semantic_tag\":\"pedestrian_path\",\n        
+    \"terrain_type\":\"pavement\",\n         \"bounding_box\":[\n            450,\n           
+    380,\n            850,\n            400\n         ],\n         \"approx_sq_ft\":8000,\n        
+    \"unity_strategy\":\"paint_terrain\"\n      },\n      {\n         \"area_name\":\"Central
+    Walkway 2\",\n         \"semantic_tag\":\"pedestrian_path\",\n         \"terrain_type\":\"pavement\",\n        
+    \"bounding_box\":[\n            450,\n            500,\n            850,\n           
+    520\n         ],\n         \"approx_sq_ft\":8000,\n         \"unity_strategy\":\"paint_terrain\"\n     
+    },\n      {\n         \"area_name\":\"North Lawn\",\n         \"semantic_tag\":\"general_green_space\",\n        
+    \"terrain_type\":\"grass\",\n         \"bounding_box\":[\n            0,\n           
+    0,\n            50,\n            1000\n         ],\n         \"approx_sq_ft\":50000,\n        
+    \"unity_strategy\":\"paint_terrain\"\n      },\n      {\n         \"area_name\":\"West
+    Lawn\",\n         \"semantic_tag\":\"general_green_space\",\n         \"terrain_type\":\"grass\",\n        
+    \"bounding_box\":[\n            50,\n            0,\n            900,\n           
+    50\n         ],\n         \"approx_sq_ft\":42500,\n         \"unity_strategy\":\"paint_terrain\"\n     
+    },\n      {\n         \"area_name\":\"East Lawn\",\n         \"semantic_tag\":\"general_green_space\",\n        
+    \"terrain_type\":\"grass\",\n         \"bounding_box\":[\n            50,\n           
+    950,\n            900,\n            1000\n         ],\n         \"approx_sq_ft\":42500,\n        
+    \"unity_strategy\":\"paint_terrain\"\n      },\n      {\n         \"area_name\":\"South
+    West Lawn\",\n         \"semantic_tag\":\"general_green_space\",\n         \"terrain_type\":\"grass\",\n        
+    \"bounding_box\":[\n            650,\n            50,\n            900,\n           
+    350\n         ],\n         \"approx_sq_ft\":75000,\n         \"unity_strategy\":\"paint_terrain\"\n     
+    }\n   ],\n   \"generated_objects\":[\n      {\n         \"area_name\":\"Dr.'s
+    Office Building\",\n         \"semantic_tag\":\"medical_facility\",\n        
+    \"object_type\":\"building\",\n         \"bounding_box\":[\n            50,\n           
+    50,\n            400,\n            950\n         ],\n         \"center_point\":[\n           
+    225,\n            500\n         ],\n         \"approx_sq_ft\":315000,\n        
+    \"target_dimensions_ft\":{\n            \"width_ft\":900,\n            \"depth_ft\":350,\n           
+    \"height_ft\":45\n         },\n         \"unity_strategy\":\"box_primitive\"\n     
+    },\n      {\n         \"area_name\":\"Cafe Building\",\n         \"semantic_tag\":\"retail_food_service\",\n        
+    \"object_type\":\"building\",\n         \"bounding_box\":[\n            400,\n           
+    50,\n            650,\n            350\n         ],\n         \"center_point\":[\n           
+    525,\n            200\n         ],\n         \"approx_sq_ft\":75000,\n        
+    \"target_dimensions_ft\":{\n            \"width_ft\":300,\n            \"depth_ft\":250,\n           
+    \"height_ft\":14\n         },\n         \"unity_strategy\":\"box_primitive\"\n     
+    },\n      {\n         \"area_name\":\"Daycare Building\",\n         \"semantic_tag\":\"child_care_facility\",\n        
+    \"object_type\":\"building\",\n         \"bounding_box\":[\n            400,\n           
+    700,\n            900,\n            950\n         ],\n         \"center_point\":[\n           
+    650,\n            825\n         ],\n         \"approx_sq_ft\":125000,\n        
+    \"target_dimensions_ft\":{\n            \"width_ft\":250,\n            \"depth_ft\":500,\n           
+    \"height_ft\":14\n         },\n         \"unity_strategy\":\"box_primitive\"\n     
+    }\n   ],\n   \"prefab_instances\":[\n      {\n         \"area_name\":\"Cafe Outdoor
+    Bench 1\",\n         \"semantic_tag\":\"outdoor_seating\",\n         \"prefab_type\":\"bench\",\n        
+    \"center_point\":[\n            500,\n            420\n         ],\n        
+    \"footprint_box\":[\n            490,\n            410,\n            510,\n           
+    430\n         ],\n         \"rotation_deg\":90,\n         \"scale_multiplier\":1.0,\n        
+    \"unity_strategy\":\"place_prefab\"\n      },\n      {\n         \"area_name\":\"Cafe
+    Outdoor Bench 2\",\n         \"semantic_tag\":\"outdoor_seating\",\n        
+    \"prefab_type\":\"bench\",\n         \"center_point\":[\n            540,\n           
+    420\n         ],\n         \"footprint_box\":[\n            530,\n           
+    410,\n            550,\n            430\n         ],\n         \"rotation_deg\":90,\n        
+    \"scale_multiplier\":1.0,\n         \"unity_strategy\":\"place_prefab\"\n     
+    },\n      {\n         \"area_name\":\"Cafe Outdoor Bench 3\",\n         \"semantic_tag\":\"outdoor_seating\",\n        
+    \"prefab_type\":\"bench\",\n         \"center_point\":[\n            580,\n           
+    420\n         ],\n         \"footprint_box\":[\n            570,\n           
+    410,\n            590,\n            430\n         ],\n         \"rotation_deg\":90,\n        
+    \"scale_multiplier\":1.0,\n         \"unity_strategy\":\"place_prefab\"\n     
+    },\n      {\n         \"area_name\":\"Daycare Outdoor Bench 1\",\n         \"semantic_tag\":\"outdoor_seating\",\n        
+    \"prefab_type\":\"bench\",\n         \"center_point\":[\n            600,\n           
+    550\n         ],\n         \"footprint_box\":[\n            590,\n           
+    540,\n            610,\n            560\n         ],\n         \"rotation_deg\":0,\n        
+    \"scale_multiplier\":1.0,\n         \"unity_strategy\":\"place_prefab\"\n     
+    },\n      {\n         \"area_name\":\"Daycare Outdoor Bench 2\",\n         \"semantic_tag\":\"outdoor_seating\",\n        
+    \"prefab_type\":\"bench\",\n         \"center_point\":[\n            630,\n           
+    550\n         ],\n         \"footprint_box\":[\n            620,\n           
+    540,\n            640,\n            560\n         ],\n         \"rotation_deg\":0,\n        
+    \"scale_multiplier\":1.0,\n         \"unity_strategy\":\"place_prefab\"\n     
+    },\n      {\n         \"area_name\":\"Cafe Planting Bed Tree 1\",\n         \"semantic_tag\":\"tree\",\n        
+    \"prefab_type\":\"tree\",\n         \"center_point\":[\n            510,\n           
+    440\n         ],\n         \"footprint_box\":[\n            490,\n           
+    420,\n            530,\n            460\n         ],\n         \"rotation_deg\":0,\n        
+    \"scale_multiplier\":1.0,\n         \"unity_strategy\":\"place_prefab\"\n     
+    },\n      {\n         \"area_name\":\"Cafe Planting Bed Tree 2\",\n         \"semantic_tag\":\"tree\",\n        
+    \"prefab_type\":\"tree\",\n         \"center_point\":[\n            540,\n           
+    460\n         ],\n         \"footprint_box\":[\n            520,\n           
+    440,\n            560,\n            480\n         ],\n         \"rotation_deg\":0,\n        
+    \"scale_multiplier\":1.0,\n         \"unity_strategy\":\"place_prefab\"\n     
+    },\n      {\n         \"area_name\":\"Daycare Planting Bed Tree 1\",\n        
+    \"semantic_tag\":\"tree\",\n         \"prefab_type\":\"tree\",\n         \"center_point\":[\n           
+    600,\n            600\n         ],\n         \"footprint_box\":[\n           
+    580,\n            580,\n            620,\n            620\n         ],\n        
+    \"rotation_deg\":0,\n         \"scale_multiplier\":1.0,\n         \"unity_strategy\":\"place_prefab\"\n     
+    },\n      {\n         \"area_name\":\"Daycare Planting Bed Tree 2\",\n        
+    \"semantic_tag\":\"tree\",\n         \"prefab_type\":\"tree\",\n         \"center_point\":[\n           
+    640,\n            620\n         ],\n         \"footprint_box\":[\n           
+    620,\n            600,\n            660,\n            640\n         ],\n        
+    \"rotation_deg\":0,\n         \"scale_multiplier\":1.0,\n         \"unity_strategy\":\"place_prefab\"\n     
+    },\n      {\n         \"area_name\":\"Daycare Planting Bed Tree 3\",\n        
+    \"semantic_tag\":\"tree\",\n         \"prefab_type\":\"tree\",\n         \"center_point\":[\n           
+    680,\n            600\n         ],\n         \"footprint_box\":[\n           
+    660,\n            580,\n            700,\n            620\n         ],\n        
+    \"rotation_deg\":0,\n         \"scale_multiplier\":1.0,\n         \"unity_strategy\":\"place_prefab\"\n     
+    }\n   ]\n}"
+--- !u!4 &506498433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506498431}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &506498434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506498431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c0135c8571f4ab7809a4f079a23a09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingGenerator
+  groundFloorPrefab: {fileID: 0}
+  upperFloorPrefab: {fileID: 0}
+  upperFloorPrefabZOffset: 0.06
+  width: 3
+  floors: 2
 --- !u!1 &536823281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,16 +1572,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696314561}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.07766}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2021933842}
-  m_Father: {fileID: 1362816745}
+  m_Father: {fileID: 1617552028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 33.601013, y: 1208.2543}
+  m_AnchoredPosition: {x: -255.4, y: 230}
   m_SizeDelta: {x: 98.1, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &696314563
@@ -1758,7 +1941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1093746716
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1775,7 +1958,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.09, y: 662}
+  m_AnchoredPosition: {x: 4.09, y: 129.5}
   m_SizeDelta: {x: 610.5, y: 55.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1093746717
@@ -1957,41 +2140,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1362816744
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1362816745}
-  m_Layer: 0
-  m_Name: Search and Buttons
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1362816745
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362816744}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 175.39899, y: -477.45, z: -0.07766}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 501964548}
-  - {fileID: 216478854}
-  - {fileID: 696314562}
-  - {fileID: 180392612}
-  m_Father: {fileID: 1617552028}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1381680487
 GameObject:
   m_ObjectHideFlags: 0
@@ -2032,6 +2180,7 @@ MonoBehaviour:
   progressText: {fileID: 1413748960}
   progressContainer: {fileID: 2093243245}
   modelRequester: {fileID: 1381680489}
+  worldGenerator: {fileID: 506498432}
 --- !u!114 &1381680489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2536,7 +2685,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1362816745}
+  - {fileID: 501964548}
+  - {fileID: 216478854}
+  - {fileID: 696314562}
+  - {fileID: 180392612}
   - {fileID: 38594102}
   - {fileID: 1093746716}
   - {fileID: 2093243246}
@@ -2615,6 +2767,99 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1822902667
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1822902670}
+  - component: {fileID: 1822902668}
+  - component: {fileID: 1822902669}
+  m_Layer: 0
+  m_Name: Terrain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!218 &1822902668
+Terrain:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822902667}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_TerrainData: {fileID: 15600000, guid: 6a87f524104df406da57333d9936db06, type: 2}
+  m_TreeDistance: 5000
+  m_TreeBillboardDistance: 50
+  m_TreeCrossFadeLength: 5
+  m_TreeMaximumFullLODCount: 50
+  m_DetailObjectDistance: 80
+  m_DetailObjectDensity: 1
+  m_HeightmapPixelError: 5
+  m_SplatMapDistance: 1000
+  m_HeightmapMinimumLODSimplification: 0
+  m_HeightmapMaximumLOD: 0
+  m_ShadowCastingMode: 2
+  m_DrawHeightmap: 1
+  m_DrawInstanced: 0
+  m_DrawTreesAndFoliage: 1
+  m_StaticShadowCaster: 0
+  m_IgnoreQualitySettings: 0
+  m_ReflectionProbeUsage: 1
+  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
+  m_BakeLightProbesForTrees: 1
+  m_PreserveTreePrototypeLayers: 0
+  m_DeringLightProbesForTrees: 1
+  m_ReceiveGI: 1
+  m_ScaleInLightmap: 0.0256
+  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
+  m_GroupingID: 0
+  m_RenderingLayerMask: 1
+  m_AllowAutoConnect: 1
+  m_EnableHeightmapRayTracing: 1
+  m_EnableTreesAndDetailsRayTracing: 0
+  m_TreeMotionVectorModeOverride: 3
+--- !u!154 &1822902669
+TerrainCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822902667}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_TerrainData: {fileID: 15600000, guid: 6a87f524104df406da57333d9936db06, type: 2}
+  m_EnableTreeColliders: 1
+--- !u!4 &1822902670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822902667}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 575, y: 0, z: 32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2919,7 +3164,7 @@ Transform:
   m_GameObject: {fileID: 2093243245}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.69, y: 607.9, z: 0}
+  m_LocalPosition: {x: 2.69, y: 119.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2938,3 +3183,5 @@ SceneRoots:
   - {fileID: 1381680490}
   - {fileID: 1617552028}
   - {fileID: 1749485381}
+  - {fileID: 1822902670}
+  - {fileID: 506498433}

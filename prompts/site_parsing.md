@@ -119,6 +119,7 @@ Each entry must follow this schema in this exact field order:
   "object_type": "building" | "structure" | "pavilion" | "kiosk",
   "bounding_box": [ymin, xmin, ymax, xmax],
   "center_point": [y, x],
+  "rotation_y_deg": number,
   "approx_sq_ft": number,
   "target_dimensions_ft": {
     "width_ft": number,
@@ -132,9 +133,23 @@ Each entry must follow this schema in this exact field order:
 ### Rules
 
 - `center_point` must be the exact center of the bounding box
+
+#### rotation_y_deg
+- This is the **Y-axis (yaw) rotation** of the building in degrees, as seen from directly above
+- `0` = building's long wall runs east–west (left–right on canvas)
+- `90` = building's long wall runs north–south (up–down on canvas)
+- **You MUST infer this from the sketch.** Look at the angle of the building's longest wall relative to horizontal and set `rotation_y_deg` accordingly
+- Do **NOT** default to `0` unless the building is unambiguously axis-aligned — most buildings on angled lots will have a non-zero rotation
+- Valid range: `[0, 360)`. Common values: `0`, `30`, `45`, `60`, `90`, `120`, `135`, `150`
+
+#### target_dimensions_ft
+- `width_ft` = the building's footprint size along its **local X axis** (before rotation is applied) — typically the shorter horizontal dimension
+- `depth_ft` = the building's footprint size along its **local Z axis** (before rotation is applied) — typically the longer horizontal dimension
+- `height_ft` = the building's **vertical** height off the ground — this is the Y dimension in Unity
+- **`height_ft` must NEVER be less than `10`. Buildings must stand upright.** A value like `2` or `5` is wrong.
 - `width_ft × depth_ft` must approximately equal `approx_sq_ft`
-- `height_ft` must be a realistic estimate for the structure type
-- In Unity: instantiate a default Cube primitive and set scale to `(width_ft, height_ft, depth_ft)`
+- In Unity: instantiate a Cube primitive, set `transform.localScale = (width_ft, height_ft, depth_ft)`, then set `transform.eulerAngles.y = rotation_y_deg`
+
 - Do **NOT** include `image_gen_prompt` on any generated object
 
 ### Height Guidelines
@@ -203,6 +218,8 @@ Before producing output, verify:
 - All bounding boxes and center points fall within `lot_boundary`
 - All center points are the correct center of their bounding box
 - `width_ft × depth_ft ≈ approx_sq_ft` for all generated objects
+- `height_ft ≥ 10` for every generated object — flat slabs are invalid
+- `rotation_y_deg` is present on every generated object and is **inferred from the sketch's wall angles**, not defaulted to `0`
 - No `image_gen_prompt` fields exist anywhere in the output
 - All coordinate values are integers in the range `[0, 1000]`
 - JSON is valid and directly parseable — no fences, no commentary

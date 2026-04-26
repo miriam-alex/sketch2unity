@@ -22,19 +22,26 @@ public class ModelRequesterUI : MonoBehaviour
     
     [Header("Model Requester")]
     public ModelRequester modelRequester;
+    public WorldGenerator worldGenerator;
     
     private ModelRequester.SearchResult lastSearchResult;
     private string currentLoadedModel = "None";
     
     private void Start()
     {
-        Debug.Log("[ModelRequesterUI] Starting initialization...");
+        // Debug.Log("[ModelRequesterUI] Starting initialization...");
         
         // Find ModelRequester if not assigned
         if (modelRequester == null)
         {
             modelRequester = FindFirstObjectByType<ModelRequester>();
             Debug.Log($"[ModelRequesterUI] Found ModelRequester: {modelRequester != null}");
+        }
+
+        if (worldGenerator == null)
+        {
+            worldGenerator = FindFirstObjectByType<WorldGenerator>();
+            Debug.Log($"[ModelRequesterUI] Found WorldGenerator: {worldGenerator != null}");
         }
 
         // Set up button listeners first
@@ -185,18 +192,26 @@ public class ModelRequesterUI : MonoBehaviour
 
     private void OnLayoutGenerated(string responseJson)
     {
-        SetProgressVisible(false);
-
         try
         {
             LayoutResponseEnvelope response = JsonUtility.FromJson<LayoutResponseEnvelope>(responseJson);
             int terrainZoneCount = response.layout != null && response.layout.terrain_zones != null
-                ? response.layout.terrain_zones.Length
+                ? response.layout.terrain_zones.Count
                 : 0;
-            int prefabCount = response.layout != null && response.layout.prefabs != null
-                ? response.layout.prefabs.Length
+            int prefabCount = response.layout != null && response.layout.prefab_instances != null
+                ? response.layout.prefab_instances.Count
                 : 0;
 
+            if (worldGenerator != null && response.layout != null)
+            {
+                worldGenerator.ApplyLayoutData(response.layout);
+            }
+            else if (worldGenerator == null)
+            {
+                Debug.LogWarning("[ModelRequesterUI] WorldGenerator not found; skipping terrain and prefab placement.");
+            }
+
+            SetProgressVisible(false);
             UpdateStatusText("Layout generation complete.");
             UpdateResultsText(
                 $"Layout Generated\nTerrain Zones: {terrainZoneCount}\nPrefabs: {prefabCount}\nSketch: {response.selected_sketch}"
@@ -204,6 +219,7 @@ public class ModelRequesterUI : MonoBehaviour
         }
         catch (System.Exception e)
         {
+            SetProgressVisible(false);
             UpdateStatusText("Layout generated, but UI parsing failed.");
             UpdateResultsText($"Raw response:\n{responseJson}\n\nParse error: {e.Message}");
         }
@@ -266,25 +282,6 @@ public class ModelRequesterUI : MonoBehaviour
         public string status;
         public string message;
         public string selected_sketch;
-        public LayoutPayload layout;
-    }
-
-    [System.Serializable]
-    private class LayoutPayload
-    {
-        public TerrainZoneDto[] terrain_zones;
-        public PrefabDto[] prefabs;
-    }
-
-    [System.Serializable]
-    private class TerrainZoneDto
-    {
-        public string area_name;
-    }
-
-    [System.Serializable]
-    private class PrefabDto
-    {
-        public string prefab_type;
+        public FullTerrainData layout;
     }
 }

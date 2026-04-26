@@ -243,10 +243,10 @@ def generate_layout_from_sketch():
             }), 500
 
         visualization_warning = None
-        try:
-            visualize_output(site_data)
-        except Exception as exc:
-            visualization_warning = str(exc)
+        # try:
+        #     visualize_output(site_data)
+        # except Exception as exc:
+        #     visualization_warning = str(exc)
 
         response = {
             "status": "success",
@@ -258,6 +258,7 @@ def generate_layout_from_sketch():
         if visualization_warning:
             response["visualization_warning"] = visualization_warning
 
+        print(json.dumps(response, indent=4))
         return jsonify(response)
 
     except Exception as e:

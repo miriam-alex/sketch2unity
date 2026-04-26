@@ -4,31 +4,134 @@ using System.Collections.Generic;
 public class WorldGenerator : MonoBehaviour 
 {
     [Header("References")]
-    public Terrain targetTerrain;
-    public PrefabRegistry prefabRegistry;
-    public TerrainRegistry terrainRegistry;
-    public int paintResolution = 1024;
+    [SerializeField] private Terrain targetTerrain;
+    [SerializeField] private PrefabRegistry prefabRegistry;
+    [SerializeField] private TerrainRegistry terrainRegistry;
+    [SerializeField] private BuildingGenerator buildingGenerator;
 
     [Header("Input")] 
-    public float prefabScaleFactor = 1;
+    [SerializeField] private float prefabScaleFactor = 1;
     
+    [Header("Test")] 
+    [SerializeField] private bool testGeneration;
     [TextArea(15, 30)]
-    public string jsonInput;
+    [SerializeField] private string jsonInput;
     private float _canvasHeight;
     private float _canvasWidth;
     
     public void Start() {
+
+        if (!testGeneration)
+        {
+            return;
+        }
+        
+        if (string.IsNullOrWhiteSpace(jsonInput)) {
+            Debug.Log("JSON input is null or whitespace");
+            return;
+        }
+
+        Debug.Log("starting world generator!");
+
         FullTerrainData data = JsonUtility.FromJson<FullTerrainData>(jsonInput);
-        _canvasWidth = data.site_scale.normalized_canvas[2]; 
+        ApplyLayoutData(data);
+    }
+
+    public void ApplyLayoutData(FullTerrainData data) {
+        if (data == null) {
+            Debug.LogWarning("WorldGenerator.ApplyLayoutData received null data.");
+            return;
+        }
+
+        if (data.site_scale == null || data.site_scale.normalized_canvas == null || data.site_scale.normalized_canvas.Length < 4) {
+            Debug.LogWarning("WorldGenerator.ApplyLayoutData received invalid site scale data.");
+            return;
+        }
+
+        _canvasWidth = data.site_scale.normalized_canvas[2];
         _canvasHeight = data.site_scale.normalized_canvas[3];
-        
-        Debug.Log("JSON parsed!");
-        
-        // 1. PAINT TERRAIN
+
+        Debug.Log("Applying generated layout to world...");
         PaintTerrain(data);
-        
-        // 2. PLACE PREFABS
         PlacePrefabs(data);
+        CreateBoxBuildings(data);
+    }
+
+    public void CreateBoxBuildings(FullTerrainData data) {
+        if (data.generated_objects == null || data.generated_objects.Count == 0) {
+            Debug.Log("No generated objects found in layout data.");
+            return;
+        }
+
+        if (targetTerrain == null) {
+            Debug.LogWarning("WorldGenerator.CreateBuildings requires a targetTerrain.");
+            return;
+        }
+
+        if (data.site_scale == null || data.site_scale.normalized_canvas == null || data.site_scale.normalized_canvas.Length < 4) {
+            Debug.LogWarning("WorldGenerator.CreateBuildings received invalid site scale data.");
+            return;
+        }
+
+        float canvasWidth = data.site_scale.normalized_canvas[2];
+        float canvasHeight = data.site_scale.normalized_canvas[3];
+        float siteWidthFt = data.site_scale.site_width_ft > 0f ? data.site_scale.site_width_ft : canvasWidth;
+        float siteHeightFt = data.site_scale.site_height_ft > 0f ? data.site_scale.site_height_ft : canvasHeight;
+        Vector3 terrainSize = targetTerrain.terrainData.size;
+
+        Transform buildingRoot = GetOrCreateBuildingRoot();
+        ClearChildren(buildingRoot);
+
+        foreach (var building in data.generated_objects) {
+            if (building == null || building.target_dimensions_ft == null || building.center_point == null || building.center_point.Length < 2) {
+                continue;
+            }
+
+            float centerX = (building.center_point[0] / canvasWidth) * terrainSize.x;
+            float centerZ = (building.center_point[1] / canvasHeight) * terrainSize.z;
+
+            float terrainHeight = targetTerrain.SampleHeight(new Vector3(centerX, 0f, centerZ));
+            float worldX = targetTerrain.transform.position.x + centerX;
+            float worldY = targetTerrain.transform.position.y + terrainHeight;
+            float worldZ = targetTerrain.transform.position.z + centerZ;
+
+            float buildingWidth = (building.target_dimensions_ft.width_ft / siteWidthFt) * terrainSize.x;
+            float buildingDepth = (building.target_dimensions_ft.depth_ft / siteHeightFt) * terrainSize.z;
+            float buildingHeight = (building.target_dimensions_ft.height_ft / siteHeightFt) * terrainSize.x;
+
+            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            cube.name = string.IsNullOrWhiteSpace(building.area_name) ? "GeneratedBuilding" : building.area_name;
+            cube.transform.SetParent(buildingRoot, true);
+            cube.transform.position = new Vector3(worldX, worldY + (buildingHeight * 0.5f), worldZ);
+            cube.transform.localScale = new Vector3(buildingWidth, buildingHeight, buildingDepth);
+
+            if (building.object_type != null)
+            {
+                Debug.Log($"Created building cube: {cube.name} ({building.object_type})");
+            }
+        }
+    }
+
+    private Transform GetOrCreateBuildingRoot() {
+        Transform existing = transform.Find("GeneratedBuildings");
+        if (existing != null) {
+            return existing;
+        }
+
+        GameObject root = new GameObject("GeneratedBuildings");
+        root.transform.SetParent(transform, false);
+        return root.transform;
+    }
+
+    private void ClearChildren(Transform root) {
+        for (int i = root.childCount - 1; i >= 0; i--) {
+            Transform child = root.GetChild(i);
+            if (Application.isPlaying) {
+                Destroy(child.gameObject);
+            } else {
+                DestroyImmediate(child.gameObject);
+            }
+        }
     }
 
     private void PaintTerrain(FullTerrainData data) {
@@ -88,7 +191,10 @@ public class WorldGenerator : MonoBehaviour
         
         foreach (var p in data.prefab_instances) {
             GameObject prefab = prefabRegistry.GetPrefab(p.prefab_type);
-            if (!prefab) continue;
+            if (!prefab) {
+                Debug.Log($"missing prefab: {p.prefab_type}");
+                continue;
+            }
 
             float xPos = (p.center_point[0] / _canvasWidth) * terrainSize.x;
             float zPos = (p.center_point[1] / _canvasHeight) * terrainSize.z;
