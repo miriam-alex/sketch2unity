@@ -18,6 +18,7 @@ public class WorldGenerator : MonoBehaviour
     [SerializeField] private string jsonInput;
     private float _canvasHeight;
     private float _canvasWidth;
+    private float defaultYRotation = 90f;
     
     public void Start() {
 
@@ -54,9 +55,67 @@ public class WorldGenerator : MonoBehaviour
         Debug.Log("Applying generated layout to world...");
         PaintTerrain(data);
         PlacePrefabs(data);
+        GenerateModularBuildings(data);
         CreateBoxBuildings(data);
     }
+    
+    public void GenerateModularBuildings(FullTerrainData data)
+    {
+        if (targetTerrain == null || buildingGenerator == null)
+        {
+            Debug.LogError("WorldGenerator: Missing dependencies for modular generation.");
+            return;
+        }
 
+        Transform buildingRoot = GetOrCreateBuildingRoot();
+        Vector3 terrainSize = targetTerrain.terrainData.size;
+
+        foreach (var bldg in data.generated_buildings)
+        {
+            float normX = bldg.center_point[0] / _canvasWidth;
+            float normZ = bldg.center_point[1] / _canvasHeight;
+        
+            float worldX = normX * terrainSize.x;
+            float worldZ = normZ * terrainSize.z;
+            float terrainHeight = targetTerrain.SampleHeight(new Vector3(worldX, 0, worldZ));
+            Vector3 spawnPos = targetTerrain.transform.position + new Vector3(worldX, terrainHeight, worldZ);
+
+            // Calculate Footprint Dimensions in Unity Units
+            float worldWidth = ((bldg.bounding_box[2] - bldg.bounding_box[0]) / _canvasWidth) * terrainSize.x;
+            float worldDepth = ((bldg.bounding_box[3] - bldg.bounding_box[1]) / _canvasHeight) * terrainSize.z;
+            
+            Debug.Log($"World width is {worldWidth} and world depth {worldDepth}");
+
+            // 3. Determine Bay Counts based on Ground Prefab Collider
+            Renderer renderer = buildingGenerator.GetRenderer();
+            if (renderer == null)
+            {
+                Debug.LogError("WorldGenerator: Building renderer is null.");
+                continue;
+            }
+            
+            // We divide the target area by the collider size to get bay counts
+            Debug.Log($"bounds of prefab -> x: {renderer.bounds.size.x}, z: {renderer.bounds.size.z}" );
+            int baysWide = Mathf.Max(1, Mathf.RoundToInt(worldWidth / renderer.bounds.size.x));
+            int baysDeep = Mathf.Max(1, Mathf.RoundToInt(worldDepth / renderer.bounds.size.z));
+        
+            // You can determine floor count here (defaulting to 1 for now)
+            int floors = 2; 
+
+            // 4. Trigger Generation
+            buildingGenerator.Generate(
+                buildingRoot, 
+                spawnPos, 
+                baysWide, 
+                baysDeep, 
+                floors, 
+                bldg.rotation_y_deg + defaultYRotation, 
+                bldg.area_name 
+            );
+            
+            Debug.Log($"Generating {bldg.area_name} with {floors} floors, {baysWide} bays wide, and {baysDeep} bays deep and rotation {bldg.rotation_y_deg + defaultYRotation}");
+        }
+    }
     public void CreateBoxBuildings(FullTerrainData data) {
         if (data.generated_objects == null || data.generated_objects.Count == 0) {
             Debug.Log("No generated objects found in layout data.");
@@ -80,7 +139,6 @@ public class WorldGenerator : MonoBehaviour
         Vector3 terrainSize = targetTerrain.terrainData.size;
 
         Transform buildingRoot = GetOrCreateBuildingRoot();
-        ClearChildren(buildingRoot);
 
         foreach (var building in data.generated_objects) {
             if (building == null || building.target_dimensions_ft == null || building.center_point == null || building.center_point.Length < 2) {
@@ -104,6 +162,7 @@ public class WorldGenerator : MonoBehaviour
             cube.transform.SetParent(buildingRoot, true);
             cube.transform.position = new Vector3(worldX, worldY + (buildingHeight * 0.5f), worldZ);
             cube.transform.localScale = new Vector3(buildingWidth, buildingHeight, buildingDepth);
+            cube.transform.localRotation = Quaternion.Euler(0, defaultYRotation, 0);
 
             if (building.object_type != null)
             {
@@ -134,58 +193,68 @@ public class WorldGenerator : MonoBehaviour
         }
     }
 
-    private void PaintTerrain(FullTerrainData data) {
-        TerrainData tData = targetTerrain.terrainData;
-        int res = tData.alphamapResolution;
+   private void PaintTerrain(FullTerrainData data) {
+    TerrainData tData = targetTerrain.terrainData;
+    int res = tData.alphamapResolution;
 
-        // 1. Define your layers explicitly or fetch from Registry
-        // Order: 0 = Dirt, 1 = Grass, 2 = Pavement
-        tData.terrainLayers = new TerrainLayer[] { 
-            terrainRegistry.GetTerrainLayer("dirt"), 
-            terrainRegistry.GetTerrainLayer("grass"), 
-            terrainRegistry.GetTerrainLayer("pavement") 
-        };
+    // 1. Prepare the Layers and a Lookup Table
+    int layerCount = terrainRegistry.entries.Count;
+    TerrainLayer[] layers = new TerrainLayer[layerCount];
+    Dictionary<string, int> keyToIndex = new Dictionary<string, int>();
 
-        int layerCount = tData.terrainLayers.Length;
-        float[,,] map = new float[res, res, layerCount];
+    for (int i = 0; i < layerCount; i++) {
+        var entry = terrainRegistry.entries[i];
+        layers[i] = entry.terrainLayer;
+        // Store the index for fast lookup later
+        keyToIndex[entry.key.ToLower()] = i; 
+    }
 
-        // 2. INITIALIZE: Set everything to 100% Dirt (Index 0)
-        for (int y = 0; y < res; y++) {
-            for (int x = 0; x < res; x++) {
-                map[y, x, 0] = 1f; // Dirt is the background
-                for (int l = 1; l < layerCount; l++) {
+    // Assign the layers to the terrain
+    tData.terrainLayers = layers;
+
+    // 2. Initialize the Alphamap (3D array: [y, x, layerIndex])
+    float[,,] map = new float[res, res, layerCount];
+
+    for (int y = 0; y < res; y++) {
+        for (int x = 0; x < res; x++) {
+            // Default to the first layer (Index 0) in your Registry
+            map[y, x, 0] = 1f; 
+            for (int l = 1; l < layerCount; l++) {
+                map[y, x, l] = 0f;
+            }
+        }
+    }
+
+    // 3. Paint Zones from JSON
+    foreach (var zone in data.terrain_zones) {
+        // Find the index mapped to this string key
+        string zoneKey = zone.terrain_type.ToLower();
+        if (!keyToIndex.TryGetValue(zoneKey, out int targetIndex)) {
+            Debug.LogWarning($"Terrain key '{zone.terrain_type}' not found in Registry.");
+            continue;
+        }
+
+        // Map 0-1000 JSON coordinates to Alphamap resolution
+        int xStart = Mathf.Clamp(Mathf.RoundToInt((zone.bounding_box[0] / 1000f) * res), 0, res);
+        int yStart = Mathf.Clamp(Mathf.RoundToInt((zone.bounding_box[1] / 1000f) * res), 0, res);
+        int xEnd   = Mathf.Clamp(Mathf.RoundToInt((zone.bounding_box[2] / 1000f) * res), 0, res);
+        int yEnd   = Mathf.Clamp(Mathf.RoundToInt((zone.bounding_box[3] / 1000f) * res), 0, res);
+
+        for (int y = yStart; y < yEnd; y++) {
+            for (int x = xStart; x < xEnd; x++) {
+                // Set all layers to 0 first (opaque override)
+                for (int l = 0; l < layerCount; l++) {
                     map[y, x, l] = 0f;
                 }
+                // Set our specific registry layer to 1
+                map[y, x, targetIndex] = 1f;
             }
         }
-
-        // 3. PAINT ZONES: Overlay Grass and Pavement
-        foreach (var zone in data.terrain_zones) {
-            // Determine which index to use based on the JSON string
-            int targetIndex = 0; 
-            if (zone.terrain_type == "grass") targetIndex = 1;
-            else if (zone.terrain_type == "pavement") targetIndex = 2;
-            else continue; // Skip if it's unknown or "dirt" (already painted)
-
-            // Map JSON 0-1000 coordinates to Alphamap 0-Res coordinates
-            int xStart = Mathf.Clamp(Mathf.RoundToInt((zone.bounding_box[0] / 1000f) * res), 0, res);
-            int yStart = Mathf.Clamp(Mathf.RoundToInt((zone.bounding_box[1] / 1000f) * res), 0, res);
-            int xEnd   = Mathf.Clamp(Mathf.RoundToInt((zone.bounding_box[2] / 1000f) * res), 0, res);
-            int yEnd   = Mathf.Clamp(Mathf.RoundToInt((zone.bounding_box[3] / 1000f) * res), 0, res);
-
-            for (int y = yStart; y < yEnd; y++) {
-                for (int x = xStart; x < xEnd; x++) {
-                    // Wipe existing layers at this pixel
-                    for (int l = 0; l < layerCount; l++) map[y, x, l] = 0f;
-                    
-                    // Set the specific zone color
-                    map[y, x, targetIndex] = 1f;
-                }
-            }
-        }
-
-        tData.SetAlphamaps(0, 0, map);
     }
+
+    // 4. Apply the map to the terrain data
+    tData.SetAlphamaps(0, 0, map);
+}
     private void PlacePrefabs(FullTerrainData data) {
         Vector3 terrainSize = targetTerrain.terrainData.size; // e.g., 500m
         

@@ -124,6 +124,7 @@ Each entry must follow this schema in this exact field order:
   "bounding_box": [ymin, xmin, ymax, xmax],
   "center_point": [y, x],
   "rotation_y_deg": number,
+  "floors": number,
   "approx_sq_ft": number,
   "unity_strategy": "modular_prefab"
 }
@@ -139,9 +140,23 @@ bbox_height_normalized = (ymax - ymin) / 1000
 approx_sq_ft = (bbox_width_normalized × site_width_ft) × (bbox_height_normalized × site_height_ft)
 ```
 
+### Estimating floors
+
+Infer from visual massing cues in the sketch:
+
+| Massing appearance | floors |
+|---|---|
+| Low, flat | 1 |
+| Moderate block | 2 |
+| Taller block | 3–4 |
+| Mid-rise | 5–8 |
+
+Default to `2` if massing is ambiguous.
+
 ### Rules
 
 - `center_point` must be the exact center of the bounding box
+- `floors` must be a positive integer ≥ 1
 
 #### rotation_y_deg
 - This is the **Y-axis (yaw) rotation** of the building in degrees, as seen from directly above
@@ -159,6 +174,7 @@ approx_sq_ft = (bbox_width_normalized × site_width_ft) × (bbox_height_normaliz
   "bounding_box": [200, 100, 400, 500],
   "center_point": [300, 300],
   "rotation_y_deg": 0,
+  "floors": 2,
   "approx_sq_ft": 2400,
   "unity_strategy": "modular_prefab"
 }
@@ -221,21 +237,7 @@ Each entry must follow this schema in this exact field order:
 
 ## 🌳 Prefab Instances
 
-Use for small, repeatable objects in the table below.
-
-| prefab_type | unity_prefab_name |
-|---|---|
-| "bench" | Bench |
-| "tree" | Tree_1 |
-| "pine_tree" | Tree_4 |
-| "bush" | Bush |
-| "square_fountain" | Fountain1 |
-| "circle_fountain" | Fountain_1 |
-| "streetlight" | Lamp |
-| "picnic_table" | DoubleBench |
-| "outdoor_beer_booth" | Booth_Food01_Art |
-| "outdoor_sausage_booth" | Booth_Food02_Art |
-| "outdoor_pretzel_booth" | Booth_Food02_Art |
+Use for small, repeatable objects such as trees and benches.
 
 Each entry must follow this schema in this exact field order:
 

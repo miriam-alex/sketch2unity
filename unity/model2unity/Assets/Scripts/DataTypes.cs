@@ -23,35 +23,54 @@ public class GeneratedObject
 }
 
 [System.Serializable]
+public class GeneratedBuilding
+{
+    public string area_name;
+    public string semantic_tag;
+    public int[] bounding_box;
+    public int[] center_point;
+    public float rotation_y_deg;
+    public float approx_sq_ft;
+    public string unity_strategy;
+}
+
+[System.Serializable]
 public class TerrainZone
 {
     public string area_name;
+    public string semantic_tag; // Added for completeness
     public string terrain_type;
-    public int[] bounding_box; // [xMin, yMin, xMax, yMax]
+    public int[] bounding_box; 
+    public float approx_sq_ft;
+    public string unity_strategy;
 }
 
 [System.Serializable]
 public class SiteScale {
-    public int[] normalized_canvas; // [0, 0, 1000, 1000]
+    public int[] normalized_canvas; 
     public float site_width_ft;
     public float site_height_ft;
-    public int[][] lot_boundary;
+    public float[][] lot_boundary; // Changed to float[][] for precision
     public string scale_note;
 }
 
 [System.Serializable]
 public class PrefabInstance {
     public string area_name;
+    public string semantic_tag;
     public string prefab_type;
     public int[] center_point;
+    public int[] footprint_box; // Added from JSON
     public float rotation_deg;
     public float scale_multiplier;
+    public string unity_strategy;
 }
 
 [System.Serializable]
 public class FullTerrainData {
     public SiteScale site_scale;
-    public List<GeneratedObject> generated_objects;
     public List<TerrainZone> terrain_zones;
+    public List<GeneratedBuilding> generated_buildings; // Mapped to your JSON example
+    public List<GeneratedObject> generated_objects;     // For the "box" buildings
     public List<PrefabInstance> prefab_instances;
 }

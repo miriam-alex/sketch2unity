@@ -190,6 +190,34 @@ def visualize_output(site_data):
             color="black"
         )
 
+    for obj in site_data["generated_buildings"]:
+        x1, y1, x2, y2 = obj["bounding_box"]
+        width = x2 - x1
+        height = y2 - y1
+
+        rect = Rectangle(
+            (x1, y1),
+            width,
+            height,
+            facecolor="orange",
+            edgecolor="darkred",
+            linewidth=2,
+            alpha=0.7
+        )
+        ax.add_patch(rect)
+
+        cx, cy = obj["center_point"]
+        ax.text(
+            cx,
+            cy,
+            f'{obj["area_name"]}',
+            ha="center",
+            va="center",
+            fontsize=10,
+            fontweight="bold",
+            color="black"
+        )
+
     # -----------------------------
     # Draw prefab instances as circles
     # -----------------------------
@@ -355,19 +383,20 @@ def choose_sketch_path():
     return Path(user_input)
 
 if __name__ == "__main__":
-    selected_sketch_path = choose_sketch_path()
-    if selected_sketch_path is None:
-        print("No sketch selected. Exiting.")
-        raise SystemExit(0)
+    # selected_sketch_path = choose_sketch_path()
+    # if selected_sketch_path is None:
+    #     print("No sketch selected. Exiting.")
+    #     raise SystemExit(0)
 
-    layout_output = process_sketch(
-        sketch_path=selected_sketch_path,
-        lot_boundary=[[0, 0], [0, 1000], [1000, 0], [1000, 1000]],
-        site_width_ft=1000,
-        site_height_ft=1000,
-    )
+    # layout_output = process_sketch(
+    #     sketch_path=selected_sketch_path,
+    #     lot_boundary=[[0, 0], [0, 1000], [1000, 0], [1000, 1000]],
+    #     site_width_ft=1000,
+    #     site_height_ft=1000,
+    # )
 
-    print(layout_output)
-
-    visualize_output(layout_output)
+    with open('sample_output.json', 'r', encoding='utf-8') as file:
+        data = json.load(file)
+        print(data)
+        visualize_output(data)
         
