@@ -936,13 +936,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5063347, y: 0, z: 0, w: 0.8623371}
-  m_LocalPosition: {x: 40, y: 105, z: -39}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 118.2, y: 11.5, z: 46.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 60.84, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1322,7 +1322,7 @@ MonoBehaviour:
   terrainRegistry: {fileID: 11400000, guid: 40b7138cb24d44d8094548b2e33cdfe5, type: 2}
   buildingGenerator: {fileID: 506498434}
   prefabScaleFactor: 0.5
-  testGeneration: 1
+  testGeneration: 0
   jsonInput: "{\n  \"site_scale\": {\n    \"site_width_ft\": 1000,\n    \"site_height_ft\":
     1000,\n    \"normalized_canvas\": [\n      0,\n      0,\n      1000,\n      1000\n   
     ],\n    \"lot_boundary\": [\n      [\n        0,\n        0\n      ],\n     
@@ -1330,105 +1330,118 @@ MonoBehaviour:
     ],\n      [\n        1000,\n        1000\n      ]\n    ],\n    \"scale_note\":
     \"All placements must fall within lot_boundary. Bounding boxes define placement.
     Real-world dimensions define scale.\"\n  },\n  \"terrain_zones\": [\n    {\n     
-    \"area_name\": \"West Grass Area 1\",\n      \"semantic_tag\": \"landscape\",\n     
-    \"terrain_type\": \"grass\",\n      \"bounding_box\": [\n        480,\n       
-    0,\n        550,\n        290\n      ],\n      \"approx_sq_ft\": 20300,\n     
-    \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\": \"West
-    Grass Area 2\",\n      \"semantic_tag\": \"landscape\",\n      \"terrain_type\":
-    \"grass\",\n      \"bounding_box\": [\n        480,\n        290,\n        550,\n       
-    490\n      ],\n      \"approx_sq_ft\": 14000,\n      \"unity_strategy\": \"paint_terrain\"\n   
-    },\n    {\n      \"area_name\": \"East Grass Area 1\",\n      \"semantic_tag\":
-    \"landscape\",\n      \"terrain_type\": \"grass\",\n      \"bounding_box\": [\n       
-    480,\n        520,\n        550,\n        710\n      ],\n      \"approx_sq_ft\":
-    13300,\n      \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\":
-    \"East Grass Area 2\",\n      \"semantic_tag\": \"landscape\",\n      \"terrain_type\":
-    \"grass\",\n      \"bounding_box\": [\n        480,\n        710,\n        550,\n       
-    1000\n      ],\n      \"approx_sq_ft\": 20300,\n      \"unity_strategy\": \"paint_terrain\"\n   
-    },\n    {\n      \"area_name\": \"West Plaza Section\",\n      \"semantic_tag\":
-    \"pedestrian_plaza\",\n      \"terrain_type\": \"plaza\",\n      \"bounding_box\":
-    [\n        550,\n        290,\n        790,\n        490\n      ],\n      \"approx_sq_ft\":
-    48000,\n      \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\":
-    \"East Plaza Section\",\n      \"semantic_tag\": \"pedestrian_plaza\",\n     
-    \"terrain_type\": \"plaza\",\n      \"bounding_box\": [\n        550,\n       
-    520,\n        790,\n        710\n      ],\n      \"approx_sq_ft\": 45600,\n     
-    \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\": \"Central
-    Pedestrian Path\",\n      \"semantic_tag\": \"pedestrian_path\",\n      \"terrain_type\":
-    \"pavement\",\n      \"bounding_box\": [\n        480,\n        490,\n       
-    790,\n        520\n      ],\n      \"approx_sq_ft\": 9300,\n      \"unity_strategy\":
-    \"paint_terrain\"\n    },\n    {\n      \"area_name\": \"Cafe Connection Path\",\n     
-    \"semantic_tag\": \"pedestrian_path\",\n      \"terrain_type\": \"pavement\",\n     
-    \"bounding_box\": [\n        790,\n        0,\n        820,\n        490\n     
-    ],\n      \"approx_sq_ft\": 14700,\n      \"unity_strategy\": \"paint_terrain\"\n   
-    },\n    {\n      \"area_name\": \"Daycare Connection Path\",\n      \"semantic_tag\":
-    \"pedestrian_path\",\n      \"terrain_type\": \"pavement\",\n      \"bounding_box\":
-    [\n        790,\n        520,\n        820,\n        1000\n      ],\n      \"approx_sq_ft\":
-    14400,\n      \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\":
-    \"Main Access Road\",\n      \"semantic_tag\": \"vehicular_access\",\n      \"terrain_type\":
-    \"asphalt\",\n      \"bounding_box\": [\n        820,\n        0,\n        1000,\n       
-    1000\n      ],\n      \"approx_sq_ft\": 180000,\n      \"unity_strategy\": \"paint_terrain\"\n   
-    }\n  ],\n  \"generated_buildings\": [\n    {\n      \"area_name\": \"Cafe Building\",\n     
-    \"semantic_tag\": \"cafe\",\n      \"bounding_box\": [\n        550,\n       
-    0,\n        790,\n        290\n      ],\n      \"center_point\": [\n        670,\n       
-    145\n      ],\n      \"rotation_y_deg\": 0,\n      \"floors\": 1,\n      \"approx_sq_ft\":
-    69600,\n      \"unity_strategy\": \"modular_prefab\"\n    },\n    {\n      \"area_name\":
-    \"Daycare Building\",\n      \"semantic_tag\": \"daycare\",\n      \"bounding_box\":
-    [\n        550,\n        710,\n        790,\n        1000\n      ],\n      \"center_point\":
-    [\n        670,\n        855\n      ],\n      \"rotation_y_deg\": 0,\n      \"floors\":
-    1,\n      \"approx_sq_ft\": 69600,\n      \"unity_strategy\": \"modular_prefab\"\n   
-    }\n  ],\n  \"generated_objects\": [\n    {\n      \"area_name\": \"Dr.s Office
-    Building\",\n      \"semantic_tag\": \"medical_office\",\n      \"object_type\":
-    \"building\",\n      \"bounding_box\": [\n        0,\n        0,\n        480,\n       
-    980\n      ],\n      \"center_point\": [\n        240,\n        490\n      ],\n     
-    \"rotation_y_deg\": 0,\n      \"approx_sq_ft\": 470400,\n      \"target_dimensions_ft\":
-    {\n        \"width_ft\": 980,\n        \"depth_ft\": 480,\n        \"height_ft\":
-    50\n      },\n      \"unity_strategy\": \"box_primitive\"\n    }\n  ],\n  \"prefab_instances\":
-    [\n    {\n      \"area_name\": \"Plaza Bench 1\",\n      \"semantic_tag\": \"bench\",\n     
-    \"prefab_type\": \"bench\",\n      \"center_point\": [\n        650,\n       
-    310\n      ],\n      \"footprint_box\": [\n        645,\n        305,\n       
-    655,\n        315\n      ],\n      \"rotation_deg\": 90,\n      \"scale_multiplier\":
+    \"area_name\": \"Central Gathering Plaza\",\n      \"semantic_tag\": \"pedestrian_area\",\n     
+    \"terrain_type\": \"plaza\",\n      \"bounding_box\": [\n        420,\n       
+    320,\n        700,\n        680\n      ],\n      \"approx_sq_ft\": 100800,\n     
+    \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\": \"Main
+    Entrance Pavement\",\n      \"semantic_tag\": \"pedestrian_walkway\",\n     
+    \"terrain_type\": \"pavement\",\n      \"bounding_box\": [\n        700,\n       
+    0,\n        800,\n        1000\n      ],\n      \"approx_sq_ft\": 100000,\n     
+    \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\": \"Left
+    Seating Planter\",\n      \"semantic_tag\": \"landscape_feature\",\n      \"terrain_type\":
+    \"planting_bed\",\n      \"bounding_box\": [\n        460,\n        370,\n       
+    560,\n        470\n      ],\n      \"approx_sq_ft\": 10000,\n      \"unity_strategy\":
+    \"paint_terrain\"\n    },\n    {\n      \"area_name\": \"Right Seating Planter\",\n     
+    \"semantic_tag\": \"landscape_feature\",\n      \"terrain_type\": \"planting_bed\",\n     
+    \"bounding_box\": [\n        460,\n        530,\n        560,\n        630\n     
+    ],\n      \"approx_sq_ft\": 10000,\n      \"unity_strategy\": \"paint_terrain\"\n   
+    },\n    {\n      \"area_name\": \"North Campus Lawn\",\n      \"semantic_tag\":
+    \"landscaped_lawn\",\n      \"terrain_type\": \"grass\",\n      \"bounding_box\":
+    [\n        0,\n        0,\n        20,\n        1000\n      ],\n      \"approx_sq_ft\":
+    20000,\n      \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\":
+    \"West Campus Lawn\",\n      \"semantic_tag\": \"landscaped_lawn\",\n      \"terrain_type\":
+    \"grass\",\n      \"bounding_box\": [\n        20,\n        0,\n        700,\n       
+    20\n      ],\n      \"approx_sq_ft\": 13600,\n      \"unity_strategy\": \"paint_terrain\"\n   
+    },\n    {\n      \"area_name\": \"East Campus Lawn\",\n      \"semantic_tag\":
+    \"landscaped_lawn\",\n      \"terrain_type\": \"grass\",\n      \"bounding_box\":
+    [\n        20,\n        980,\n        700,\n        1000\n      ],\n      \"approx_sq_ft\":
+    13600,\n      \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\":
+    \"South Campus Lawn\",\n      \"semantic_tag\": \"landscaped_lawn\",\n      \"terrain_type\":
+    \"grass\",\n      \"bounding_box\": [\n        800,\n        0,\n        1000,\n       
+    1000\n      ],\n      \"approx_sq_ft\": 200000,\n      \"unity_strategy\": \"paint_terrain\"\n   
+    },\n    {\n      \"area_name\": \"Mid-Level West Grass\",\n      \"semantic_tag\":
+    \"landscaped_lawn\",\n      \"terrain_type\": \"grass\",\n      \"bounding_box\":
+    [\n        400,\n        20,\n        450,\n        320\n      ],\n      \"approx_sq_ft\":
+    15000,\n      \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\":
+    \"Mid-Level East Grass\",\n      \"semantic_tag\": \"landscaped_lawn\",\n     
+    \"terrain_type\": \"grass\",\n      \"bounding_box\": [\n        400,\n       
+    680,\n        450,\n        980\n      ],\n      \"approx_sq_ft\": 15000,\n     
+    \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\": \"Mid-Level
+    Central Grass\",\n      \"semantic_tag\": \"landscaped_lawn\",\n      \"terrain_type\":
+    \"grass\",\n      \"bounding_box\": [\n        400,\n        320,\n        420,\n       
+    680\n      ],\n      \"approx_sq_ft\": 7200,\n      \"unity_strategy\": \"paint_terrain\"\n   
+    }\n  ],\n  \"generated_buildings\": [\n    {\n      \"area_name\": \"Dr.'s Office
+    Building\",\n      \"semantic_tag\": \"medical_office\",\n      \"bounding_box\":
+    [\n        20,\n        20,\n        400,\n        980\n      ],\n      \"center_point\":
+    [\n        210,\n        500\n      ],\n      \"rotation_y_deg\": 0,\n      \"floors\":
+    3,\n      \"approx_sq_ft\": 364800,\n      \"unity_strategy\": \"modular_prefab\"\n   
+    },\n    {\n      \"area_name\": \"Cafe Building\",\n      \"semantic_tag\": \"commercial_cafe\",\n     
+    \"bounding_box\": [\n        450,\n        20,\n        680,\n        320\n     
+    ],\n      \"center_point\": [\n        565,\n        170\n      ],\n      \"rotation_y_deg\":
+    0,\n      \"floors\": 2,\n      \"approx_sq_ft\": 69000,\n      \"unity_strategy\":
+    \"modular_prefab\"\n    },\n    {\n      \"area_name\": \"Daycare Building\",\n     
+    \"semantic_tag\": \"educational_daycare\",\n      \"bounding_box\": [\n       
+    450,\n        680,\n        680,\n        980\n      ],\n      \"center_point\":
+    [\n        565,\n        830\n      ],\n      \"rotation_y_deg\": 0,\n      \"floors\":
+    2,\n      \"approx_sq_ft\": 69000,\n      \"unity_strategy\": \"modular_prefab\"\n   
+    }\n  ],\n  \"generated_objects\": [],\n  \"prefab_instances\": [\n    {\n     
+    \"area_name\": \"Tree 1\",\n      \"semantic_tag\": \"tree_deciduous\",\n     
+    \"prefab_type\": \"tree\",\n      \"center_point\": [\n        500,\n       
+    400\n      ],\n      \"footprint_box\": [\n        475,\n        375,\n       
+    525,\n        425\n      ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\":
     1.0,\n      \"unity_strategy\": \"place_prefab\"\n    },\n    {\n      \"area_name\":
-    \"Plaza Bench 2\",\n      \"semantic_tag\": \"bench\",\n      \"prefab_type\":
-    \"bench\",\n      \"center_point\": [\n        665,\n        310\n      ],\n     
-    \"footprint_box\": [\n        660,\n        305,\n        670,\n        315\n     
-    ],\n      \"rotation_deg\": 90,\n      \"scale_multiplier\": 1.0,\n      \"unity_strategy\":
-    \"place_prefab\"\n    },\n    {\n      \"area_name\": \"Plaza Bench 3\",\n     
-    \"semantic_tag\": \"bench\",\n      \"prefab_type\": \"bench\",\n      \"center_point\":
-    [\n        680,\n        310\n      ],\n      \"footprint_box\": [\n        675,\n       
-    305,\n        685,\n        315\n      ],\n      \"rotation_deg\": 90,\n     
-    \"scale_multiplier\": 1.0,\n      \"unity_strategy\": \"place_prefab\"\n    },\n   
-    {\n      \"area_name\": \"Plaza Bench 4\",\n      \"semantic_tag\": \"bench\",\n     
-    \"prefab_type\": \"bench\",\n      \"center_point\": [\n        695,\n       
-    310\n      ],\n      \"footprint_box\": [\n        690,\n        305,\n       
-    700,\n        315\n      ],\n      \"rotation_deg\": 90,\n      \"scale_multiplier\":
-    1.0,\n      \"unity_strategy\": \"place_prefab\"\n    },\n    {\n      \"area_name\":
-    \"Plaza Tree 1\",\n      \"semantic_tag\": \"tree\",\n      \"prefab_type\":
-    \"tree\",\n      \"center_point\": [\n        600,\n        390\n      ],\n     
-    \"footprint_box\": [\n        590,\n        380,\n        610,\n        400\n     
+    \"Tree 2\",\n      \"semantic_tag\": \"tree_deciduous\",\n      \"prefab_type\":
+    \"tree\",\n      \"center_point\": [\n        470,\n        430\n      ],\n     
+    \"footprint_box\": [\n        445,\n        405,\n        495,\n        455\n     
     ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\": 1.0,\n      \"unity_strategy\":
-    \"place_prefab\"\n    },\n    {\n      \"area_name\": \"Plaza Tree 2\",\n     
-    \"semantic_tag\": \"tree\",\n      \"prefab_type\": \"tree\",\n      \"center_point\":
-    [\n        630,\n        410\n      ],\n      \"footprint_box\": [\n        620,\n       
-    400,\n        640,\n        420\n      ],\n      \"rotation_deg\": 0,\n     
+    \"place_prefab\"\n    },\n    {\n      \"area_name\": \"Tree 3\",\n      \"semantic_tag\":
+    \"tree_deciduous\",\n      \"prefab_type\": \"tree\",\n      \"center_point\":
+    [\n        530,\n        440\n      ],\n      \"footprint_box\": [\n        505,\n       
+    415,\n        555,\n        465\n      ],\n      \"rotation_deg\": 0,\n     
     \"scale_multiplier\": 1.0,\n      \"unity_strategy\": \"place_prefab\"\n    },\n   
-    {\n      \"area_name\": \"Plaza Tree 3\",\n      \"semantic_tag\": \"tree\",\n     
-    \"prefab_type\": \"tree\",\n      \"center_point\": [\n        660,\n       
-    430\n      ],\n      \"footprint_box\": [\n        650,\n        420,\n       
-    670,\n        440\n      ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\":
+    {\n      \"area_name\": \"Tree 4\",\n      \"semantic_tag\": \"tree_deciduous\",\n     
+    \"prefab_type\": \"tree\",\n      \"center_point\": [\n        500,\n       
+    560\n      ],\n      \"footprint_box\": [\n        475,\n        535,\n       
+    525,\n        585\n      ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\":
     1.0,\n      \"unity_strategy\": \"place_prefab\"\n    },\n    {\n      \"area_name\":
-    \"Plaza Tree 4\",\n      \"semantic_tag\": \"tree\",\n      \"prefab_type\":
-    \"tree\",\n      \"center_point\": [\n        600,\n        620\n      ],\n     
-    \"footprint_box\": [\n        590,\n        610,\n        610,\n        630\n     
+    \"Tree 5\",\n      \"semantic_tag\": \"tree_deciduous\",\n      \"prefab_type\":
+    \"tree\",\n      \"center_point\": [\n        470,\n        590\n      ],\n     
+    \"footprint_box\": [\n        445,\n        565,\n        495,\n        615\n     
     ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\": 1.0,\n      \"unity_strategy\":
-    \"place_prefab\"\n    },\n    {\n      \"area_name\": \"Plaza Tree 5\",\n     
-    \"semantic_tag\": \"tree\",\n      \"prefab_type\": \"tree\",\n      \"center_point\":
-    [\n        630,\n        640\n      ],\n      \"footprint_box\": [\n        620,\n       
-    630,\n        640,\n        650\n      ],\n      \"rotation_deg\": 0,\n     
+    \"place_prefab\"\n    },\n    {\n      \"area_name\": \"Tree 6\",\n      \"semantic_tag\":
+    \"tree_deciduous\",\n      \"prefab_type\": \"tree\",\n      \"center_point\":
+    [\n        530,\n        600\n      ],\n      \"footprint_box\": [\n        505,\n       
+    575,\n        555,\n        625\n      ],\n      \"rotation_deg\": 0,\n     
     \"scale_multiplier\": 1.0,\n      \"unity_strategy\": \"place_prefab\"\n    },\n   
-    {\n      \"area_name\": \"Plaza Tree 6\",\n      \"semantic_tag\": \"tree\",\n     
-    \"prefab_type\": \"tree\",\n      \"center_point\": [\n        660,\n       
-    660\n      ],\n      \"footprint_box\": [\n        650,\n        650,\n       
-    670,\n        670\n      ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\":
-    1.0,\n      \"unity_strategy\": \"place_prefab\"\n    }\n  ]\n}"
+    {\n      \"area_name\": \"Bench 1\",\n      \"semantic_tag\": \"outdoor_seating\",\n     
+    \"prefab_type\": \"bench\",\n      \"center_point\": [\n        570,\n       
+    390\n      ],\n      \"footprint_box\": [\n        560,\n        380,\n       
+    580,\n        400\n      ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\":
+    1.0,\n      \"unity_strategy\": \"place_prefab\"\n    },\n    {\n      \"area_name\":
+    \"Bench 2\",\n      \"semantic_tag\": \"outdoor_seating\",\n      \"prefab_type\":
+    \"bench\",\n      \"center_point\": [\n        590,\n        410\n      ],\n     
+    \"footprint_box\": [\n        580,\n        400,\n        600,\n        420\n     
+    ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\": 1.0,\n      \"unity_strategy\":
+    \"place_prefab\"\n    },\n    {\n      \"area_name\": \"Bench 3\",\n      \"semantic_tag\":
+    \"outdoor_seating\",\n      \"prefab_type\": \"bench\",\n      \"center_point\":
+    [\n        570,\n        430\n      ],\n      \"footprint_box\": [\n        560,\n       
+    420,\n        580,\n        440\n      ],\n      \"rotation_deg\": 0,\n     
+    \"scale_multiplier\": 1.0,\n      \"unity_strategy\": \"place_prefab\"\n    },\n   
+    {\n      \"area_name\": \"Bench 4\",\n      \"semantic_tag\": \"outdoor_seating\",\n     
+    \"prefab_type\": \"bench\",\n      \"center_point\": [\n        570,\n       
+    560\n      ],\n      \"footprint_box\": [\n        560,\n        550,\n       
+    580,\n        570\n      ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\":
+    1.0,\n      \"unity_strategy\": \"place_prefab\"\n    },\n    {\n      \"area_name\":
+    \"Bench 5\",\n      \"semantic_tag\": \"outdoor_seating\",\n      \"prefab_type\":
+    \"bench\",\n      \"center_point\": [\n        590,\n        580\n      ],\n     
+    \"footprint_box\": [\n        580,\n        570,\n        600,\n        590\n     
+    ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\": 1.0,\n      \"unity_strategy\":
+    \"place_prefab\"\n    },\n    {\n      \"area_name\": \"Bench 6\",\n      \"semantic_tag\":
+    \"outdoor_seating\",\n      \"prefab_type\": \"bench\",\n      \"center_point\":
+    [\n        570,\n        600\n      ],\n      \"footprint_box\": [\n        560,\n       
+    590,\n        580,\n        610\n      ],\n      \"rotation_deg\": 0,\n     
+    \"scale_multiplier\": 1.0,\n      \"unity_strategy\": \"place_prefab\"\n    }\n 
+    ]\n}"
 --- !u!4 &506498433
 Transform:
   m_ObjectHideFlags: 0

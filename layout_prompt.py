@@ -260,6 +260,13 @@ def visualize_output(site_data):
     plt.tight_layout()
     plt.show()
 
+def extract_json(response: str) -> dict:
+    try:
+        start = response.index('{')
+        end = response.rindex('}')
+        return response[start:end + 1]
+    except ValueError as e:
+        raise ValueError(f"Could not extract JSON from response: {e}\n\nRaw response:\n{response}")
 
 def process_sketch(
     lot_boundary=None,
@@ -317,6 +324,7 @@ def process_sketch(
                 contents=contents,
             )
             output = response.text
+            output = extract_json(output)
             output_path.write_text(output, encoding="utf-8")
             print(f"Success: {output_path.name}")
             if normalized_boundary is not None:

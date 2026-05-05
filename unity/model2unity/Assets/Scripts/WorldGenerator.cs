@@ -96,8 +96,9 @@ public class WorldGenerator : MonoBehaviour
             
             // We divide the target area by the collider size to get bay counts
             Debug.Log($"bounds of prefab -> x: {renderer.bounds.size.x}, z: {renderer.bounds.size.z}" );
-            int baysWide = Mathf.Max(1, Mathf.RoundToInt(worldWidth / renderer.bounds.size.x));
-            int baysDeep = Mathf.Max(1, Mathf.RoundToInt(worldDepth / renderer.bounds.size.z));
+            // they're flipped here i should figure out what math is happening honestly .....
+            int baysDeep = Mathf.Max(1, Mathf.RoundToInt(worldWidth / renderer.bounds.size.x));
+            int baysWide = Mathf.Max(1, Mathf.RoundToInt(worldDepth / renderer.bounds.size.z));
         
             // You can determine floor count here (defaulting to 1 for now)
             int floors = 2; 
