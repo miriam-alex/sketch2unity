@@ -1,219 +1,137 @@
 {
   "reasoning": {
-    "plaza_center": [500, 450],
+    "open_space_reference": {
+      "label": "Central Open Space",
+      "center": [550, 450]
+    },
+    "circulation_gaps": [
+      {
+        "label": "Entrance from Tram",
+        "between": ["Tram Station Building", "Central Open Space"],
+        "bounding_box": [500, 700, 600, 780],
+        "terrain_type": "pavement"
+      }
+    ],
     "building_rotations": [
       {
         "name": "Museum History",
         "facade_faces": "east",
         "rotation_y_deg": 270,
-        "justification": "Building sits on the west edge of the site; facade faces east toward the central plaza."
+        "justification": "Building is to the left (west) of the central open space, facade faces east."
       },
       {
-        "name": "Shop Block A",
+        "name": "Shop A1",
         "facade_faces": "east",
         "rotation_y_deg": 270,
-        "justification": "Building sits on the west edge of the site; facade faces east toward the central plaza."
+        "justification": "Building is to the left (west) of the central open space, facade faces east."
       },
       {
-        "name": "Shop Block B",
+        "name": "Shop A2",
         "facade_faces": "east",
         "rotation_y_deg": 270,
-        "justification": "Building sits on the west edge of the site; facade faces east toward the central plaza."
+        "justification": "Building is to the left (west) of the central open space, facade faces east."
       },
       {
-        "name": "Shop Block C",
+        "name": "Shop A3",
         "facade_faces": "east",
         "rotation_y_deg": 270,
-        "justification": "Building sits on the west edge of the site; facade faces east toward the central plaza."
+        "justification": "Building is to the left (west) of the central open space, facade faces east."
       },
       {
-        "name": "Shop Block D",
+        "name": "Shop B1",
         "facade_faces": "south",
         "rotation_y_deg": 0,
-        "justification": "Building sits on the north edge of the central plaza; facade faces south toward the open space."
+        "justification": "Building is on the upper (north) side of the central open space, with the y-axis difference being dominant. Facade faces south."
       },
       {
-        "name": "Shop Block E",
+        "name": "Shop B2",
         "facade_faces": "south",
         "rotation_y_deg": 0,
-        "justification": "Building sits on the north edge of the central plaza; facade faces south toward the open space."
+        "justification": "Building is on the upper (north) side of the central open space, with the y-axis difference being dominant. Facade faces south."
       },
       {
-        "name": "Shop Block F",
+        "name": "Shop B3",
         "facade_faces": "south",
         "rotation_y_deg": 0,
-        "justification": "Building sits on the north edge of the central plaza; facade faces south toward the open space."
-      },
-      {
-        "name": "Tram Station Building",
-        "facade_faces": "west",
-        "rotation_y_deg": 90,
-        "justification": "Main entrance is labeled 'ENTRANCE FROM TRAM' on its west side, indicating facade faces west toward a tram platform/arrival zone."
+        "justification": "Building is on the upper (north) side of the central open space, with the y-axis difference being dominant. Facade faces south."
       },
       {
         "name": "24 HR Chicken Shop",
         "facade_faces": "west",
         "rotation_y_deg": 90,
-        "justification": "Building sits on the east edge of the central plaza; facade faces west toward the open space."
+        "justification": "Building is to the right (east) of the central open space, facade faces west."
       },
       {
-        "name": "Shop Block G",
+        "name": "Shop C1",
         "facade_faces": "west",
         "rotation_y_deg": 90,
-        "justification": "Building sits on the east edge of the central plaza; facade faces west toward the open space."
+        "justification": "Building is to the right (east) of the central open space, facade faces west."
       },
       {
-        "name": "Shop Block H",
+        "name": "Shop C2",
         "facade_faces": "west",
         "rotation_y_deg": 90,
-        "justification": "Building sits on the east edge of the central plaza; facade faces west toward the open space."
+        "justification": "Building is to the right (east) of the central open space, facade faces west."
       },
       {
-        "name": "Bridge Structure",
-        "facade_faces": "south",
-        "rotation_y_deg": 0,
-        "justification": "The bridge spans the northern part of the site; its primary interface or view is toward the main plaza below, thus facing south."
+        "name": "Tram Station Building",
+        "facade_faces": "west",
+        "rotation_y_deg": 90,
+        "justification": "Building is to the right (east) of the central open space, facade faces west, also facing the 'Entrance from Tram' circulation path."
       },
       {
-        "name": "Escalator_structure",
+        "name": "Escalator Structure",
         "facade_faces": "south",
         "rotation_y_deg": 0,
-        "justification": "Escalator leads down from the bridge level into the main plaza, thus its operational front faces south."
+        "justification": "Structure connects from the bridge level down to the central open space, thus its primary facade faces south."
       },
       {
-        "name": "Elevator_structure",
+        "name": "Elevator Structure",
         "facade_faces": "south",
         "rotation_y_deg": 0,
-        "justification": "Elevator leads down from the bridge level into the main plaza, thus its operational front faces south."
-      },
-      {
-        "name": "Bridge_Vehicle_1_uncertain",
-        "facade_faces": "south",
-        "rotation_y_deg": 0,
-        "justification": "Vehicles on the bridge are depicted facing generally south, towards the activity in the plaza below."
-      },
-      {
-        "name": "Bridge_Vehicle_2_uncertain",
-        "facade_faces": "south",
-        "rotation_y_deg": 0,
-        "justification": "Vehicles on the bridge are depicted facing generally south, towards the activity in the plaza below."
-      },
-      {
-        "name": "Bridge_Vehicle_3_uncertain",
-        "facade_faces": "south",
-        "rotation_y_deg": 0,
-        "justification": "Vehicles on the bridge are depicted facing generally south, towards the activity in the plaza below."
-      },
-      {
-        "name": "Bridge_Vehicle_4_uncertain",
-        "facade_faces": "south",
-        "rotation_y_deg": 0,
-        "justification": "Vehicles on the bridge are depicted facing generally south, towards the activity in the plaza below."
-      },
-      {
-        "name": "Bridge_Vehicle_5_uncertain",
-        "facade_faces": "south",
-        "rotation_y_deg": 0,
-        "justification": "Vehicles on the bridge are depicted facing generally south, towards the activity in the plaza below."
+        "justification": "Structure connects from the bridge level down to the central open space, thus its primary facade faces south."
       }
     ],
-    "prefab_checks": [
-      {
-        "element_label": "Escalator",
-        "footprint_normalized": 5000,
-        "prefab_match": "NONE",
-        "classification": "generated_objects"
-      },
-      {
-        "element_label": "Elevator",
-        "footprint_normalized": 2500,
-        "prefab_match": "NONE",
-        "classification": "generated_objects"
-      },
-      {
-        "element_label": "Bridge_Vehicle_1_uncertain",
-        "footprint_normalized": 1200,
-        "prefab_match": "NONE",
-        "classification": "generated_objects"
-      },
-      {
-        "element_label": "Bridge_Vehicle_2_uncertain",
-        "footprint_normalized": 1200,
-        "prefab_match": "NONE",
-        "classification": "generated_objects"
-      },
-      {
-        "element_label": "Bridge_Vehicle_3_uncertain",
-        "footprint_normalized": 1200,
-        "prefab_match": "NONE",
-        "classification": "generated_objects"
-      },
-      {
-        "element_label": "Bridge_Vehicle_4_uncertain",
-        "footprint_normalized": 1200,
-        "prefab_match": "NONE",
-        "classification": "generated_objects"
-      },
-      {
-        "element_label": "Bridge_Vehicle_5_uncertain",
-        "footprint_normalized": 1200,
-        "prefab_match": "NONE",
-        "classification": "generated_objects"
-      }
-    ]
+    "prefab_checks": []
   },
   "site_scale": {
     "site_width_ft": 1000,
     "site_height_ft": 1000,
-    "normalized_canvas": [
-      0,
-      0,
-      1000,
-      1000
-    ],
-    "lot_boundary": [
-      [
-        0,
-        0
-      ],
-      [
-        0,
-        1000
-      ],
-      [
-        1000,
-        1000
-      ],
-      [
-        1000,
-        0
-      ]
-    ],
+    "normalized_canvas": [0, 0, 1000, 1000],
+    "lot_boundary": [[0, 0], [0, 1000], [1000, 0], [1000, 1000]],
     "scale_note": "All placements must fall within lot_boundary. Bounding boxes define placement. Real-world dimensions define scale."
   },
   "terrain_zones": [
     {
-      "area_name": "Main Plaza Pavement",
+      "area_name": "Central Open Space",
       "semantic_tag": "open_space",
       "terrain_type": "plaza",
-      "bounding_box": [270, 200, 850, 600],
-      "approx_sq_ft": 336000,
+      "bounding_box": [300, 200, 800, 700],
+      "approx_sq_ft": 250000,
       "unity_strategy": "paint_terrain"
     },
     {
-      "area_name": "Bridge Pavement",
-      "semantic_tag": "circulation",
+      "area_name": "Bridge Walkway",
+      "semantic_tag": "circulation_bridge",
       "terrain_type": "pavement",
-      "bounding_box": [70, 0, 200, 1000],
-      "approx_sq_ft": 130000,
+      "bounding_box": [0, 0, 150, 1000],
+      "approx_sq_ft": 150000,
       "unity_strategy": "paint_terrain"
     },
     {
-      "area_name": "Tram Pavement Area",
-      "semantic_tag": "circulation",
+      "area_name": "Escalator Elevator Plaza",
+      "semantic_tag": "circulation_hub",
       "terrain_type": "pavement",
-      "bounding_box": [450, 600, 850, 1000],
-      "approx_sq_ft": 160000,
+      "bounding_box": [150, 300, 250, 700],
+      "approx_sq_ft": 40000,
+      "unity_strategy": "paint_terrain"
+    },
+    {
+      "area_name": "Tram Entrance Path",
+      "semantic_tag": "circulation_path",
+      "terrain_type": "pavement",
+      "bounding_box": [500, 700, 600, 780],
+      "approx_sq_ft": 8000,
       "unity_strategy": "paint_terrain"
     }
   ],
@@ -221,177 +139,160 @@
     {
       "area_name": "Museum History",
       "semantic_tag": "civic_museum",
-      "bounding_box": [570, 70, 780, 270],
-      "center_point": [675, 170],
+      "bounding_box": [570, 70, 870, 250],
+      "center_point": [720, 160],
       "rotation_y_deg": 270,
       "floors": 3,
-      "approx_width_ft": 200,
-      "approx_depth_ft": 210,
-      "approx_sq_ft": 42000,
+      "approx_width_ft": 180,
+      "approx_depth_ft": 300,
+      "approx_sq_ft": 54000,
       "unity_strategy": "modular_prefab"
     },
     {
-      "area_name": "Shop Block A",
+      "area_name": "Shop A1",
       "semantic_tag": "retail_shop",
-      "bounding_box": [480, 70, 560, 200],
-      "center_point": [520, 135],
+      "bounding_box": [280, 100, 360, 200],
+      "center_point": [320, 150],
       "rotation_y_deg": 270,
       "floors": 2,
-      "approx_width_ft": 130,
+      "approx_width_ft": 100,
       "approx_depth_ft": 80,
-      "approx_sq_ft": 10400,
+      "approx_sq_ft": 8000,
       "unity_strategy": "modular_prefab"
     },
     {
-      "area_name": "Shop Block B",
+      "area_name": "Shop A2",
       "semantic_tag": "retail_shop",
-      "bounding_box": [390, 70, 470, 200],
-      "center_point": [430, 135],
+      "bounding_box": [370, 100, 450, 200],
+      "center_point": [410, 150],
       "rotation_y_deg": 270,
       "floors": 2,
-      "approx_width_ft": 130,
+      "approx_width_ft": 100,
       "approx_depth_ft": 80,
-      "approx_sq_ft": 10400,
+      "approx_sq_ft": 8000,
       "unity_strategy": "modular_prefab"
     },
     {
-      "area_name": "Shop Block C",
+      "area_name": "Shop A3",
       "semantic_tag": "retail_shop",
-      "bounding_box": [300, 70, 380, 200],
-      "center_point": [340, 135],
+      "bounding_box": [460, 100, 540, 200],
+      "center_point": [500, 150],
       "rotation_y_deg": 270,
       "floors": 2,
-      "approx_width_ft": 130,
+      "approx_width_ft": 100,
       "approx_depth_ft": 80,
-      "approx_sq_ft": 10400,
+      "approx_sq_ft": 8000,
       "unity_strategy": "modular_prefab"
     },
     {
-      "area_name": "Shop Block D",
+      "area_name": "Shop B1",
       "semantic_tag": "retail_shop",
-      "bounding_box": [300, 270, 370, 370],
-      "center_point": [335, 320],
+      "bounding_box": [280, 280, 360, 380],
+      "center_point": [320, 330],
       "rotation_y_deg": 0,
       "floors": 2,
       "approx_width_ft": 100,
-      "approx_depth_ft": 70,
-      "approx_sq_ft": 7000,
+      "approx_depth_ft": 80,
+      "approx_sq_ft": 8000,
       "unity_strategy": "modular_prefab"
     },
     {
-      "area_name": "Shop Block E",
+      "area_name": "Shop B2",
       "semantic_tag": "retail_shop",
-      "bounding_box": [300, 380, 370, 480],
-      "center_point": [335, 430],
+      "bounding_box": [280, 390, 360, 490],
+      "center_point": [320, 440],
       "rotation_y_deg": 0,
       "floors": 2,
       "approx_width_ft": 100,
-      "approx_depth_ft": 70,
-      "approx_sq_ft": 7000,
+      "approx_depth_ft": 80,
+      "approx_sq_ft": 8000,
       "unity_strategy": "modular_prefab"
     },
     {
-      "area_name": "Shop Block F",
+      "area_name": "Shop B3",
       "semantic_tag": "retail_shop",
-      "bounding_box": [300, 490, 370, 590],
-      "center_point": [335, 540],
+      "bounding_box": [280, 500, 360, 600],
+      "center_point": [320, 550],
       "rotation_y_deg": 0,
       "floors": 2,
       "approx_width_ft": 100,
-      "approx_depth_ft": 70,
-      "approx_sq_ft": 7000,
-      "unity_strategy": "modular_prefab"
-    },
-    {
-      "area_name": "Tram Station Building",
-      "semantic_tag": "transport_station",
-      "bounding_box": [470, 710, 790, 940],
-      "center_point": [630, 825],
-      "rotation_y_deg": 90,
-      "floors": 2,
-      "approx_width_ft": 230,
-      "approx_depth_ft": 320,
-      "approx_sq_ft": 73600,
+      "approx_depth_ft": 80,
+      "approx_sq_ft": 8000,
       "unity_strategy": "modular_prefab"
     },
     {
       "area_name": "24 HR Chicken Shop",
-      "semantic_tag": "retail_restaurant",
-      "bounding_box": [470, 610, 560, 690],
-      "center_point": [515, 650],
+      "semantic_tag": "food_service",
+      "bounding_box": [440, 480, 560, 580],
+      "center_point": [500, 530],
       "rotation_y_deg": 90,
-      "floors": 1,
-      "approx_width_ft": 80,
-      "approx_depth_ft": 90,
-      "approx_sq_ft": 7200,
+      "floors": 2,
+      "approx_width_ft": 100,
+      "approx_depth_ft": 120,
+      "approx_sq_ft": 12000,
       "unity_strategy": "modular_prefab"
     },
     {
-      "area_name": "Shop Block G",
+      "area_name": "Shop C1",
       "semantic_tag": "retail_shop",
-      "bounding_box": [570, 610, 650, 690],
-      "center_point": [610, 650],
+      "bounding_box": [570, 480, 650, 580],
+      "center_point": [610, 530],
       "rotation_y_deg": 90,
-      "floors": 1,
-      "approx_width_ft": 80,
+      "floors": 2,
+      "approx_width_ft": 100,
       "approx_depth_ft": 80,
-      "approx_sq_ft": 6400,
+      "approx_sq_ft": 8000,
       "unity_strategy": "modular_prefab"
     },
     {
-      "area_name": "Shop Block H",
+      "area_name": "Shop C2",
       "semantic_tag": "retail_shop",
-      "bounding_box": [660, 610, 740, 690],
-      "center_point": [700, 650],
+      "bounding_box": [660, 480, 740, 580],
+      "center_point": [700, 530],
       "rotation_y_deg": 90,
-      "floors": 1,
-      "approx_width_ft": 80,
+      "floors": 2,
+      "approx_width_ft": 100,
       "approx_depth_ft": 80,
-      "approx_sq_ft": 6400,
+      "approx_sq_ft": 8000,
+      "unity_strategy": "modular_prefab"
+    },
+    {
+      "area_name": "Tram Station Building",
+      "semantic_tag": "transportation_hub",
+      "bounding_box": [350, 780, 750, 950],
+      "center_point": [550, 865],
+      "rotation_y_deg": 90,
+      "floors": 3,
+      "approx_width_ft": 170,
+      "approx_depth_ft": 400,
+      "approx_sq_ft": 68000,
       "unity_strategy": "modular_prefab"
     }
   ],
   "generated_objects": [
     {
-      "area_name": "Bridge Structure",
-      "semantic_tag": "circulation_structure",
+      "area_name": "Escalator Structure",
+      "semantic_tag": "circulation_element",
       "object_type": "structure",
-      "bounding_box": [70, 0, 200, 1000],
-      "center_point": [135, 500],
+      "bounding_box": [180, 390, 230, 470],
+      "center_point": [205, 430],
       "rotation_y_deg": 0,
-      "approx_width_ft": 1000,
-      "approx_depth_ft": 130,
-      "approx_sq_ft": 130000,
-      "target_dimensions_ft": {
-        "width_ft": 1000,
-        "depth_ft": 130,
-        "height_ft": 16
-      },
-      "unity_strategy": "box_primitive"
-    },
-    {
-      "area_name": "Escalator_structure",
-      "semantic_tag": "transport_element",
-      "object_type": "structure",
-      "bounding_box": [210, 300, 260, 400],
-      "center_point": [235, 350],
-      "rotation_y_deg": 0,
-      "approx_width_ft": 100,
+      "approx_width_ft": 80,
       "approx_depth_ft": 50,
-      "approx_sq_ft": 5000,
+      "approx_sq_ft": 4000,
       "target_dimensions_ft": {
-        "width_ft": 100,
+        "width_ft": 80,
         "depth_ft": 50,
-        "height_ft": 12
+        "height_ft": 15
       },
       "unity_strategy": "box_primitive"
     },
     {
-      "area_name": "Elevator_structure",
-      "semantic_tag": "transport_element",
+      "area_name": "Elevator Structure",
+      "semantic_tag": "circulation_element",
       "object_type": "structure",
-      "bounding_box": [210, 470, 260, 520],
-      "center_point": [235, 495],
+      "bounding_box": [180, 520, 230, 570],
+      "center_point": [205, 545],
       "rotation_y_deg": 0,
       "approx_width_ft": 50,
       "approx_depth_ft": 50,
@@ -399,92 +300,7 @@
       "target_dimensions_ft": {
         "width_ft": 50,
         "depth_ft": 50,
-        "height_ft": 16
-      },
-      "unity_strategy": "box_primitive"
-    },
-    {
-      "area_name": "Bridge_Vehicle_1_uncertain",
-      "semantic_tag": "transport_vehicle",
-      "object_type": "structure",
-      "bounding_box": [100, 230, 130, 270],
-      "center_point": [115, 250],
-      "rotation_y_deg": 0,
-      "approx_width_ft": 40,
-      "approx_depth_ft": 30,
-      "approx_sq_ft": 1200,
-      "target_dimensions_ft": {
-        "width_ft": 40,
-        "depth_ft": 30,
-        "height_ft": 10
-      },
-      "unity_strategy": "box_primitive"
-    },
-    {
-      "area_name": "Bridge_Vehicle_2_uncertain",
-      "semantic_tag": "transport_vehicle",
-      "object_type": "structure",
-      "bounding_box": [100, 370, 130, 410],
-      "center_point": [115, 390],
-      "rotation_y_deg": 0,
-      "approx_width_ft": 40,
-      "approx_depth_ft": 30,
-      "approx_sq_ft": 1200,
-      "target_dimensions_ft": {
-        "width_ft": 40,
-        "depth_ft": 30,
-        "height_ft": 10
-      },
-      "unity_strategy": "box_primitive"
-    },
-    {
-      "area_name": "Bridge_Vehicle_3_uncertain",
-      "semantic_tag": "transport_vehicle",
-      "object_type": "structure",
-      "bounding_box": [100, 500, 130, 540],
-      "center_point": [115, 520],
-      "rotation_y_deg": 0,
-      "approx_width_ft": 40,
-      "approx_depth_ft": 30,
-      "approx_sq_ft": 1200,
-      "target_dimensions_ft": {
-        "width_ft": 40,
-        "depth_ft": 30,
-        "height_ft": 10
-      },
-      "unity_strategy": "box_primitive"
-    },
-    {
-      "area_name": "Bridge_Vehicle_4_uncertain",
-      "semantic_tag": "transport_vehicle",
-      "object_type": "structure",
-      "bounding_box": [100, 640, 130, 680],
-      "center_point": [115, 660],
-      "rotation_y_deg": 0,
-      "approx_width_ft": 40,
-      "approx_depth_ft": 30,
-      "approx_sq_ft": 1200,
-      "target_dimensions_ft": {
-        "width_ft": 40,
-        "depth_ft": 30,
-        "height_ft": 10
-      },
-      "unity_strategy": "box_primitive"
-    },
-    {
-      "area_name": "Bridge_Vehicle_5_uncertain",
-      "semantic_tag": "transport_vehicle",
-      "object_type": "structure",
-      "bounding_box": [100, 770, 130, 810],
-      "center_point": [115, 790],
-      "rotation_y_deg": 0,
-      "approx_width_ft": 40,
-      "approx_depth_ft": 30,
-      "approx_sq_ft": 1200,
-      "target_dimensions_ft": {
-        "width_ft": 40,
-        "depth_ft": 30,
-        "height_ft": 10
+        "height_ft": 25
       },
       "unity_strategy": "box_primitive"
     }

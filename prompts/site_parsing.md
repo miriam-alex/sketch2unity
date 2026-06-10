@@ -70,12 +70,10 @@ Exactly six top-level keys — no more, no less:
 
 **Examples:**
 
-- Building on the LEFT (west) edge of plaza — facade faces east — `270`
-- Building on the RIGHT (east) edge of plaza — facade faces west — `90`
-- Building on the TOP (north) edge of plaza — facade faces south — `0`
-- Building on the BOTTOM (south) edge of plaza — facade faces north — `180`
-- Bench facing a path running east-west — front faces south — `0`
-- Food booth facing into plaza from the east edge — front faces west — `90`
+- Building on the LEFT (west) edge of open space — facade faces east — `270`
+- Building on the RIGHT (east) edge of open space — facade faces west — `90`
+- Building on the TOP (north) edge of open space — facade faces south — `0`
+- Building on the BOTTOM (south) edge of open space — facade faces north — `180`
 
 Never use long wall direction as a proxy for facing — two buildings can share the same long wall direction but face opposite directions.
 
@@ -102,13 +100,37 @@ Before classifying any element as `generated_buildings` or `generated_objects`, 
 
 ---
 
+### Circulation Gaps and Entrances
+
+If the sketch shows a labeled or visible gap between two buildings (e.g. "Entrance",
+"From Tram", an arrow, or a clear empty corridor), that gap must be preserved as a
+`terrain_zone` with `terrain_type: "pavement"` or `"plaza"`. The bounding boxes of
+adjacent buildings must not overlap or touch this zone.
+
+Do not infer that two buildings are adjacent just because they are near each other —
+if there is whitespace or a label between them in the sketch, treat it as intentional
+clearance.
+
+---
+
 ## Schema Definitions
 
 ### reasoning
 
 ```json
 {
-  "plaza_center": [y, x],
+  "open_space_reference": null | {
+    "label": "string",
+    "center": [y, x]
+  },
+  "circulation_gaps": [
+    {
+      "label": "string",
+      "between": ["building name", "building name"],
+      "bounding_box": [ymin, xmin, ymax, xmax],
+      "terrain_type": "pavement | plaza | asphalt"
+    }
+  ],
   "building_rotations": [
     {
       "name": "string",
@@ -127,12 +149,36 @@ Before classifying any element as `generated_buildings` or `generated_objects`, 
   ]
 }
 ```
+- Not all sketches contain a central open space. If no clear open space, street,
+  or circulation zone is visible, set `open_space_reference` to null and infer
+  facade direction from explicit labels, arrows, or perimeter position instead.
 
-- `plaza_center` is the estimated center of the main open space in normalized coordinates
+  When estimating `open_space_reference.center`, identify the largest continuous
+  empty area in the sketch and use its geometric center. Do not average all
+  buildings — find the empty space itself. If buildings cluster on two or more
+  sides of an open area, the open space center should fall clearly in the gap
+  between them, not near any building.
+
+  After setting `open_space_reference.center`, verify: every building that
+  visually borders the open space must have a center_point that is clearly
+  offset from `open_space_reference.center` on the dominant axis by at least
+  50 normalized units. If not, re-estimate the open space center.
+
+  If an open space exists, compare the building's `center_point` to
+  `open_space_reference.center` using the dominant axis:
+
+  - Building to the RIGHT (x > space center x, dominant axis) → faces west → `90`
+  - Building to the LEFT (x < space center x, dominant axis) → faces east → `270`
+  - Building BELOW (y > space center y, dominant axis) → faces north → `180`
+  - Building ABOVE (y < space center y, dominant axis) → faces south → `0`
+
 - Every building and generated_object must appear in `building_rotations`
 - Every element under ~2,500 normalized sq units must appear in `prefab_checks`
 - `rotation_y_deg: 0` MUST have an explicit justification — it is never a default
 - Values in `reasoning` must be consistent with all values in the rest of the JSON
+- Every labeled or visible gap in the sketch must appear in `circulation_gaps`
+- Each gap must also appear as a `terrain_zone` in the main output
+- Adjacent building bounding boxes must not overlap the gap's `bounding_box`
 
 ---
 
@@ -189,7 +235,7 @@ approx_sq_ft    = approx_width_ft x approx_depth_ft
 
 Default: `2` if ambiguous.
 
-**rotation_y_deg** — use the Rotation Convention table above. If the site contains a central open plaza, building facades face inward toward the plaza center. If the site contains a street, buildings face toward the street.
+**rotation_y_deg** — use the Rotation Convention table above. Determine facing direction using the dominant axis rule described in the `reasoning` schema. Apply to all open spaces equally — plaza, street, courtyard, or pathway.
 
 **center_point** must be the exact center of `bounding_box`.
 
@@ -276,7 +322,10 @@ Derive `approx_width_ft`, `approx_depth_ft`, and `approx_sq_ft` using the same f
 ```json
 {
   "reasoning": {
-    "plaza_center": [600, 500],
+    "open_space_reference": {
+      "label": "Central Lawn",
+      "center": [600, 500]
+    },
     "building_rotations": [
       {
         "name": "Apartment Block A",
@@ -375,6 +424,9 @@ Derive `approx_width_ft`, `approx_depth_ft`, and `approx_sq_ft` using the same f
 - [ ] No `image_gen_prompt` field exists anywhere
 - [ ] All coordinate values are integers in `[0, 1000]`
 - [ ] Output is valid JSON — no fences, no commentary
+- [ ] Every labeled or visible gap in the sketch appears in `reasoning.circulation_gaps`
+- [ ] Every entry in `reasoning.circulation_gaps` has a corresponding `terrain_zone` in the main output
+- [ ] If `open_space_reference` is not null, each building's `facade_faces` matches its center_point position relative to `open_space_reference.center` using the dominant axis rule
 
 ---
 

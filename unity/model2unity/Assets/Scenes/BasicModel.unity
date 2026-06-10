@@ -153,7 +153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -112.93, y: 160.8}
+  m_AnchoredPosition: {x: -117.6, y: 160.8}
   m_SizeDelta: {x: 368.9, y: 48.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &38594103
@@ -376,6 +376,143 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180392611}
+  m_CullTransparentMesh: 1
+--- !u!1 &211227967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 211227968}
+  - component: {fileID: 211227970}
+  - component: {fileID: 211227969}
+  m_Layer: 5
+  m_Name: Timer Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &211227968
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211227967}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1617552028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 101.59996}
+  m_SizeDelta: {x: 607.54, y: 56}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &211227969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211227967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Timer text here
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 15
+  m_fontSizeBase: 15
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &211227970
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211227967}
   m_CullTransparentMesh: 1
 --- !u!1 &216478853
 GameObject:
@@ -1323,125 +1460,114 @@ MonoBehaviour:
   buildingGenerator: {fileID: 506498434}
   prefabScaleFactor: 0.5
   testGeneration: 0
-  jsonInput: "{\n  \"site_scale\": {\n    \"site_width_ft\": 1000,\n    \"site_height_ft\":
+  jsonInput: "{\"site_scale\": {\n    \"site_width_ft\": 1000,\n    \"site_height_ft\":
     1000,\n    \"normalized_canvas\": [\n      0,\n      0,\n      1000,\n      1000\n   
     ],\n    \"lot_boundary\": [\n      [\n        0,\n        0\n      ],\n     
-    [\n        0,\n        1000\n      ],\n      [\n        1000,\n        0\n     
-    ],\n      [\n        1000,\n        1000\n      ]\n    ],\n    \"scale_note\":
-    \"All placements must fall within lot_boundary. Bounding boxes define placement.
-    Real-world dimensions define scale.\"\n  },\n  \"terrain_zones\": [\n    {\n     
-    \"area_name\": \"Central Gathering Plaza\",\n      \"semantic_tag\": \"pedestrian_area\",\n     
-    \"terrain_type\": \"plaza\",\n      \"bounding_box\": [\n        420,\n       
-    320,\n        700,\n        680\n      ],\n      \"approx_sq_ft\": 100800,\n     
-    \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\": \"Main
-    Entrance Pavement\",\n      \"semantic_tag\": \"pedestrian_walkway\",\n     
-    \"terrain_type\": \"pavement\",\n      \"bounding_box\": [\n        700,\n       
-    0,\n        800,\n        1000\n      ],\n      \"approx_sq_ft\": 100000,\n     
-    \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\": \"Left
-    Seating Planter\",\n      \"semantic_tag\": \"landscape_feature\",\n      \"terrain_type\":
-    \"planting_bed\",\n      \"bounding_box\": [\n        460,\n        370,\n       
-    560,\n        470\n      ],\n      \"approx_sq_ft\": 10000,\n      \"unity_strategy\":
-    \"paint_terrain\"\n    },\n    {\n      \"area_name\": \"Right Seating Planter\",\n     
-    \"semantic_tag\": \"landscape_feature\",\n      \"terrain_type\": \"planting_bed\",\n     
-    \"bounding_box\": [\n        460,\n        530,\n        560,\n        630\n     
-    ],\n      \"approx_sq_ft\": 10000,\n      \"unity_strategy\": \"paint_terrain\"\n   
-    },\n    {\n      \"area_name\": \"North Campus Lawn\",\n      \"semantic_tag\":
-    \"landscaped_lawn\",\n      \"terrain_type\": \"grass\",\n      \"bounding_box\":
-    [\n        0,\n        0,\n        20,\n        1000\n      ],\n      \"approx_sq_ft\":
-    20000,\n      \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\":
-    \"West Campus Lawn\",\n      \"semantic_tag\": \"landscaped_lawn\",\n      \"terrain_type\":
-    \"grass\",\n      \"bounding_box\": [\n        20,\n        0,\n        700,\n       
-    20\n      ],\n      \"approx_sq_ft\": 13600,\n      \"unity_strategy\": \"paint_terrain\"\n   
-    },\n    {\n      \"area_name\": \"East Campus Lawn\",\n      \"semantic_tag\":
-    \"landscaped_lawn\",\n      \"terrain_type\": \"grass\",\n      \"bounding_box\":
-    [\n        20,\n        980,\n        700,\n        1000\n      ],\n      \"approx_sq_ft\":
-    13600,\n      \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\":
-    \"South Campus Lawn\",\n      \"semantic_tag\": \"landscaped_lawn\",\n      \"terrain_type\":
-    \"grass\",\n      \"bounding_box\": [\n        800,\n        0,\n        1000,\n       
-    1000\n      ],\n      \"approx_sq_ft\": 200000,\n      \"unity_strategy\": \"paint_terrain\"\n   
-    },\n    {\n      \"area_name\": \"Mid-Level West Grass\",\n      \"semantic_tag\":
-    \"landscaped_lawn\",\n      \"terrain_type\": \"grass\",\n      \"bounding_box\":
-    [\n        400,\n        20,\n        450,\n        320\n      ],\n      \"approx_sq_ft\":
-    15000,\n      \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\":
-    \"Mid-Level East Grass\",\n      \"semantic_tag\": \"landscaped_lawn\",\n     
-    \"terrain_type\": \"grass\",\n      \"bounding_box\": [\n        400,\n       
-    680,\n        450,\n        980\n      ],\n      \"approx_sq_ft\": 15000,\n     
-    \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\": \"Mid-Level
-    Central Grass\",\n      \"semantic_tag\": \"landscaped_lawn\",\n      \"terrain_type\":
-    \"grass\",\n      \"bounding_box\": [\n        400,\n        320,\n        420,\n       
-    680\n      ],\n      \"approx_sq_ft\": 7200,\n      \"unity_strategy\": \"paint_terrain\"\n   
-    }\n  ],\n  \"generated_buildings\": [\n    {\n      \"area_name\": \"Dr.'s Office
-    Building\",\n      \"semantic_tag\": \"medical_office\",\n      \"bounding_box\":
-    [\n        20,\n        20,\n        400,\n        980\n      ],\n      \"center_point\":
-    [\n        210,\n        500\n      ],\n      \"rotation_y_deg\": 0,\n      \"floors\":
-    3,\n      \"approx_sq_ft\": 364800,\n      \"unity_strategy\": \"modular_prefab\"\n   
-    },\n    {\n      \"area_name\": \"Cafe Building\",\n      \"semantic_tag\": \"commercial_cafe\",\n     
-    \"bounding_box\": [\n        450,\n        20,\n        680,\n        320\n     
-    ],\n      \"center_point\": [\n        565,\n        170\n      ],\n      \"rotation_y_deg\":
-    0,\n      \"floors\": 2,\n      \"approx_sq_ft\": 69000,\n      \"unity_strategy\":
-    \"modular_prefab\"\n    },\n    {\n      \"area_name\": \"Daycare Building\",\n     
-    \"semantic_tag\": \"educational_daycare\",\n      \"bounding_box\": [\n       
-    450,\n        680,\n        680,\n        980\n      ],\n      \"center_point\":
-    [\n        565,\n        830\n      ],\n      \"rotation_y_deg\": 0,\n      \"floors\":
-    2,\n      \"approx_sq_ft\": 69000,\n      \"unity_strategy\": \"modular_prefab\"\n   
-    }\n  ],\n  \"generated_objects\": [],\n  \"prefab_instances\": [\n    {\n     
-    \"area_name\": \"Tree 1\",\n      \"semantic_tag\": \"tree_deciduous\",\n     
-    \"prefab_type\": \"tree\",\n      \"center_point\": [\n        500,\n       
-    400\n      ],\n      \"footprint_box\": [\n        475,\n        375,\n       
-    525,\n        425\n      ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\":
+    [\n        0,\n        1000\n      ],\n      [\n        1000,\n        1000\n     
+    ],\n      [\n        1000,\n        0\n      ]\n    ],\n    \"scale_note\": \"All
+    placements must fall within lot_boundary. Bounding boxes define placement. Real-world
+    dimensions define scale.\"\n  },\n  \"terrain_zones\": [\n    {\n      \"area_name\":
+    \"Main Plaza Pavement\",\n      \"semantic_tag\": \"open_space\",\n      \"terrain_type\":
+    \"plaza\",\n      \"bounding_box\": [260, 160, 860, 580],\n      \"approx_sq_ft\":
+    252000,\n      \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\":
+    \"Tram Access Path\",\n      \"semantic_tag\": \"circulation\",\n      \"terrain_type\":
+    \"pavement\",\n      \"bounding_box\": [500, 500, 550, 600],\n      \"approx_sq_ft\":
+    5000,\n      \"unity_strategy\": \"paint_terrain\"\n    },\n    {\n      \"area_name\":
+    \"Bridge Underside Pavement\",\n      \"semantic_tag\": \"circulation\",\n     
+    \"terrain_type\": \"pavement\",\n      \"bounding_box\": [150, 0, 280, 900],\n     
+    \"approx_sq_ft\": 117000,\n      \"unity_strategy\": \"paint_terrain\"\n    },\n   
+    {\n      \"area_name\": \"Tram Platform Pavement\",\n      \"semantic_tag\":
+    \"platform\",\n      \"terrain_type\": \"pavement\",\n      \"bounding_box\":
+    [300, 850, 700, 900],\n      \"approx_sq_ft\": 20000,\n      \"unity_strategy\":
+    \"paint_terrain\"\n    }\n  ],\n  \"generated_buildings\": [\n    {\n      \"area_name\":
+    \"Museum History\",\n      \"semantic_tag\": \"civic_museum\",\n      \"bounding_box\":
+    [550, 50, 750, 150],\n      \"center_point\": [650, 100],\n      \"rotation_y_deg\":
+    270,\n      \"floors\": 3,\n      \"approx_width_ft\": 100,\n      \"approx_depth_ft\":
+    200,\n      \"approx_sq_ft\": 20000,\n      \"unity_strategy\": \"modular_prefab\"\n   
+    },\n    {\n      \"area_name\": \"West Shop 1\",\n      \"semantic_tag\": \"retail_shop\",\n     
+    \"bounding_box\": [450, 50, 520, 150],\n      \"center_point\": [485, 100],\n     
+    \"rotation_y_deg\": 270,\n      \"floors\": 2,\n      \"approx_width_ft\": 100,\n     
+    \"approx_depth_ft\": 70,\n      \"approx_sq_ft\": 7000,\n      \"unity_strategy\":
+    \"modular_prefab\"\n    },\n    {\n      \"area_name\": \"West Shop 2\",\n     
+    \"semantic_tag\": \"retail_shop\",\n      \"bounding_box\": [380, 50, 450, 150],\n     
+    \"center_point\": [415, 100],\n      \"rotation_y_deg\": 270,\n      \"floors\":
+    2,\n      \"approx_width_ft\": 100,\n      \"approx_depth_ft\": 70,\n      \"approx_sq_ft\":
+    7000,\n      \"unity_strategy\": \"modular_prefab\"\n    },\n    {\n      \"area_name\":
+    \"West Shop 3\",\n      \"semantic_tag\": \"retail_shop\",\n      \"bounding_box\":
+    [300, 50, 370, 150],\n      \"center_point\": [335, 100],\n      \"rotation_y_deg\":
+    270,\n      \"floors\": 2,\n      \"approx_width_ft\": 100,\n      \"approx_depth_ft\":
+    70,\n      \"approx_sq_ft\": 7000,\n      \"unity_strategy\": \"modular_prefab\"\n   
+    },\n    {\n      \"area_name\": \"North Shop 1\",\n      \"semantic_tag\": \"retail_shop\",\n     
+    \"bounding_box\": [280, 200, 350, 300],\n      \"center_point\": [315, 250],\n     
+    \"rotation_y_deg\": 0,\n      \"floors\": 2,\n      \"approx_width_ft\": 100,\n     
+    \"approx_depth_ft\": 70,\n      \"approx_sq_ft\": 7000,\n      \"unity_strategy\":
+    \"modular_prefab\"\n    },\n    {\n      \"area_name\": \"North Shop 2\",\n     
+    \"semantic_tag\": \"retail_shop\",\n      \"bounding_box\": [280, 310, 350, 410],\n     
+    \"center_point\": [315, 360],\n      \"rotation_y_deg\": 0,\n      \"floors\":
+    2,\n      \"approx_width_ft\": 100,\n      \"approx_depth_ft\": 70,\n      \"approx_sq_ft\":
+    7000,\n      \"unity_strategy\": \"modular_prefab\"\n    },\n    {\n      \"area_name\":
+    \"North Shop 3\",\n      \"semantic_tag\": \"retail_shop\",\n      \"bounding_box\":
+    [280, 420, 350, 520],\n      \"center_point\": [315, 470],\n      \"rotation_y_deg\":
+    0,\n      \"floors\": 2,\n      \"approx_width_ft\": 100,\n      \"approx_depth_ft\":
+    70,\n      \"approx_sq_ft\": 7000,\n      \"unity_strategy\": \"modular_prefab\"\n   
+    },\n    {\n      \"area_name\": \"24 HR Chicken Shop\",\n      \"semantic_tag\":
+    \"retail_restaurant\",\n      \"bounding_box\": [570, 380, 670, 480],\n     
+    \"center_point\": [620, 430],\n      \"rotation_y_deg\": 180,\n      \"floors\":
+    2,\n      \"approx_width_ft\": 100,\n      \"approx_depth_ft\": 100,\n      \"approx_sq_ft\":
+    10000,\n      \"unity_strategy\": \"modular_prefab\"\n    },\n    {\n      \"area_name\":
+    \"South Shop 1\",\n      \"semantic_tag\": \"retail_shop\",\n      \"bounding_box\":
+    [680, 380, 750, 480],\n      \"center_point\": [715, 430],\n      \"rotation_y_deg\":
+    180,\n      \"floors\": 2,\n      \"approx_width_ft\": 100,\n      \"approx_depth_ft\":
+    70,\n      \"approx_sq_ft\": 7000,\n      \"unity_strategy\": \"modular_prefab\"\n   
+    },\n    {\n      \"area_name\": \"South Shop 2\",\n      \"semantic_tag\": \"retail_shop\",\n     
+    \"bounding_box\": [760, 380, 830, 480],\n      \"center_point\": [795, 430],\n     
+    \"rotation_y_deg\": 180,\n      \"floors\": 2,\n      \"approx_width_ft\": 100,\n     
+    \"approx_depth_ft\": 70,\n      \"approx_sq_ft\": 7000,\n      \"unity_strategy\":
+    \"modular_prefab\"\n    },\n    {\n      \"area_name\": \"Tram Station\",\n     
+    \"semantic_tag\": \"transport_hub\",\n      \"bounding_box\": [300, 600, 700,
+    850],\n      \"center_point\": [500, 725],\n      \"rotation_y_deg\": 90,\n     
+    \"floors\": 2,\n      \"approx_width_ft\": 250,\n      \"approx_depth_ft\": 400,\n     
+    \"approx_sq_ft\": 100000,\n      \"unity_strategy\": \"modular_prefab\"\n   
+    }\n  ],\n  \"generated_objects\": [\n    {\n      \"area_name\": \"Escalator
+    Structure\",\n      \"semantic_tag\": \"transport_structure\",\n      \"object_type\":
+    \"structure\",\n      \"bounding_box\": [170, 200, 250, 300],\n      \"center_point\":
+    [210, 250],\n      \"rotation_y_deg\": 0,\n      \"approx_width_ft\": 100,\n     
+    \"approx_depth_ft\": 80,\n      \"approx_sq_ft\": 8000,\n      \"target_dimensions_ft\":
+    {\n        \"width_ft\": 100,\n        \"depth_ft\": 80,\n        \"height_ft\":
+    25\n      },\n      \"unity_strategy\": \"box_primitive\"\n    },\n    {\n     
+    \"area_name\": \"Elevator Structure\",\n      \"semantic_tag\": \"transport_structure\",\n     
+    \"object_type\": \"structure\",\n      \"bounding_box\": [170, 450, 250, 500],\n     
+    \"center_point\": [210, 475],\n      \"rotation_y_deg\": 0,\n      \"approx_width_ft\":
+    50,\n      \"approx_depth_ft\": 80,\n      \"approx_sq_ft\": 4000,\n      \"target_dimensions_ft\":
+    {\n        \"width_ft\": 50,\n        \"depth_ft\": 80,\n        \"height_ft\":
+    28\n      },\n      \"unity_strategy\": \"box_primitive\"\n    },\n    {\n     
+    \"area_name\": \"Bridge Structure\",\n      \"semantic_tag\": \"civic_bridge\",\n     
+    \"object_type\": \"structure\",\n      \"bounding_box\": [0, 0, 150, 900],\n     
+    \"center_point\": [75, 450],\n      \"rotation_y_deg\": 0,\n      \"approx_width_ft\":
+    900,\n      \"approx_depth_ft\": 150,\n      \"approx_sq_ft\": 135000,\n     
+    \"target_dimensions_ft\": {\n        \"width_ft\": 900,\n        \"depth_ft\":
+    150,\n        \"height_ft\": 20\n      },\n      \"unity_strategy\": \"box_primitive\"\n   
+    }\n  ],\n  \"prefab_instances\": [\n    {\n      \"area_name\": \"Bridge Stall
+    1 (Blue) Left\",\n      \"semantic_tag\": \"retail_food_stall\",\n      \"prefab_type\":
+    \"outdoor_beer_booth\",\n      \"center_point\": [100, 265],\n      \"footprint_box\":
+    [80, 250, 120, 280],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\":
     1.0,\n      \"unity_strategy\": \"place_prefab\"\n    },\n    {\n      \"area_name\":
-    \"Tree 2\",\n      \"semantic_tag\": \"tree_deciduous\",\n      \"prefab_type\":
-    \"tree\",\n      \"center_point\": [\n        470,\n        430\n      ],\n     
-    \"footprint_box\": [\n        445,\n        405,\n        495,\n        455\n     
-    ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\": 1.0,\n      \"unity_strategy\":
-    \"place_prefab\"\n    },\n    {\n      \"area_name\": \"Tree 3\",\n      \"semantic_tag\":
-    \"tree_deciduous\",\n      \"prefab_type\": \"tree\",\n      \"center_point\":
-    [\n        530,\n        440\n      ],\n      \"footprint_box\": [\n        505,\n       
-    415,\n        555,\n        465\n      ],\n      \"rotation_deg\": 0,\n     
-    \"scale_multiplier\": 1.0,\n      \"unity_strategy\": \"place_prefab\"\n    },\n   
-    {\n      \"area_name\": \"Tree 4\",\n      \"semantic_tag\": \"tree_deciduous\",\n     
-    \"prefab_type\": \"tree\",\n      \"center_point\": [\n        500,\n       
-    560\n      ],\n      \"footprint_box\": [\n        475,\n        535,\n       
-    525,\n        585\n      ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\":
+    \"Bridge Stall 2 (Red) Left\",\n      \"semantic_tag\": \"retail_food_stall\",\n     
+    \"prefab_type\": \"outdoor_sausage_booth\",\n      \"center_point\": [100, 305],\n     
+    \"footprint_box\": [80, 290, 120, 320],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\":
     1.0,\n      \"unity_strategy\": \"place_prefab\"\n    },\n    {\n      \"area_name\":
-    \"Tree 5\",\n      \"semantic_tag\": \"tree_deciduous\",\n      \"prefab_type\":
-    \"tree\",\n      \"center_point\": [\n        470,\n        590\n      ],\n     
-    \"footprint_box\": [\n        445,\n        565,\n        495,\n        615\n     
-    ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\": 1.0,\n      \"unity_strategy\":
-    \"place_prefab\"\n    },\n    {\n      \"area_name\": \"Tree 6\",\n      \"semantic_tag\":
-    \"tree_deciduous\",\n      \"prefab_type\": \"tree\",\n      \"center_point\":
-    [\n        530,\n        600\n      ],\n      \"footprint_box\": [\n        505,\n       
-    575,\n        555,\n        625\n      ],\n      \"rotation_deg\": 0,\n     
-    \"scale_multiplier\": 1.0,\n      \"unity_strategy\": \"place_prefab\"\n    },\n   
-    {\n      \"area_name\": \"Bench 1\",\n      \"semantic_tag\": \"outdoor_seating\",\n     
-    \"prefab_type\": \"bench\",\n      \"center_point\": [\n        570,\n       
-    390\n      ],\n      \"footprint_box\": [\n        560,\n        380,\n       
-    580,\n        400\n      ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\":
+    \"Bridge Stall 3 (Blue) Mid\",\n      \"semantic_tag\": \"retail_food_stall\",\n     
+    \"prefab_type\": \"outdoor_beer_booth\",\n      \"center_point\": [100, 515],\n     
+    \"footprint_box\": [80, 500, 120, 530],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\":
     1.0,\n      \"unity_strategy\": \"place_prefab\"\n    },\n    {\n      \"area_name\":
-    \"Bench 2\",\n      \"semantic_tag\": \"outdoor_seating\",\n      \"prefab_type\":
-    \"bench\",\n      \"center_point\": [\n        590,\n        410\n      ],\n     
-    \"footprint_box\": [\n        580,\n        400,\n        600,\n        420\n     
-    ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\": 1.0,\n      \"unity_strategy\":
-    \"place_prefab\"\n    },\n    {\n      \"area_name\": \"Bench 3\",\n      \"semantic_tag\":
-    \"outdoor_seating\",\n      \"prefab_type\": \"bench\",\n      \"center_point\":
-    [\n        570,\n        430\n      ],\n      \"footprint_box\": [\n        560,\n       
-    420,\n        580,\n        440\n      ],\n      \"rotation_deg\": 0,\n     
-    \"scale_multiplier\": 1.0,\n      \"unity_strategy\": \"place_prefab\"\n    },\n   
-    {\n      \"area_name\": \"Bench 4\",\n      \"semantic_tag\": \"outdoor_seating\",\n     
-    \"prefab_type\": \"bench\",\n      \"center_point\": [\n        570,\n       
-    560\n      ],\n      \"footprint_box\": [\n        560,\n        550,\n       
-    580,\n        570\n      ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\":
+    \"Bridge Stall 4 (Red) Mid\",\n      \"semantic_tag\": \"retail_food_stall\",\n     
+    \"prefab_type\": \"outdoor_sausage_booth\",\n      \"center_point\": [100, 555],\n     
+    \"footprint_box\": [80, 540, 120, 570],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\":
     1.0,\n      \"unity_strategy\": \"place_prefab\"\n    },\n    {\n      \"area_name\":
-    \"Bench 5\",\n      \"semantic_tag\": \"outdoor_seating\",\n      \"prefab_type\":
-    \"bench\",\n      \"center_point\": [\n        590,\n        580\n      ],\n     
-    \"footprint_box\": [\n        580,\n        570,\n        600,\n        590\n     
-    ],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\": 1.0,\n      \"unity_strategy\":
-    \"place_prefab\"\n    },\n    {\n      \"area_name\": \"Bench 6\",\n      \"semantic_tag\":
-    \"outdoor_seating\",\n      \"prefab_type\": \"bench\",\n      \"center_point\":
-    [\n        570,\n        600\n      ],\n      \"footprint_box\": [\n        560,\n       
-    590,\n        580,\n        610\n      ],\n      \"rotation_deg\": 0,\n     
-    \"scale_multiplier\": 1.0,\n      \"unity_strategy\": \"place_prefab\"\n    }\n 
-    ]\n}"
+    \"Bridge Stall 5 (Red) Right\",\n      \"semantic_tag\": \"retail_food_stall\",\n     
+    \"prefab_type\": \"outdoor_sausage_booth\",\n      \"center_point\": [100, 765],\n     
+    \"footprint_box\": [80, 750, 120, 780],\n      \"rotation_deg\": 0,\n      \"scale_multiplier\":
+    1.0,\n      \"unity_strategy\": \"place_prefab\"\n    }\n  ]\n}"
 --- !u!4 &506498433
 Transform:
   m_ObjectHideFlags: 0
@@ -1472,81 +1598,6 @@ MonoBehaviour:
   groundFloorPrefab: {fileID: 8150486483898850497, guid: c1b1212c01f8b4665bae7dad2b1d5ec8, type: 3}
   upperFloorPrefab: {fileID: 2115440206970842405, guid: 761c311d702c942e0a1aa0cd15f2e96d, type: 3}
   upperFloorPrefabZOffset: 0.06
---- !u!1 &536823281
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 536823282}
-  - component: {fileID: 536823284}
-  - component: {fileID: 536823283}
-  m_Layer: 5
-  m_Name: Handle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &536823282
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 536823281}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 841425620}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &536823283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 536823281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &536823284
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 536823281}
-  m_CullTransparentMesh: 1
 --- !u!1 &696314561
 GameObject:
   m_ObjectHideFlags: 0
@@ -1717,78 +1768,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &841425619
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 841425620}
-  m_Layer: 5
-  m_Name: Handle Slide Area
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &841425620
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 841425619}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 536823282}
-  m_Father: {fileID: 1550159564}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &854201384
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 854201385}
-  m_Layer: 5
-  m_Name: Fill Area
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &854201385
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 854201384}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1463740390}
-  m_Father: {fileID: 1550159564}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1027369981
 GameObject:
   m_ObjectHideFlags: 0
@@ -2178,9 +2157,8 @@ MonoBehaviour:
   searchInput: {fileID: 216478855}
   statusText: {fileID: 38594103}
   resultsText: {fileID: 1093746717}
-  progressBar: {fileID: 1550159565}
   progressText: {fileID: 1413748960}
-  progressContainer: {fileID: 2093243245}
+  timerText: {fileID: 211227969}
   modelRequester: {fileID: 1381680489}
   worldGenerator: {fileID: 506498432}
 --- !u!114 &1381680489
@@ -2246,11 +2224,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2093243246}
+  m_Father: {fileID: 1617552028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 119.400024}
   m_SizeDelta: {x: 607.54, y: 56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1413748960
@@ -2353,246 +2331,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1413748958}
   m_CullTransparentMesh: 1
---- !u!1 &1463740389
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1463740390}
-  - component: {fileID: 1463740392}
-  - component: {fileID: 1463740391}
-  m_Layer: 5
-  m_Name: Fill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1463740390
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463740389}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 854201385}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1463740391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463740389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1463740392
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463740389}
-  m_CullTransparentMesh: 1
---- !u!1 &1465851721
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1465851722}
-  - component: {fileID: 1465851724}
-  - component: {fileID: 1465851723}
-  m_Layer: 5
-  m_Name: Background
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1465851722
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1465851721}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1550159564}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1465851723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1465851721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1465851724
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1465851721}
-  m_CullTransparentMesh: 1
---- !u!1 &1550159563
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1550159564}
-  - component: {fileID: 1550159565}
-  m_Layer: 5
-  m_Name: Progress Slider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1550159564
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550159563}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1465851722}
-  - {fileID: 854201385}
-  - {fileID: 841425620}
-  m_Father: {fileID: 2093243246}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -228.68, y: -1.6}
-  m_SizeDelta: {x: 156.67, y: 20}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1550159565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550159563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 536823283}
-  m_FillRect: {fileID: 1463740390}
-  m_HandleRect: {fileID: 536823282}
-  m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 0
-  m_OnValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1617552024
 GameObject:
   m_ObjectHideFlags: 0
@@ -2693,7 +2431,8 @@ RectTransform:
   - {fileID: 180392612}
   - {fileID: 38594102}
   - {fileID: 1093746716}
-  - {fileID: 2093243246}
+  - {fileID: 1413748959}
+  - {fileID: 211227968}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3141,39 +2880,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2021933841}
   m_CullTransparentMesh: 1
---- !u!1 &2093243245
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2093243246}
-  m_Layer: 0
-  m_Name: Progress
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2093243246
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2093243245}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.69, y: 119.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1413748959}
-  - {fileID: 1550159564}
-  m_Father: {fileID: 1617552028}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -16,9 +16,8 @@ public class ModelRequesterUI : MonoBehaviour
     public TMP_Text resultsText; // Shows current loaded model info
     
     [Header("Progress UI")]
-    public Slider progressBar;
     public TMP_Text progressText;
-    public GameObject progressContainer; // Optional container to show/hide progress UI
+    public TMP_Text timerText; // To display the timer
     
     [Header("Model Requester")]
     public ModelRequester modelRequester;
@@ -26,6 +25,8 @@ public class ModelRequesterUI : MonoBehaviour
     
     private ModelRequester.SearchResult lastSearchResult;
     private string currentLoadedModel = "None";
+    private float requestStartTime;
+    private bool isRequestRunning = false;
     
     private void Start()
     {
@@ -60,6 +61,18 @@ public class ModelRequesterUI : MonoBehaviour
             generateLayoutButton.onClick.AddListener(OnGenerateLayoutClicked);
         }
         
+        // initialize text
+        if (progressText != null)
+        {
+            progressText.text = "";
+        }
+        
+        if (timerText != null)
+        {
+            timerText.text = "";
+        }
+
+        
         // Subscribe to events with null checks (after UI is set up)
         if (modelRequester != null)
         {
@@ -79,8 +92,6 @@ public class ModelRequesterUI : MonoBehaviour
             Debug.Log("[ModelRequesterUI] Successfully subscribed to ModelRequester events");
         }
         
-        // Initialize progress UI
-        SetProgressVisible(false);
         
         UpdateStatusText("Ready - Search a model or click 'Generate Layout' to run sketch prompting");
         UpdateResultsText($"Currently loaded model: {currentLoadedModel}");
@@ -91,6 +102,7 @@ public class ModelRequesterUI : MonoBehaviour
     private void OnHealthCheckClicked()
     {
         UpdateStatusText("Testing server connection...");
+        UpdateResultsText("Pinging server...");
         if (modelRequester != null)
         {
             modelRequester.TestServerConnectionButton();
@@ -106,10 +118,12 @@ public class ModelRequesterUI : MonoBehaviour
         if (success)
         {
             UpdateStatusText(message);
+            UpdateResultsText("Server is responsive.");
         }
         else
         {
             UpdateStatusText($"Health Check Failed: {message}");
+            UpdateResultsText("Server did not respond.");
         }
     }
     
@@ -130,7 +144,8 @@ public class ModelRequesterUI : MonoBehaviour
         if (modelRequester != null)
         {
             Debug.Log("progress should be visible here?");
-            SetProgressVisible(true);
+            isRequestRunning = true;
+            requestStartTime = Time.time;
             modelRequester.SearchAndLoadModel(query);
         }
         else
@@ -146,8 +161,9 @@ public class ModelRequesterUI : MonoBehaviour
 
         if (modelRequester != null)
         {
-            SetProgressVisible(true);
             UpdateProgress(0f, "Waiting for sketch selection...");
+            isRequestRunning = true;
+            requestStartTime = Time.time;
             modelRequester.GenerateLayoutFromSketchButton();
         }
         else
@@ -164,13 +180,11 @@ public class ModelRequesterUI : MonoBehaviour
         {
             UpdateStatusText($"No models found for '{results.query}'");
             UpdateResultsText($"No models found for '{results.query}'\\n\\nTry searching for: cat, dog, house, tree");
-            SetProgressVisible(false);
         }
         else
         {
             UpdateStatusText($"Found {results.count} models for '{results.query}' - Loading first result...");
             UpdateResultsText($"Loading: {results.models[0].name}...");
-            SetProgressVisible(true);
             UpdateProgress(0f, "Starting download...");
         }
     }
@@ -178,6 +192,7 @@ public class ModelRequesterUI : MonoBehaviour
     private void OnDownloadProgress(float progress, string status)
     {
         UpdateProgress(progress, status);
+        UpdateResultsText($"{status}...");
     }
     
     private void OnModelLoaded(string filePath)
@@ -185,13 +200,14 @@ public class ModelRequesterUI : MonoBehaviour
         string fileName = System.IO.Path.GetFileName(filePath);
         currentLoadedModel = fileName;
         
-        SetProgressVisible(false);
+        isRequestRunning = false;
         UpdateResultsText($"Model Loaded: {fileName}\\nSaved to: {filePath}");
         UpdateStatusText($"Success! Model '{fileName}' is loaded and ready to use.");
     }
 
     private void OnLayoutGenerated(string responseJson)
     {
+        isRequestRunning = false;
         try
         {
             LayoutResponseEnvelope response = JsonUtility.FromJson<LayoutResponseEnvelope>(responseJson);
@@ -211,7 +227,6 @@ public class ModelRequesterUI : MonoBehaviour
                 Debug.LogWarning("[ModelRequesterUI] WorldGenerator not found; skipping terrain and prefab placement.");
             }
 
-            SetProgressVisible(false);
             UpdateStatusText("Layout generation complete.");
             UpdateResultsText(
                 $"Layout Generated\nTerrain Zones: {terrainZoneCount}\nPrefabs: {prefabCount}\nSketch: {response.selected_sketch}"
@@ -219,7 +234,6 @@ public class ModelRequesterUI : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            SetProgressVisible(false);
             UpdateStatusText("Layout generated, but UI parsing failed.");
             UpdateResultsText($"Raw response:\n{responseJson}\n\nParse error: {e.Message}");
         }
@@ -227,31 +241,13 @@ public class ModelRequesterUI : MonoBehaviour
     
     private void OnErrorReceived(string errorMessage)
     {
-        SetProgressVisible(false);
+        isRequestRunning = false;
         UpdateStatusText($"ERROR: {errorMessage}");
         UpdateResultsText($"Error: {errorMessage}\\n\\nCurrently loaded: {currentLoadedModel}");
     }
     
-    private void SetProgressVisible(bool visible)
-    {
-        if (progressContainer != null)
-        {
-            progressContainer.SetActive(visible);
-        }
-        else
-        {
-            if (progressBar != null) progressBar.gameObject.SetActive(visible);
-            if (progressText != null) progressText.gameObject.SetActive(visible);
-        }
-    }
-    
     private void UpdateProgress(float progress, string statusMessage)
     {
-        if (progressBar != null)
-        {
-            progressBar.value = progress;
-        }
-        
         if (progressText != null)
         {
             int percentage = Mathf.RoundToInt(progress * 100);
@@ -273,6 +269,18 @@ public class ModelRequesterUI : MonoBehaviour
         if (resultsText != null)
         {
             resultsText.text = message;
+        }
+    }
+
+    private void Update()
+    {
+        if (isRequestRunning)
+        {
+            float elapsedTime = Time.time - requestStartTime;
+            if (timerText != null)
+            {
+                timerText.text = $"Time: {elapsedTime:F2}s";
+            }
         }
     }
 
