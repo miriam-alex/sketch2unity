@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
 
 /// <summary>
 /// Simple UI controller for testing the ModelRequester functionality
@@ -221,6 +222,10 @@ public class ModelRequesterUI : MonoBehaviour
             if (worldGenerator != null && response.layout != null)
             {
                 worldGenerator.ApplyLayoutData(response.layout);
+				string filePath = Path.Combine(Application.persistentDataPath, "CurrentResponseLayout.txt");
+        		// Write the string to the file
+        		File.WriteAllText(filePath, responseJson);
+        		Debug.Log($"Layout data successfully saved to: {filePath}");
             }
             else if (worldGenerator == null)
             {
@@ -235,7 +240,8 @@ public class ModelRequesterUI : MonoBehaviour
         catch (System.Exception e)
         {
             UpdateStatusText("Layout generated, but UI parsing failed.");
-            UpdateResultsText($"Raw response:\n{responseJson}\n\nParse error: {e.Message}");
+            Debug.LogError($"Raw response:\n{responseJson}");
+			Debug.LogError($"Parse error: {e.Message}");
         }
     }
     

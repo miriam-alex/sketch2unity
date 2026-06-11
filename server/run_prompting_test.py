@@ -1,4 +1,4 @@
-from layout_prompt import process_sketch, visualize_output, choose_sketch_path
+from server.layout_prompt import process_sketch, visualize_output, choose_sketch_path
 from pathlib import Path
 import json
 

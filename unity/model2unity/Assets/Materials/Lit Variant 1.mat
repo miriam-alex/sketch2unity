@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Lit Variant
+  m_Name: Lit Variant 1
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_Parent: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_Parent: {fileID: 2100000, guid: b78be58a0783441619ec3af99ff886b5, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -28,8 +28,8 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _BaseColor: {r: 0.5754717, g: 0.45618123, b: 0.3501691, a: 1}
-    - _Color: {r: 0.57547164, g: 0.45618117, b: 0.35016906, a: 1}
+    - _BaseColor: {r: 0.5235849, g: 1, b: 0.94192904, a: 1}
+    - _Color: {r: 0.52358484, g: 1, b: 0.94192904, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &6020249179515015377

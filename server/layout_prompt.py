@@ -15,7 +15,7 @@ from matplotlib.patches import Rectangle, Circle
 load_dotenv()
 
 # Configuration
-MODEL_ID = "gemini-2.5-flash"
+MODEL_ID = "gemini-3.5-flash"
 PROMPT_PATH = Path("prompts/site_parsing.md")
 OUTPUT_PATH = Path("sample_output.json")
 

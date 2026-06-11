@@ -11,17 +11,32 @@ public class BuildingGenerator : MonoBehaviour
     
     public void Generate(Transform parent, Vector3 spawnPos, int baysWide, int baysDeep, int floors, float rotationY, string buildingName)
     {
-        if (groundFloorPrefab == null || upperFloorPrefab == null) return;
+        if (groundFloorPrefab == null)
+        {
+            Debug.Log("Ground floor prefab is null.");
+            return;
+        }
+        
+        if (upperFloorPrefab == null)
+        {
+            Debug.Log("Upper floor prefab is null.");
+            return;
+        }
         
         GameObject buildingRoot = new GameObject(string.IsNullOrEmpty(buildingName) ? "Building_Root" : buildingName);
         buildingRoot.transform.SetParent(parent);
         buildingRoot.transform.position = spawnPos;
         buildingRoot.transform.rotation = Quaternion.Euler(0, rotationY, 0);
-        // Quaternion rotation = Quaternion.Euler(0f, 90f, 0f);
         BoxCollider gCollider = groundFloorPrefab.GetComponentInChildren<BoxCollider>();
         BoxCollider uCollider = upperFloorPrefab.GetComponentInChildren<BoxCollider>();
         Vector3 gSize = Vector3.Scale(gCollider.size, groundFloorPrefab.transform.localScale);
+        Debug.Log($"gCollider.size: {gCollider.size}");
+        Debug.Log($"groundFloorPrefab.transform.localScale: {groundFloorPrefab.transform.localScale}");
+        Debug.Log($"gSize: {gSize}");
         Vector3 uSize = Vector3.Scale(uCollider.size, upperFloorPrefab.transform.localScale);
+        Debug.Log($"uCollider.size: {uCollider.size}");
+        Debug.Log($"upperFloorPrefab.transform.localScale: {upperFloorPrefab.transform.localScale}");
+        Debug.Log($"uSize: {uSize}");
 
         // 3. Calculate Centering Offset
         // We center based on the ground floor's footprint
@@ -60,7 +75,9 @@ public class BuildingGenerator : MonoBehaviour
                     // Apply your specific Z-tweak for upper floors
                     if (!isGround)
                     {
+                        Debug.Log($"original local pos.z: {localPos.z}");
                         localPos.z += upperFloorPrefabZOffset;
+                        Debug.Log($"new local pos.z: {localPos.z}");
                     }
 
                     // 6. Instantiate as child of Floor Root

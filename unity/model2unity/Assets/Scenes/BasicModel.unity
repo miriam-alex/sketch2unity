@@ -1459,7 +1459,7 @@ MonoBehaviour:
   terrainRegistry: {fileID: 11400000, guid: 40b7138cb24d44d8094548b2e33cdfe5, type: 2}
   buildingGenerator: {fileID: 506498434}
   prefabScaleFactor: 0.5
-  testGeneration: 0
+  testGeneration: 1
   jsonInput: "{\"site_scale\": {\n    \"site_width_ft\": 1000,\n    \"site_height_ft\":
     1000,\n    \"normalized_canvas\": [\n      0,\n      0,\n      1000,\n      1000\n   
     ],\n    \"lot_boundary\": [\n      [\n        0,\n        0\n      ],\n     
@@ -1595,9 +1595,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c0135c8571f4ab7809a4f079a23a09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildingGenerator
-  groundFloorPrefab: {fileID: 8150486483898850497, guid: c1b1212c01f8b4665bae7dad2b1d5ec8, type: 3}
-  upperFloorPrefab: {fileID: 2115440206970842405, guid: 761c311d702c942e0a1aa0cd15f2e96d, type: 3}
-  upperFloorPrefabZOffset: 0.06
+  groundFloorPrefab: {fileID: 7216019511835054022, guid: 44aecd93e16194968a6adef67335a96f, type: 3}
+  upperFloorPrefab: {fileID: 6434795173430529191, guid: ea53ba617196b448f84a9e1d615a125a, type: 3}
+  upperFloorPrefabZOffset: 0.32
 --- !u!1 &696314561
 GameObject:
   m_ObjectHideFlags: 0
