@@ -2,6 +2,7 @@ import os
 import time
 import random
 import json
+import base64
 import subprocess
 import sys
 from pathlib import Path
@@ -9,19 +10,42 @@ from typing import Iterable
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+import anthropic
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle, Circle
 
 load_dotenv()
 
-# Configuration
-MODEL_ID = "gemini-3.5-flash"
+# =========================================================
+# Provider selection
+# =========================================================
+CURRENT_PROVIDER = "claude"  # "gemini" or "claude"
+
+# =========================================================
+# Gemini configuration
+# =========================================================
+GEMINI_MODEL_ID = "gemini-3.5-flash"
+GEMINI_API_KEY = os.getenv("GOOGLE_API_KEY")
+
+# =========================================================
+# Claude configuration (placeholders — fill in as needed)
+# =========================================================
+CLAUDE_MODEL_ID = "claude-sonnet-4-6"            # TODO: confirm/replace with desired Claude model id
+CLAUDE_API_KEY = os.getenv("ANTHROPIC_API_KEY")  # TODO: set ANTHROPIC_API_KEY in your .env
+CLAUDE_MAX_TOKENS = 12000                        
+
+# =========================================================
+# Shared configuration
+# =========================================================
 PROMPT_PATH = Path("prompts/site_parsing.md")
 OUTPUT_PATH = Path("sample_output.json")
-
-# Client Setup
-client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
 MAX_RETRIES = 3
+
+# =========================================================
+# Client setup
+# =========================================================
+gemini_client = genai.Client(api_key=GEMINI_API_KEY)
+claude_client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
 
 
 def normalize_lot_boundary(lot_boundary):
@@ -79,6 +103,7 @@ def build_runtime_site_context(site_width_ft=None, site_height_ft=None, lot_boun
         f"{json.dumps(site_scale, indent=2)}\n"
         "```\n"
     )
+
 
 def visualize_output(site_data):
 
@@ -268,6 +293,131 @@ def extract_json(response: str) -> dict:
     except ValueError as e:
         raise ValueError(f"Could not extract JSON from response: {e}\n\nRaw response:\n{response}")
 
+class ResponseTruncatedError(Exception):
+    """
+    Raised when the model stopped because it hit the output token limit,
+    not because it actually finished. The JSON will be incomplete, so this
+    is treated as a distinct failure mode from rate limits / API errors.
+    """
+    pass
+
+
+def _call_model(prompt_text, runtime_context, image_bytes):
+    """
+    Makes a single API call to whichever provider CURRENT_PROVIDER points to.
+    Returns the raw text response from the model (not yet JSON-extracted).
+    Raises on any API error so the retry wrapper can decide what to do with it.
+    Raises ResponseTruncatedError specifically if the response was cut off
+    before the model finished (i.e. it hit the max output token limit).
+    """
+    if CURRENT_PROVIDER == "gemini":
+        contents = [prompt_text]
+        if runtime_context:
+            contents.append(runtime_context)
+        contents.append(types.Part.from_bytes(data=image_bytes, mime_type="image/png"))
+
+        response = gemini_client.models.generate_content(
+            model=GEMINI_MODEL_ID,
+            contents=contents,
+        )
+
+        finish_reason = None
+        if getattr(response, "candidates", None):
+            finish_reason = getattr(response.candidates[0], "finish_reason", None)
+        if finish_reason is not None and "MAX_TOKENS" in str(finish_reason).upper():
+            raise ResponseTruncatedError(
+                "Gemini's response was truncated before it finished the JSON "
+                "(hit the max output token limit). Increase the output token "
+                "budget for this model and try again."
+            )
+
+        return response.text
+
+    elif CURRENT_PROVIDER == "claude":
+        text_parts = [prompt_text]
+        if runtime_context:
+            text_parts.append(runtime_context)
+        combined_text = "\n".join(text_parts)
+
+        image_b64 = base64.standard_b64encode(image_bytes).decode("utf-8")
+
+        response = claude_client.messages.create(
+            model=CLAUDE_MODEL_ID,
+            max_tokens=CLAUDE_MAX_TOKENS,
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "image",
+                            "source": {
+                                "type": "base64",
+                                "media_type": "image/png",
+                                "data": image_b64,
+                            },
+                        },
+                        {
+                            "type": "text",
+                            "text": combined_text,
+                        },
+                    ],
+                }
+            ],
+        )
+
+        if response.stop_reason == "max_tokens":
+            raise ResponseTruncatedError(
+                f"Claude's response was truncated at the {CLAUDE_MAX_TOKENS}-token "
+                "limit before it finished the JSON. Increase CLAUDE_MAX_TOKENS and "
+                "try again."
+            )
+
+        return "".join(
+            block.text for block in response.content if getattr(block, "type", None) == "text"
+        )
+
+    else:
+        raise ValueError(
+            f"Unknown CURRENT_PROVIDER: {CURRENT_PROVIDER!r}. Expected 'gemini' or 'claude'."
+        )
+
+
+def call_model_with_retries(prompt_text, runtime_context, image_bytes):
+    """
+    Factored-out retry + dispatch logic. Looks at CURRENT_PROVIDER and calls the
+    matching provider via _call_model, retrying on rate-limit/overload errors.
+    Returns the extracted JSON string (same format the old inline code produced),
+    or None if every retry failed / a permanent error occurred.
+    """
+    output = None
+
+    for attempt in range(MAX_RETRIES):
+        try:
+            print(f"🔄 [Calling {CURRENT_PROVIDER} (Attempt {attempt+1})...")
+            raw_output = _call_model(prompt_text, runtime_context, image_bytes)
+            output = extract_json(raw_output)
+            break
+
+        except ResponseTruncatedError as e:
+            # Retrying with the same token budget would just truncate again,
+            # so fail loud immediately instead of burning retries.
+            print(f"✂️ {e}")
+            break
+
+        except Exception as e:
+            err_msg = str(e)
+            if "429" in err_msg or "503" in err_msg:
+                # If we hit a wall, wait a full minute + jitter
+                wait = 60 + random.uniform(5, 15)
+                print(f"🚨 API Overloaded. Sleeping {wait:.1f}s before retry...")
+                time.sleep(wait)
+            else:
+                print(f"❌ Permanent Error: {e}")
+                break
+
+    return output
+
+
 def process_sketch(
     lot_boundary=None,
     site_width_ft=None,
@@ -288,7 +438,7 @@ def process_sketch(
     if not sketch_path.exists():
         print(f"{sketch_path} does not exist")
         return
-    
+
     if not prompt_path.exists():
         print(f"{prompt_path} does not exist")
         return
@@ -305,69 +455,25 @@ def process_sketch(
         lot_boundary=normalized_boundary,
     )
 
-    output = None
+    prompt_text = prompt_path.read_text(encoding="utf-8")
+    image_bytes = sketch_path.read_bytes()
 
-    for attempt in range(MAX_RETRIES):
-        try:
-            print(f"🔄 [Processing {sketch_path} (Attempt {attempt+1})...")
-            
-            prompt_text = prompt_path.read_text(encoding="utf-8")
-            image_bytes = sketch_path.read_bytes()
+    print(f"🔄 [Processing {sketch_path}...")
+    output = call_model_with_retries(prompt_text, runtime_context, image_bytes)
 
-            contents = [prompt_text]
-            if runtime_context:
-                contents.append(runtime_context)
-            contents.append(types.Part.from_bytes(data=image_bytes, mime_type="image/png"))
-
-            response = client.models.generate_content(
-                model=MODEL_ID,
-                contents=contents,
-            )
-            output = response.text
-            output = extract_json(output)
-            output_path.write_text(output, encoding="utf-8")
-            print(f"Success: {output_path.name}")
-            if normalized_boundary is not None:
-                print(f"Applied lot boundary with {len(normalized_boundary)} points")
-            break
-
-        except Exception as e:
-            err_msg = str(e)
-            if "429" in err_msg or "503" in err_msg:
-                # If we hit a wall, wait a full minute + jitter
-                wait = 60 + random.uniform(5, 15)
-                print(f"🚨 API Overloaded. Sleeping {wait:.1f}s before retry...")
-                time.sleep(wait)
-            else:
-                print(f"❌ Permanent Error: {e}")
-                break
+    if output is not None:
+        output_path.write_text(output, encoding="utf-8")
+        print(f"Success: {output_path.name}")
+        if normalized_boundary is not None:
+            print(f"Applied lot boundary with {len(normalized_boundary)} points")
 
     return output
 
 
 def choose_sketch_path():
-    try:
-        import tkinter as tk
-        from tkinter import filedialog
-
-        root = tk.Tk()
-        root.withdraw()
-        root.attributes("-topmost", True)
-
-        selected_path = filedialog.askopenfilename(
-            title="Select a sketch image",
-            filetypes=[
-                ("Image files", "*.png *.jpg *.jpeg *.webp *.bmp"),
-                ("All files", "*.*"),
-            ],
-        )
-
-        root.destroy()
-        if selected_path:
-            return Path(selected_path)
-    except Exception:
-        pass
-
+    # On macOS, Tkinter crashes when called from a background thread (Flask handler)
+    # because NSWindow must be instantiated on the main thread. Use osascript instead,
+    # which spawns a separate process and is safe from any thread.
     if sys.platform == "darwin":
         script = (
             'POSIX path of (choose file with prompt "Select a sketch image" '
@@ -383,6 +489,28 @@ def choose_sketch_path():
             selected_path = result.stdout.strip()
             if selected_path:
                 return Path(selected_path)
+    else:
+        try:
+            import tkinter as tk
+            from tkinter import filedialog
+
+            root = tk.Tk()
+            root.withdraw()
+            root.attributes("-topmost", True)
+
+            selected_path = filedialog.askopenfilename(
+                title="Select a sketch image",
+                filetypes=[
+                    ("Image files", "*.png *.jpg *.jpeg *.webp *.bmp"),
+                    ("All files", "*.*"),
+                ],
+            )
+
+            root.destroy()
+            if selected_path:
+                return Path(selected_path)
+        except Exception:
+            pass
 
     user_input = input("Enter the full path to your sketch image (or press Enter to cancel): ").strip()
     if not user_input:
@@ -407,4 +535,3 @@ if __name__ == "__main__":
         data = json.load(file)
         print(data)
         visualize_output(data)
-        

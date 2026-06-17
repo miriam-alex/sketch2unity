@@ -1,10 +1,10 @@
 # To Run
 
-Add any models you want in the models folder. Please ensure they have the .glb format or they may not import with a texture.
-
-`pip install -r requirements.txt`
+Set up an .env file with the GOOGLE_API_KEY and/or ANTHROPIC_API_KEY variables.
 
 `python -m venv .venv`
+
+`pip install -r requirements.txt`
 
 `source .venv/bin/activate`
 
