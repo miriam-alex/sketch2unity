@@ -519,19 +519,31 @@ def choose_sketch_path():
     return Path(user_input)
 
 if __name__ == "__main__":
-    # selected_sketch_path = choose_sketch_path()
-    # if selected_sketch_path is None:
-    #     print("No sketch selected. Exiting.")
-    #     raise SystemExit(0)
+    # Site 1 (Site A) lot boundary — pentagonal waterfront parcel along Bronx River,
+    # wider at north, tapering southeast toward the river bank.
+    SITE_1_LOT_BOUNDARY = [
+        [ 50, 150],   # northwest corner
+        [ 80, 700],   # northeast corner
+        [320, 620],   # east side mid (angles inward)
+        [420, 350],   # southeast tip
+        [280,  80],   # west side mid (river bank)
+    ]
 
-    # layout_output = process_sketch(
-    #     sketch_path=selected_sketch_path,
-    #     lot_boundary=[[0, 0], [0, 1000], [1000, 0], [1000, 1000]],
-    #     site_width_ft=1000,
-    #     site_height_ft=1000,
-    # )
+    selected_sketch_path = choose_sketch_path()
+    if selected_sketch_path is None:
+        print("No sketch selected. Exiting.")
+        raise SystemExit(0)
 
-    with open('sample_output.json', 'r', encoding='utf-8') as file:
-        data = json.load(file)
-        print(data)
-        visualize_output(data)
+    layout_output = process_sketch(
+        sketch_path=selected_sketch_path,
+        lot_boundary=SITE_1_LOT_BOUNDARY,
+        site_width_ft=220,
+        site_height_ft=180,
+    )
+
+    if layout_output is None:
+        print("Layout generation failed.")
+        raise SystemExit(1)
+
+    data = json.loads(layout_output)
+    visualize_output(data)

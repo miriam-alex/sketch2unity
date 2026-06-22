@@ -1,137 +1,125 @@
 {
   "reasoning": {
     "open_space_reference": {
-      "label": "Central Courtyard / Pedestrian Area",
-      "center": [500, 350]
+      "label": "Central Market Courtyard",
+      "center": [280, 380]
     },
     "circulation_gaps": [
       {
-        "label": "Ferry Access Road",
-        "between": ["Shop 1 Block", "Ferry Terminal Edge"],
-        "bounding_box": [550, 0, 700, 80],
-        "terrain_type": "asphalt"
-      },
-      {
-        "label": "Main Waterfront Promenade",
-        "between": ["Shop Complex", "Waterfront"],
-        "bounding_box": [580, 80, 680, 600],
+        "label": "Ferry Access Path",
+        "between": ["Shop 9", "Shop 1"],
+        "bounding_box": [120, 150, 320, 185],
         "terrain_type": "pavement"
       },
       {
-        "label": "Tram Access Road",
-        "between": ["Shop Complex East", "Tram Station"],
-        "bounding_box": [200, 600, 600, 680],
+        "label": "Tram Station Approach",
+        "between": ["Shop 4", "Tram Station"],
+        "bounding_box": [80, 580, 200, 640],
         "terrain_type": "asphalt"
       },
       {
-        "label": "Internal Courtyard Path",
-        "between": ["Shop Row North", "Shop Row South"],
-        "bounding_box": [280, 100, 400, 580],
+        "label": "South Pedestrian Path",
+        "between": ["Museum of History", "Shop 13"],
+        "bounding_box": [360, 180, 420, 560],
         "terrain_type": "pavement"
       }
     ],
     "building_rotations": [
       {
         "name": "Shop 1",
-        "facade_faces": "south",
-        "rotation_y_deg": 0,
-        "justification": "Shop 1 sits on the north edge of the top row; facade faces south toward the internal courtyard."
+        "facade_faces": "east",
+        "rotation_y_deg": 270,
+        "justification": "Shop 1 is on the western edge of the market block; facade faces east toward the central courtyard."
       },
       {
-        "name": "Shop 2 West",
+        "name": "Shop 2",
         "facade_faces": "south",
         "rotation_y_deg": 0,
-        "justification": "Shop 2 West sits on the north edge of the top row; facade faces south toward the internal courtyard."
-      },
-      {
-        "name": "Shop 2 East",
-        "facade_faces": "south",
-        "rotation_y_deg": 0,
-        "justification": "Shop 2 East sits on the north edge of the top row; facade faces south toward the internal courtyard."
+        "justification": "Shop 2 sits along the northern row; facade faces south toward the central courtyard at y=280."
       },
       {
         "name": "Shop 3",
         "facade_faces": "south",
         "rotation_y_deg": 0,
-        "justification": "Shop 3 sits on the north edge of the top row; facade faces south toward the internal courtyard."
+        "justification": "Shop 3 is in the northern row; facade faces south toward the central courtyard."
       },
       {
         "name": "Shop 4",
         "facade_faces": "south",
         "rotation_y_deg": 0,
-        "justification": "Shop 4 sits on the north edge of the top row; facade faces south toward the internal courtyard."
+        "justification": "Shop 4 is in the northern row on the east side; facade faces south toward the central courtyard."
       },
       {
         "name": "Shop 5",
         "facade_faces": "west",
         "rotation_y_deg": 90,
-        "justification": "Shop 5 sits on the east edge of the complex; it is to the right of the open space center x=350; facade faces west toward the courtyard."
+        "justification": "Shop 5 is on the eastern edge; center x=560 > open space center x=380, so facade faces west."
       },
       {
         "name": "Shop 6",
         "facade_faces": "west",
         "rotation_y_deg": 90,
-        "justification": "Shop 6 sits on the east edge of the complex; it is to the right of the open space center x=350; facade faces west toward the courtyard."
+        "justification": "Shop 6 is on the eastern edge below Shop 5; center x=560 > open space center x=380, so facade faces west."
       },
       {
         "name": "Shop 7",
         "facade_faces": "west",
         "rotation_y_deg": 90,
-        "justification": "Shop 7 sits on the east edge of the complex; it is to the right of the open space center x=350; facade faces west toward the courtyard."
+        "justification": "Shop 7 is on the eastern edge; center x=550 > open space center x=380, so facade faces west."
       },
       {
         "name": "Shop 8",
         "facade_faces": "west",
         "rotation_y_deg": 90,
-        "justification": "Shop 8 sits on the east-south area of the complex; facade faces west toward the courtyard."
+        "justification": "Shop 8 is on the eastern edge lower section; center x=545 > open space center x=380, facade faces west."
       },
       {
         "name": "Shop 9",
         "facade_faces": "east",
         "rotation_y_deg": 270,
-        "justification": "Shop 9 sits on the west edge of the complex; it is to the left of the open space center x=350; facade faces east toward the courtyard."
+        "justification": "Shop 9 is on the western edge; center x=185 < open space center x=380, facade faces east."
       },
       {
         "name": "Shop 10",
         "facade_faces": "east",
         "rotation_y_deg": 270,
-        "justification": "Shop 10 sits on the west edge of the complex; it is to the left of the open space center; facade faces east toward the courtyard."
+        "justification": "Shop 10 is on the western edge; center x=185 < open space center x=380, facade faces east."
       },
       {
         "name": "Shop 11",
         "facade_faces": "east",
         "rotation_y_deg": 270,
-        "justification": "Shop 11 sits on the west edge of the complex; it is to the left of the open space center; facade faces east toward the courtyard."
+        "justification": "Shop 11 is on the western edge lower section; center x=185 < open space center x=380, facade faces east."
       },
       {
         "name": "Shop 12",
-        "facade_faces": "west",
-        "rotation_y_deg": 90,
-        "justification": "Shop 12 is in the south-central area slightly right of center; facade faces west."
+        "facade_faces": "north",
+        "rotation_y_deg": 180,
+        "justification": "Shop 12 is in the lower section; center y=330 > open space center y=280, facade faces north toward courtyard."
       },
       {
         "name": "Shop 13",
-        "facade_faces": "east",
-        "rotation_y_deg": 270,
-        "justification": "Shop 13 is in the south-central area slightly left of center; facade faces east toward the courtyard interior."
+        "facade_faces": "north",
+        "rotation_y_deg": 180,
+        "justification": "Shop 13 is in the lower-left section; center y=330 > open space center y=280, facade faces north toward courtyard."
       },
       {
         "name": "Shop 14",
-        "facade_faces": "east",
-        "rotation_y_deg": 270,
-        "justification": "Shop 14 is below Shop 13 on the left-center; facade faces east toward the courtyard."
+        "facade_faces": "north",
+        "rotation_y_deg": 180,
+        "justification": "Shop 14 is in the lower-left section below Shop 13; center y=360 > open space center y=280, facade faces north."
       },
       {
         "name": "Museum of History",
         "facade_faces": "east",
         "rotation_y_deg": 270,
-        "justification": "Museum of History is on the far west side of the complex; it is clearly to the left of the open space center; facade faces east."
+        "justification": "Museum of History is on the far western edge; center x=205 < open space center x=380, facade faces east."
       },
       {
         "name": "Tram Station",
         "facade_faces": "west",
         "rotation_y_deg": 90,
-        "justification": "Tram Station sits to the far right (east) of the site; facade faces west toward the main complex and access road."
+        "justification": "Tram Station is on the far eastern side of the site, beyond the main market block; facade faces west toward the site."
       }
     ],
     "prefab_checks": [
@@ -142,81 +130,79 @@
         "classification": "prefab_instances"
       },
       {
-        "element_label": "Tree cluster near Shop 4/5",
+        "element_label": "Tree cluster near Shop 5",
         "footprint_normalized": 900,
         "prefab_match": "tree",
         "classification": "prefab_instances"
       },
       {
-        "element_label": "People/figures near Museum",
-        "footprint_normalized": 600,
+        "element_label": "Person/figure near Museum",
+        "footprint_normalized": 400,
         "prefab_match": "NONE",
         "classification": "generated_objects"
       }
     ]
   },
   "site_scale": {
-    "site_width_ft": 1000,
-    "site_height_ft": 1000,
+    "site_width_ft": 220,
+    "site_height_ft": 180,
     "normalized_canvas": [0, 0, 1000, 1000],
-    "lot_boundary": [[0, 0], [0, 1000], [1000, 0], [1000, 1000]],
+    "lot_boundary": [
+      [50, 150],
+      [80, 700],
+      [320, 620],
+      [420, 350],
+      [280, 80]
+    ],
     "scale_note": "All placements must fall within lot_boundary. Bounding boxes define placement. Real-world dimensions define scale."
   },
   "terrain_zones": [
     {
-      "area_name": "Internal Courtyard Path",
-      "semantic_tag": "pedestrian_circulation",
+      "area_name": "Central Market Courtyard",
+      "semantic_tag": "open_space_market",
+      "terrain_type": "plaza",
+      "bounding_box": [130, 220, 370, 530],
+      "approx_sq_ft": 3872,
+      "unity_strategy": "paint_terrain"
+    },
+    {
+      "area_name": "Ferry Access Path",
+      "semantic_tag": "circulation_pedestrian",
       "terrain_type": "pavement",
-      "bounding_box": [280, 100, 400, 580],
-      "approx_sq_ft": 28000,
+      "bounding_box": [120, 150, 320, 185],
+      "approx_sq_ft": 198,
       "unity_strategy": "paint_terrain"
     },
     {
-      "area_name": "Main Waterfront Promenade",
-      "semantic_tag": "waterfront_promenade",
+      "area_name": "Tram Station Approach",
+      "semantic_tag": "circulation_transit",
+      "terrain_type": "asphalt",
+      "bounding_box": [80, 580, 200, 640],
+      "approx_sq_ft": 474,
+      "unity_strategy": "paint_terrain"
+    },
+    {
+      "area_name": "South Pedestrian Path",
+      "semantic_tag": "circulation_pedestrian",
       "terrain_type": "pavement",
-      "bounding_box": [580, 80, 680, 600],
-      "approx_sq_ft": 52000,
+      "bounding_box": [360, 180, 420, 560],
+      "approx_sq_ft": 907,
       "unity_strategy": "paint_terrain"
     },
     {
-      "area_name": "Ferry Access Road",
-      "semantic_tag": "road_access",
-      "terrain_type": "asphalt",
-      "bounding_box": [550, 0, 700, 80],
-      "approx_sq_ft": 12000,
-      "unity_strategy": "paint_terrain"
-    },
-    {
-      "area_name": "Tram Access Road",
-      "semantic_tag": "tram_road",
-      "terrain_type": "asphalt",
-      "bounding_box": [200, 600, 600, 680],
-      "approx_sq_ft": 32000,
-      "unity_strategy": "paint_terrain"
-    },
-    {
-      "area_name": "Waterfront Water Zone",
-      "semantic_tag": "water_body",
+      "area_name": "Waterfront / Ferry Zone",
+      "semantic_tag": "water_edge",
       "terrain_type": "water",
-      "bounding_box": [680, 0, 1000, 1000],
-      "approx_sq_ft": 320000,
+      "bounding_box": [200, 50, 420, 155],
+      "approx_sq_ft": 1463,
       "unity_strategy": "paint_terrain"
     },
     {
-      "area_name": "Ferry Terminal Ground",
-      "semantic_tag": "ferry_dock",
-      "terrain_type": "pavement",
-      "bounding_box": [500, 0, 580, 80],
-      "approx_sq_ft": 6400,
-      "unity_strategy": "paint_terrain"
-    },
-    {
-      "area_name": "East Open Ground",
-      "semantic_tag": "open_ground",
-      "terrain_type": "pavement",
-      "bounding_box": [100, 600, 580, 680],
-      "approx_sq_ft": 38400,
+      "area_name": "Eastern Green Buffer",
+      "semantic_tag": "landscape_buffer",
+      "terrain_type": "grass",
+      "bounding_box": [100, 610, 380, 700],
+      "approx_sq_ft": 1008,
       "unity_strategy": "paint_terrain"
     }
   ],
@@ -224,239 +210,210 @@
     {
       "area_name": "Shop 1",
       "semantic_tag": "retail_shop",
-      "bounding_box": [100, 80, 190, 160],
-      "center_point": [145, 120],
-      "rotation_y_deg": 0,
+      "bounding_box": [80, 185, 135, 240],
+      "center_point": [107, 212],
+      "rotation_y_deg": 270,
       "floors": 2,
-      "approx_width_ft": 80,
-      "approx_depth_ft": 90,
-      "approx_sq_ft": 7200,
+      "approx_width_ft": 12,
+      "approx_depth_ft": 10,
+      "approx_sq_ft": 120,
       "unity_strategy": "modular_prefab"
     },
     {
-      "area_name": "Shop 2 West",
+      "area_name": "Shop 2",
       "semantic_tag": "retail_shop",
-      "bounding_box": [100, 160, 190, 270],
-      "center_point": [145, 215],
+      "bounding_box": [80, 240, 135, 320],
+      "center_point": [107, 280],
       "rotation_y_deg": 0,
       "floors": 2,
-      "approx_width_ft": 110,
-      "approx_depth_ft": 90,
-      "approx_sq_ft": 9900,
-      "unity_strategy": "modular_prefab"
-    },
-    {
-      "area_name": "Shop 2 East",
-      "semantic_tag": "retail_shop",
-      "bounding_box": [100, 270, 190, 350],
-      "center_point": [145, 310],
-      "rotation_y_deg": 0,
-      "floors": 2,
-      "approx_width_ft": 80,
-      "approx_depth_ft": 90,
-      "approx_sq_ft": 7200,
+      "approx_width_ft": 18,
+      "approx_depth_ft": 10,
+      "approx_sq_ft": 180,
       "unity_strategy": "modular_prefab"
     },
     {
       "area_name": "Shop 3",
       "semantic_tag": "retail_shop",
-      "bounding_box": [100, 350, 190, 450],
-      "center_point": [145, 400],
+      "bounding_box": [80, 380, 135, 460],
+      "center_point": [107, 420],
       "rotation_y_deg": 0,
       "floors": 2,
-      "approx_width_ft": 100,
-      "approx_depth_ft": 90,
-      "approx_sq_ft": 9000,
+      "approx_width_ft": 18,
+      "approx_depth_ft": 10,
+      "approx_sq_ft": 180,
       "unity_strategy": "modular_prefab"
     },
     {
       "area_name": "Shop 4",
       "semantic_tag": "retail_shop",
-      "bounding_box": [100, 450, 190, 570],
-      "center_point": [145, 510],
+      "bounding_box": [80, 460, 135, 540],
+      "center_point": [107, 500],
       "rotation_y_deg": 0,
       "floors": 2,
-      "approx_width_ft": 120,
-      "approx_depth_ft": 90,
-      "approx_sq_ft": 10800,
-      "unity_strategy": "modular_prefab"
-    },
-    {
-      "area_name": "Shop 9",
-      "semantic_tag": "retail_shop",
-      "bounding_box": [190, 80, 280, 160],
-      "center_point": [235, 120],
-      "rotation_y_deg": 270,
-      "floors": 2,
-      "approx_width_ft": 80,
-      "approx_depth_ft": 90,
-      "approx_sq_ft": 7200,
-      "unity_strategy": "modular_prefab"
-    },
-    {
-      "area_name": "Shop 10",
-      "semantic_tag": "retail_shop",
-      "bounding_box": [280, 80, 370, 160],
-      "center_point": [325, 120],
-      "rotation_y_deg": 270,
-      "floors": 2,
-      "approx_width_ft": 80,
-      "approx_depth_ft": 90,
-      "approx_sq_ft": 7200,
-      "unity_strategy": "modular_prefab"
-    },
-    {
-      "area_name": "Shop 11",
-      "semantic_tag": "retail_shop",
-      "bounding_box": [370, 80, 460, 160],
-      "center_point": [415, 120],
-      "rotation_y_deg": 270,
-      "floors": 2,
-      "approx_width_ft": 80,
-      "approx_depth_ft": 90,
-      "approx_sq_ft": 7200,
+      "approx_width_ft": 18,
+      "approx_depth_ft": 10,
+      "approx_sq_ft": 180,
       "unity_strategy": "modular_prefab"
     },
     {
       "area_name": "Shop 5",
       "semantic_tag": "retail_shop",
-      "bounding_box": [190, 490, 280, 570],
-      "center_point": [235, 530],
+      "bounding_box": [135, 530, 200, 580],
+      "center_point": [167, 555],
       "rotation_y_deg": 90,
       "floors": 2,
-      "approx_width_ft": 80,
-      "approx_depth_ft": 90,
-      "approx_sq_ft": 7200,
+      "approx_width_ft": 11,
+      "approx_depth_ft": 12,
+      "approx_sq_ft": 132,
       "unity_strategy": "modular_prefab"
     },
     {
       "area_name": "Shop 6",
       "semantic_tag": "retail_shop",
-      "bounding_box": [280, 490, 370, 570],
-      "center_point": [325, 530],
+      "bounding_box": [200, 530, 260, 580],
+      "center_point": [230, 555],
       "rotation_y_deg": 90,
       "floors": 2,
-      "approx_width_ft": 80,
-      "approx_depth_ft": 90,
-      "approx_sq_ft": 7200,
+      "approx_width_ft": 11,
+      "approx_depth_ft": 11,
+      "approx_sq_ft": 121,
       "unity_strategy": "modular_prefab"
     },
     {
       "area_name": "Shop 7",
       "semantic_tag": "retail_shop",
-      "bounding_box": [370, 490, 440, 570],
-      "center_point": [405, 530],
+      "bounding_box": [260, 510, 310, 570],
+      "center_point": [285, 540],
       "rotation_y_deg": 90,
       "floors": 2,
-      "approx_width_ft": 80,
-      "approx_depth_ft": 70,
-      "approx_sq_ft": 5600,
+      "approx_width_ft": 13,
+      "approx_depth_ft": 9,
+      "approx_sq_ft": 117,
       "unity_strategy": "modular_prefab"
     },
     {
       "area_name": "Shop 8",
       "semantic_tag": "retail_shop",
-      "bounding_box": [440, 490, 530, 570],
-      "center_point": [485, 530],
+      "bounding_box": [310, 490, 365, 570],
+      "center_point": [337, 530],
       "rotation_y_deg": 90,
       "floors": 2,
-      "approx_width_ft": 80,
-      "approx_depth_ft": 90,
-      "approx_sq_ft": 7200,
+      "approx_width_ft": 18,
+      "approx_depth_ft": 10,
+      "approx_sq_ft": 180,
+      "unity_strategy": "modular_prefab"
+    },
+    {
+      "area_name": "Shop 9",
+      "semantic_tag": "retail_shop",
+      "bounding_box": [135, 185, 200, 225],
+      "center_point": [167, 205],
+      "rotation_y_deg": 270,
+      "floors": 2,
+      "approx_width_ft": 9,
+      "approx_depth_ft": 12,
+      "approx_sq_ft": 108,
+      "unity_strategy": "modular_prefab"
+    },
+    {
+      "area_name": "Shop 10",
+      "semantic_tag": "retail_shop",
+      "bounding_box": [200, 185, 255, 225],
+      "center_point": [227, 205],
+      "rotation_y_deg": 270,
+      "floors": 2,
+      "approx_width_ft": 9,
+      "approx_depth_ft": 10,
+      "approx_sq_ft": 90,
+      "unity_strategy": "modular_prefab"
+    },
+    {
+      "area_name": "Shop 11",
+      "semantic_tag": "retail_shop",
+      "bounding_box": [255, 185, 305, 225],
+      "center_point": [280, 205],
+      "rotation_y_deg": 270,
+      "floors": 2,
+      "approx_width_ft": 9,
+      "approx_depth_ft": 9,
+      "approx_sq_ft": 81,
       "unity_strategy": "modular_prefab"
     },
     {
       "area_name": "Shop 12",
       "semantic_tag": "retail_shop",
-      "bounding_box": [430, 400, 510, 490],
-      "center_point": [470, 445],
-      "rotation_y_deg": 90,
+      "bounding_box": [305, 430, 360, 490],
+      "center_point": [332, 460],
+      "rotation_y_deg": 180,
       "floors": 2,
-      "approx_width_ft": 90,
-      "approx_depth_ft": 80,
-      "approx_sq_ft": 7200,
+      "approx_width_ft": 13,
+      "approx_depth_ft": 10,
+      "approx_sq_ft": 130,
       "unity_strategy": "modular_prefab"
     },
     {
       "area_name": "Shop 13",
       "semantic_tag": "retail_shop",
-      "bounding_box": [430, 310, 490, 400],
-      "center_point": [460, 355],
-      "rotation_y_deg": 270,
+      "bounding_box": [305, 355, 355, 430],
+      "center_point": [330, 392],
+      "rotation_y_deg": 180,
       "floors": 2,
-      "approx_width_ft": 90,
-      "approx_depth_ft": 60,
-      "approx_sq_ft": 5400,
+      "approx_width_ft": 17,
+      "approx_depth_ft": 9,
+      "approx_sq_ft": 153,
       "unity_strategy": "modular_prefab"
     },
     {
       "area_name": "Shop 14",
       "semantic_tag": "retail_shop",
-      "bounding_box": [490, 310, 550, 400],
-      "center_point": [520, 355],
-      "rotation_y_deg": 270,
+      "bounding_box": [355, 355, 410, 430],
+      "center_point": [382, 392],
+      "rotation_y_deg": 180,
       "floors": 2,
-      "approx_width_ft": 90,
-      "approx_depth_ft": 60,
-      "approx_sq_ft": 5400,
+      "approx_width_ft": 17,
+      "approx_depth_ft": 10,
+      "approx_sq_ft": 170,
       "unity_strategy": "modular_prefab"
     },
     {
       "area_name": "Museum of History",
-      "semantic_tag": "museum_cultural",
-      "bounding_box": [440, 160, 560, 280],
-      "center_point": [500, 220],
+      "semantic_tag": "civic_museum",
+      "bounding_box": [290, 180, 370, 265],
+      "center_point": [330, 222],
       "rotation_y_deg": 270,
       "floors": 2,
-      "approx_width_ft": 120,
-      "approx_depth_ft": 120,
-      "approx_sq_ft": 14400,
+      "approx_width_ft": 19,
+      "approx_depth_ft": 14,
+      "approx_sq_ft": 266,
       "unity_strategy": "modular_prefab"
     },
     {
       "area_name": "Tram Station",
-      "semantic_tag": "transit_tram_station",
-      "bounding_box": [150, 720, 500, 980],
-      "center_point": [325, 850],
+      "semantic_tag": "transit_station",
+      "bounding_box": [100, 620, 290, 700],
+      "center_point": [195, 660],
       "rotation_y_deg": 90,
       "floors": 1,
-      "approx_width_ft": 260,
-      "approx_depth_ft": 350,
-      "approx_sq_ft": 91000,
+      "approx_width_ft": 18,
+      "approx_depth_ft": 34,
+      "approx_sq_ft": 612,
       "unity_strategy": "modular_prefab"
     }
   ],
   "generated_objects": [
     {
-      "area_name": "Ferry Terminal_uncertain",
-      "semantic_tag": "ferry_terminal",
+      "area_name": "Visitor Figure near Museum_uncertain",
+      "semantic_tag": "decorative_figure",
       "object_type": "structure",
-      "bounding_box": [500, 0, 580, 80],
-      "center_point": [540, 40],
+      "bounding_box": [300, 163, 330, 183],
+      "center_point": [315, 173],
       "rotation_y_deg": 270,
-      "approx_width_ft": 80,
-      "approx_depth_ft": 80,
-      "approx_sq_ft": 6400,
+      "approx_width_ft": 4,
+      "approx_depth_ft": 5,
+      "approx_sq_ft": 20,
       "target_dimensions_ft": {
-        "width_ft": 80,
-        "depth_ft": 80,
-        "height_ft": 16
-      },
-      "unity_strategy": "box_primitive"
-    },
-    {
-      "area_name": "Figures Near Museum_uncertain",
-      "semantic_tag": "pedestrian_marker",
-      "object_type": "structure",
-      "bounding_box": [450, 140, 490, 170],
-      "center_point": [470, 155],
-      "rotation_y_deg": 270,
-      "approx_width_ft": 30,
-      "approx_depth_ft": 40,
-      "approx_sq_ft": 1200,
-      "target_dimensions_ft": {
-        "width_ft": 30,
-        "depth_ft": 40,
+        "width_ft": 4,
+        "depth_ft": 4,
         "height_ft": 10
       },
       "unity_strategy": "box_primitive"
@@ -464,41 +421,51 @@
   ],
   "prefab_instances": [
     {
-      "area_name": "Tree Cluster Shop 1",
+      "area_name": "Tree Cluster Shop 1 Left",
       "semantic_tag": "vegetation",
       "prefab_type": "tree",
-      "center_point": [178, 118],
-      "footprint_box": [163, 103, 193, 133],
+      "center_point": [145, 200],
+      "footprint_box": [135, 190, 155, 210],
       "rotation_deg": 0,
       "scale_multiplier": 1.0,
       "unity_strategy": "place_prefab"
     },
     {
-      "area_name": "Tree Cluster Shop 1 B",
+      "area_name": "Tree Cluster Shop 1 Right",
       "semantic_tag": "vegetation",
       "prefab_type": "tree",
-      "center_point": [178, 135],
-      "footprint_box": [163, 120, 193, 150],
+      "center_point": [145, 218],
+      "footprint_box": [135, 208, 155, 228],
       "rotation_deg": 0,
       "scale_multiplier": 1.0,
       "unity_strategy": "place_prefab"
     },
     {
-      "area_name": "Tree Cluster Shop 4 5",
+      "area_name": "Tree Cluster Shop 1 Center",
       "semantic_tag": "vegetation",
       "prefab_type": "tree",
-      "center_point": [178, 492],
-      "footprint_box": [163, 477, 193, 507],
+      "center_point": [145, 232],
+      "footprint_box": [135, 222, 155, 242],
       "rotation_deg": 0,
       "scale_multiplier": 1.0,
       "unity_strategy": "place_prefab"
     },
     {
-      "area_name": "Tree Cluster Shop 4 5 B",
+      "area_name": "Tree Cluster Shop 5 Left",
       "semantic_tag": "vegetation",
       "prefab_type": "tree",
-      "center_point": [178, 510],
-      "footprint_box": [163, 495, 193, 525],
+      "center_point": [132, 524],
+      "footprint_box": [122, 514, 142, 534],
+      "rotation_deg": 0,
+      "scale_multiplier": 1.0,
+      "unity_strategy": "place_prefab"
+    },
+    {
+      "area_name": "Tree Cluster Shop 5 Right",
+      "semantic_tag": "vegetation",
+      "prefab_type": "tree",
+      "center_point": [132, 540],
+      "footprint_box": [122, 530, 142, 550],
       "rotation_deg": 0,
       "scale_multiplier": 1.0,
       "unity_strategy": "place_prefab"

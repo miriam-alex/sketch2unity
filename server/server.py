@@ -28,9 +28,20 @@ CORS(app)  # Enable CORS for Unity communication
 SUPPORTED_EXTENSIONS = ['.obj', '.glb']
 SUPPORTED_REGEX_EXTENSIONS = ['*.obj', '*.glb']
 LAYOUT_OUTPUT_PATH = PROJECT_ROOT / "sample_output.json"
-DEFAULT_LOT_BOUNDARY = [[0, 0], [0, 1000], [1000, 0], [1000, 1000]]
-DEFAULT_SITE_WIDTH_FT = 1000
-DEFAULT_SITE_HEIGHT_FT = 1000
+# DEFAULT_LOT_BOUNDARY = [[0, 0], [0, 1000], [1000, 0], [1000, 1000]]
+# DEFAULT_SITE_WIDTH_FT = 1000
+# DEFAULT_SITE_HEIGHT_FT = 1000
+
+# Site 1 (Site A) — pentagonal waterfront parcel along Bronx River, ~220x180 ft
+DEFAULT_LOT_BOUNDARY = [
+    [ 50, 150],   # northwest corner
+    [ 80, 700],   # northeast corner
+    [320, 620],   # east side mid (angles inward)
+    [420, 350],   # southeast tip
+    [280,  80],   # west side mid (river bank)
+]
+DEFAULT_SITE_WIDTH_FT = 220
+DEFAULT_SITE_HEIGHT_FT = 180
 
 layout_generation_lock = threading.Lock()
 
